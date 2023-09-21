@@ -163,7 +163,7 @@ export default function Header() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <h1
             onClick={() => {
-              navigate("/dang-nhap");
+              navigate("/login");
             }}
             className="font-medium cursor-pointer"
           >

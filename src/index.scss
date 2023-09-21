@@ -2,54 +2,107 @@
 @tailwind components;
 @tailwind utilities;
 
-// css login page
-@media only screen and (min-width: 1025px){
-    .login-page{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .animate-left{
-        width: 50%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .animate-right {
-        width: 50%;
-    }
-    
+// css login page / sign up page / reset password page
+@media only screen and (min-width: 1025px) {
+  .login-page,
+  .signup-page,
+  .resetpassword-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item-left {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item-right {
+    width: 50%;
+  }
 }
 @media only screen and (min-width: 786px) and (max-width: 1024px) {
-    .login-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .animate-left {
-        width: 50%;
-        height: 100vh;
-    }
-    .animate-right {
-        width: 50%;
-    }
+  .login-page,
+  .signup-page,
+  .resetpassword-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item-left {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .item-right {
+    width: 50%;
+  }
 }
 @media only screen and (min-width: 320px) and (max-width: 785px) {
-    .login-page {
-        display: block;
-    }
+  .login-page,
+  .signup-page,
+  .resetpassword-page {
+    display: block;
+  }
+  .item-left {
+    width: 100%;
+  }
+  .item-right {
+    width: 100%;
+  }
 }
 .login-form {
-    max-width: 300px;
-    margin: 0 auto;
-    .login-form-forgot {
-        float: right;
+  max-width: 300px;
+  margin: 0 auto;
+  .login-form-forgot {
+    float: right;
+  }
+  .ant-col-rtl .login-form-forgot {
+    float: left;
+  }
+  .btn {
+    width: 100%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  }
+  .login-form-text-bottom {
+    text-align: center;
+    --tw-text-opacity: 1;
+    color: rgb(22 163 74 / var(--tw-text-opacity));
+    span {
+      text-decoration: underline;
+      cursor: pointer;
     }
-    .ant-col-rtl .login-form-forgot {
-        float: left;
+  }
+}
+.signup {
+  .signup-title {
+    margin-left: 150px;
+    padding: 30px 0;
+    --tw-text-opacity: 1;
+    color: rgb(22 163 74 / var(--tw-text-opacity));
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 500;
+  }
+}
+.signup-form {
+  margin-left: 150px;
+  .btn {
+    width: 100%;
+    --tw-bg-opacity: 1;
+    background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+  }
+  .signup-form-text-bottom {
+    text-align: center;
+    --tw-text-opacity: 1;
+    color: rgb(22 163 74 / var(--tw-text-opacity));
+    span {
+      text-decoration: underline;
+      cursor: pointer;
     }
-    .login-form-button {
-        width: 100%;
-    }
+  }
 }

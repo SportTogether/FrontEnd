@@ -3,14 +3,16 @@ import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
+import { useNavigate } from "react-router-dom";
 const DangNhapPage = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
+  const navigate = useNavigate();
   return (
     <>
       <div className="container login-page">
-        <div className="animate-left">
+        <div className="item-left">
           <Lottie
             animationData={animateLogin}
             className=""
@@ -19,7 +21,7 @@ const DangNhapPage = () => {
             height="100%"
           />
         </div>
-        <div className="animate-right">
+        <div className="item-right">
           <Form
             name="normal_login"
             className="login-form"
@@ -38,7 +40,10 @@ const DangNhapPage = () => {
               ]}
             >
               <Input
-                prefix={<UserOutlined className="site-form-item-icon" />}
+                className="border-green-600 border-2"
+                prefix={
+                  <UserOutlined className="site-form-item-icon text-green-600" />
+                }
                 placeholder="Username"
               />
             </Form.Item>
@@ -51,31 +56,43 @@ const DangNhapPage = () => {
                 },
               ]}
             >
-              <Input
-                prefix={<LockOutlined className="site-form-item-icon" />}
+              <Input.Password
+                className="border-green-600 border-2"
+                prefix={
+                  <LockOutlined className="site-form-item-icon text-green-600" />
+                }
                 type="password"
                 placeholder="Password"
               />
             </Form.Item>
             <Form.Item>
               <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox className="text-green-600">Remember me</Checkbox>
               </Form.Item>
-
-              <a className="login-form-forgot" href="">
+              <p
+                className="login-form-forgot text-green-600 cursor-pointer"
+                onClick={() => {
+                  navigate("/reset-password");
+                }}
+              >
                 Forgot password
-              </a>
+              </p>
             </Form.Item>
 
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Log in
+              <Button type="primary" htmlType="submit" className="btn">
+                Login
               </Button>
-              Or <a href="">register now!</a>
+              <p className="login-form-text-bottom">
+                Don't Have an Account?{" "}
+                <span
+                  onClick={() => {
+                    navigate("/signup");
+                  }}
+                >
+                  Sign Up
+                </span>
+              </p>
             </Form.Item>
           </Form>
         </div>
