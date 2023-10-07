@@ -8,6 +8,7 @@ import DatSanPage from "./Pages/DatSanPage/DatSanPage";
 import DetailSanPage from "./Pages/DetailSan/DetailSanPage";
 import UuDaiPage from "./Pages/UuDai/UuDaiPage";
 import ForumPage from "./Pages/Forum/ForumPage";
+import KetNoiPage from "./Pages/KetNoi/KetNoiPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="uu-dai" element={<UuDaiPage />} />
             <Route path="detail" element={<DetailSanPage />} />
             <Route path="forum" element={<ForumPage />} />
+            <Route path="ket-noi" element={<KetNoiPage />} />
             <Route path="login" element={<DangNhapPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="signup" element={<DangKyPage />} />

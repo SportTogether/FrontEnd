@@ -367,7 +367,13 @@ const DatSanPage = () => {
             <div className="overflow-y-scroll h-[500px]">
               {itemsList.map((item) => {
                 return (
-                  <div className="list-item" key={item.key}>
+                  <div
+                    className="list-item"
+                    key={item.key}
+                    onClick={() => {
+                      navigate("/detail");
+                    }}
+                  >
                     <div className="list-item-left">
                       <img src={item.image} alt="" />
                     </div>
@@ -391,12 +397,7 @@ const DatSanPage = () => {
                         <p className="text-lg">
                           <b>Giá tham khảo:</b> {item.price}
                         </p>
-                        <b
-                          className="text-right text-xl cursor-pointer"
-                          onClick={() => {
-                            navigate("/detail");
-                          }}
-                        >
+                        <b className="text-right text-xl cursor-pointer">
                           <i className="fas fa-location-arrow"></i> Tìm đường
                         </b>
                       </div>

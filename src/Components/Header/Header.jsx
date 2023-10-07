@@ -157,7 +157,14 @@ export default function Header() {
           >
             FORUM
           </div>
-          <div className="nav-left-title">KẾT NỐI</div>
+          <div
+            className="nav-left-title"
+            onClick={() => {
+              navigate("/ket-noi");
+            }}
+          >
+            KẾT NỐI
+          </div>
           <div className="nav-left-title">
             <h1 onClick={showModal}>
               TÌM KIẾM{" "}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 // Import Swiper styles
@@ -41,18 +42,34 @@ const itemNews = [
   },
 ];
 const HomePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="container home-page">
       <div className="home-page-left">
-        <div className="home-page-left-items">
+        <div
+          className="home-page-left-items"
+          onClick={() => {
+            navigate("/dat-san");
+          }}
+        >
           <img src="../../../public/image/datsanIcon.png" alt="" />
           <h1 className="text-center">ĐẶT SÂN</h1>
         </div>
-        <div className="home-page-left-items">
+        <div
+          className="home-page-left-items"
+          onClick={() => {
+            navigate("/ket-noi");
+          }}
+        >
           <img src="../../../public/image/ketnoiIcon.png" alt="" />
           <h1 className="text-center">KẾT NỐI</h1>
         </div>
-        <div className="home-page-left-items">
+        <div
+          className="home-page-left-items"
+          onClick={() => {
+            navigate("/forum");
+          }}
+        >
           <img src="../../../public/image/forumIcon.png" alt="" />
           <h1 className="text-center">FORUM</h1>
         </div>

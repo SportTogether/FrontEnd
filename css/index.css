@@ -232,6 +232,7 @@
 }
 .home-page .home-page-left .home-page-left-items {
   width: 33.333333%;
+  cursor: pointer;
 }
 .home-page .home-page-left .home-page-left-items img {
   width: 150px;
@@ -318,6 +319,7 @@
   color: rgb(22 163 74/var(--tw-text-opacity));
 }
 .dat-san-page .dat-san-right .list .list-item {
+  cursor: pointer;
   margin: 0 20px;
   padding: 20px 30px;
   display: flex;
