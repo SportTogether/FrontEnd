@@ -2,9 +2,24 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
+import { list } from "postcss";
 const onChange = (e) => {
   console.log(`checked = ${e.target.value}`);
 };
+let data = "";
+try {
+  const response = await fetch("http://localhost:8080/api/yards", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      data = result;
+    });
+} catch (error) {
+  console.error("Lỗi xảy ra: ", error);
+}
+// console.log(data.data);
 const cities = [
   {
     key: "1",
@@ -172,41 +187,43 @@ const types = [
     ),
   },
 ];
-const itemsList = [
-  {
-    key: 1,
-    name: "Sân Thành Thắng",
-    image: "../../../public/image/sanThanhThang.JPG",
-    address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
-    rate: 4,
-    type: "Sân Bóng Đá",
-    price: "300.000đ / trận",
-    kilometers: "5.7km",
-    point: "Sân Cỏ Nhân Tạo",
-  },
-  {
-    key: 2,
-    name: "Sân 312",
-    image: "../../../public/image/sanThanhThang.JPG",
-    address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
-    rate: 3,
-    type: "Sân Bóng Đá",
-    price: "250.000đ / trận",
-    kilometers: "10km",
-    point: "Sân Cỏ Nhân Tạo",
-  },
-  {
-    key: 3,
-    name: "Sân Mini Victory",
-    image: "../../../public/image/sanThanhThang.JPG",
-    address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
-    rate: 3,
-    type: "Sân Bóng Đá",
-    price: "350.000đ / trận",
-    kilometers: "11.5km",
-    point: "Sân Cỏ Nhân Tạo",
-  },
-];
+const itemsList = data.data;
+console.log(itemsList);
+// itemList = [
+//   {
+//     key: 1,
+//     name: "Sân Thành Thắng",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
+//     rate: 4,
+//     type: "Sân Bóng Đá",
+//     price: "300.000đ / trận",
+//     kilometers: "5.7km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+//   {
+//     key: 2,
+//     name: "Sân 312",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
+//     rate: 3,
+//     type: "Sân Bóng Đá",
+//     price: "250.000đ / trận",
+//     kilometers: "10km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+//   {
+//     key: 3,
+//     name: "Sân Mini Victory",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
+//     rate: 3,
+//     type: "Sân Bóng Đá",
+//     price: "350.000đ / trận",
+//     kilometers: "11.5km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+// ];
 const DatSanPage = () => {
   const navigate = useNavigate();
   return (
@@ -239,14 +256,14 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Checkbox value="SAN7" onChange={onChange}>
-                        <h1 className="text-2xl">SÂN 7 NGƯỜI</h1>
+                      <Checkbox value="NhanTao" onChange={onChange}>
+                        <h1 className="text-2xl">Sân cỏ nhân tạo</h1>
                       </Checkbox>
-                      <Checkbox value="SAN5" onChange={onChange}>
-                        <h1 className="text-2xl">SÂN 5 NGƯỜI</h1>
+                      <Checkbox value="TuNhien" onChange={onChange}>
+                        <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
                       </Checkbox>
-                      <Checkbox value="SANFUSTAL" onChange={onChange}>
-                        <h1 className="text-2xl">SÂN FUSTAL</h1>
+                      <Checkbox value="Futsal" onChange={onChange}>
+                        <h1 className="text-2xl">Sân Futsal</h1>
                       </Checkbox>
                     </>
                   ),
@@ -375,23 +392,26 @@ const DatSanPage = () => {
                     }}
                   >
                     <div className="list-item-left">
-                      <img src={item.image} alt="" />
+                      <img
+                        src="../../../public/image/sanThanhThang.JPG"
+                        alt=""
+                      />
                     </div>
                     <div className="list-item-right">
                       <div className="grid grid-cols-2">
                         <h1 className="text-blue-700 text-2xl font-bold">
                           {item.name}
                         </h1>
-                        <p className="text-right">{item.kilometers}</p>
+                        <p className="text-right">{item.distance} km</p>
                       </div>
                       <Rate
                         allowHalf
-                        defaultValue={item.rate}
+                        defaultValue={item.stars}
                         className="text-2xl"
                       />
                       <h1 className="text-xl">{item.address}</h1>
                       <p className="text-lg">
-                        <b>Điểm nhấn:</b> {item.point}
+                        <b>Điểm nhấn:</b> {item.type}
                       </p>
                       <div className="grid grid-cols-2">
                         <p className="text-lg">
