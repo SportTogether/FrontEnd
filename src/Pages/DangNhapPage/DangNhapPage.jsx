@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Button, Checkbox, Form, Input, message } from "antd";
 const DangNhapPage = () => {
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+  const userName = "admin";
+  const passWord = "1234";
+  const [userLogin, setUserLogin] = useState({
+    userName,
+    passWord,
+  });
   const navigate = useNavigate();
+  const onFinish = (values) => {
+    console.log("values:", values);
+    if (values.username == userName && values.password == passWord) {
+      setUserLogin({
+        userName: values.username,
+        passWord: values.password,
+      });
+      localStorage.setItem("USER_LOGIN", userLogin);
+      message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    } else {
+      message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+    }
+  };
   return (
     <>
       <div className="container login-page">
@@ -22,6 +41,9 @@ const DangNhapPage = () => {
           />
         </div>
         <div className="item-right">
+          <h1 className="text-center font-medium text-3xl text-green-600 py-5">
+            Login
+          </h1>
           <Form
             name="normal_login"
             className="login-form"
@@ -38,6 +60,7 @@ const DangNhapPage = () => {
                   message: "Please input your Username!",
                 },
               ]}
+              initialValue={"admin"}
             >
               <Input
                 className="border-green-600 border-2"
@@ -55,6 +78,7 @@ const DangNhapPage = () => {
                   message: "Please input your Password!",
                 },
               ]}
+              initialValue={"1234"}
             >
               <Input.Password
                 className="border-green-600 border-2"

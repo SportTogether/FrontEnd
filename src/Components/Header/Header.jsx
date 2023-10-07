@@ -1,264 +1,281 @@
-import { Fragment, useState } from "react";
-import { Dialog, Disclosure, Popover, Transition } from "@headlessui/react";
-import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const products = [
+import { Dropdown, Form, Modal, Select } from "antd";
+const items = [
   {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    href: "#",
-    icon: ChartPieIcon,
+    key: "1",
+    label: (
+      <h1 className="text-xl">
+        <i className="fas fa-futbol"></i>{" "}
+        <span className="pl-2">Sân Bóng Đá</span>
+      </h1>
+    ),
   },
   {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    href: "#",
-    icon: CursorArrowRaysIcon,
+    key: "2",
+    label: (
+      <div className="flex">
+        <img
+          src="../../../public/image/badminton.png"
+          width={24}
+          height={24}
+          alt=""
+        />
+        <span className="text-xl pl-2">Sân Cầu Lông</span>
+      </div>
+    ),
   },
   {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    href: "#",
-    icon: FingerPrintIcon,
+    key: "3",
+    label: (
+      <div className="flex">
+        <img
+          src="../../../public/image/tennis.png"
+          width={24}
+          height={24}
+          alt=""
+        />
+        <span className="text-xl pl-2">Sân Tennis</span>
+      </div>
+    ),
   },
   {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    href: "#",
-    icon: SquaresPlusIcon,
+    key: "4",
+    label: (
+      <h1 className="text-xl">
+        <i className="fas fa-basketball-ball"></i>
+        <span className="pl-2">Sân Bóng Rổ</span>
+      </h1>
+    ),
   },
   {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    href: "#",
-    icon: ArrowPathIcon,
+    key: "5",
+    label: (
+      <h1 className="text-xl">
+        <i className="fas fa-table-tennis"></i>
+        <span className="pl-2">Sân Bóng Bàn</span>
+      </h1>
+    ),
   },
 ];
-const callsToAction = [
-  { name: "Watch demo", href: "#", icon: PlayCircleIcon },
-  { name: "Contact sales", href: "#", icon: PhoneIcon },
+const cities = [
+  {
+    id: 1,
+    value: "TpHCM",
+    cityName: "Thành phố Hồ Chí Minh",
+  },
+  {
+    id: 2,
+    value: "HaNoi",
+    cityName: "Hà Nội",
+  },
+  {
+    id: 3,
+    value: "DaNang",
+    cityName: "Đà Nẵng",
+  },
+  {
+    id: 4,
+    value: "ThuDuc",
+    cityName: "Thủ Đức",
+  },
+  {
+    id: 5,
+    value: "HaiPhong",
+    cityName: "Hải Phòng",
+  },
+  {
+    id: 6,
+    value: "BinhDuong",
+    cityName: "Bình Dương",
+  },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [form] = Form.useForm();
+  const onFinish = (value) => {
+    console.log(value);
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
-    <header className="bg-white">
-      <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-        aria-label="Global"
-      >
-        <div className="flex lg:flex-1">
+    <header className="header">
+      <div className="logo-header">
+        <div
+          className="flex justify-center items-center cursor-pointer"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           <img
-            className="h-8 w-auto cursor-pointer"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="../../../public/image/logoIcon.png"
+            width={70}
+            height={70}
             alt=""
-            onClick={() => {
-              navigate("/");
-            }}
           />
+          <h1 className="logo-title">SPORTTORGETHER</h1>
         </div>
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-            onClick={() => setMobileMenuOpen(true)}
+      </div>
+      <div className="nav">
+        <div className="nav-left xl:gap-x-12">
+          <Dropdown
+            menu={{
+              items,
+            }}
           >
-            <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-          </button>
-        </div>
-        <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <Popover className="relative">
-            <Popover.Button className="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900">
-              Product
-              <ChevronDownIcon
-                className="h-5 w-5 flex-none text-gray-400"
-                aria-hidden="true"
-              />
-            </Popover.Button>
-
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-200"
-              enterFrom="opacity-0 translate-y-1"
-              enterTo="opacity-100 translate-y-0"
-              leave="transition ease-in duration-150"
-              leaveFrom="opacity-100 translate-y-0"
-              leaveTo="opacity-0 translate-y-1"
+            <h1
+              className="nav-left-title"
+              onClick={(e) => {
+                navigate("/dat-san");
+                return e.preventDefault();
+              }}
             >
-              <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-                <div className="p-4">
-                  {products.map((item) => (
-                    <div
-                      key={item.name}
-                      className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
-                    >
-                      <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                        <item.icon
-                          className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
-                          aria-hidden="true"
+              ĐẶT SÂN
+            </h1>
+          </Dropdown>
+          <div
+            className="nav-left-title"
+            onClick={() => {
+              navigate("/uu-dai");
+            }}
+          >
+            ƯU ĐÃI
+          </div>
+          <div
+            className="nav-left-title"
+            onClick={() => {
+              navigate("/forum");
+            }}
+          >
+            FORUM
+          </div>
+          <div className="nav-left-title">KẾT NỐI</div>
+          <div className="nav-left-title">
+            <h1 onClick={showModal}>
+              TÌM KIẾM{" "}
+              <span>
+                <i className="fas fa-search"></i>
+              </span>
+            </h1>
+          </div>
+          <Modal
+            title="Chọn Môn Thể Thao Và Khu Vực"
+            open={isModalOpen}
+            onOk={handleOk}
+            footer={false}
+            onCancel={handleCancel}
+            width="100%"
+          >
+            <div className="flex">
+              <Form
+                form={form}
+                name="booking"
+                onFinish={onFinish}
+                className="container flex"
+                scrollToFirstError
+              >
+                <Form.Item
+                  name="monTheThao"
+                  className="w-[285px]"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng chọn môn thể thao!!!",
+                    },
+                  ]}
+                >
+                  <Select defaultValue={"Chọn Môn Thể Thao"} size="large">
+                    <Select.Option value="BongDa">
+                      <h1>
+                        <i className="fas fa-futbol text-xl"></i>{" "}
+                        <span className="pl-2 text-xl">Sân Bóng Đá</span>
+                      </h1>
+                    </Select.Option>
+                    <Select.Option value="CauLong">
+                      <div className="flex">
+                        <img
+                          src="../../../public/image/badminton.png"
+                          width={24}
+                          height={24}
+                          alt=""
                         />
+                        <span className="text-xl pl-2">Sân Cầu Lông</span>
                       </div>
-                      <div className="flex-auto">
-                        <a
-                          href={item.href}
-                          className="block font-semibold text-gray-900"
-                        >
-                          {item.name}
-                          <span className="absolute inset-0" />
-                        </a>
-                        <p className="mt-1 text-gray-600">{item.description}</p>
+                    </Select.Option>
+                    <Select.Option value="Tennis">
+                      <div className="flex">
+                        <img
+                          src="../../../public/image/tennis.png"
+                          width={24}
+                          height={24}
+                          alt=""
+                        />
+                        <span className="text-xl pl-2">Sân Tennis</span>
                       </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                  {callsToAction.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-100"
-                    >
-                      <item.icon
-                        className="h-5 w-5 flex-none text-gray-400"
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </Popover.Panel>
-            </Transition>
-          </Popover>
-
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Features
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Marketplace
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
-          </a>
-        </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+                    </Select.Option>
+                    <Select.Option value=" Ro">
+                      <h1>
+                        <i className="fas fa-basketball-ball text-xl"></i>
+                        <span className="pl-2 text-xl">Sân Bóng Rổ</span>
+                      </h1>
+                    </Select.Option>
+                    <Select.Option value="BongBan">
+                      <i className="fas fa-table-tennis text-xl"></i>
+                      <span className="pl-2 text-xl">Sân Bóng Bàn</span>
+                    </Select.Option>
+                  </Select>
+                </Form.Item>
+                <Form.Item
+                  name="khuVuc"
+                  className="w-[1000px] px-5"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Vui lòng chọn khu vực!!!",
+                    },
+                  ]}
+                >
+                  <Select defaultValue={"Chọn Khu Vực"} size="large">
+                    {cities.map((item) => {
+                      return (
+                        <Select.Option key={item.id} value={item.value}>
+                          <h1 className="text-xl">{item.cityName}</h1>
+                        </Select.Option>
+                      );
+                    })}
+                  </Select>
+                </Form.Item>
+                <Form.Item className="w-[285px]">
+                  <button
+                    type="submit"
+                    className="bg-blue-900 rounded-lg text-base font-medium py-2 px-10 text-green-600 delay-200 transition hover:text-white"
+                  >
+                    Tìm Kiếm Sân Chơi
+                  </button>
+                </Form.Item>
+              </Form>
+            </div>
+          </Modal>
+        </div>
+        <div className="nav-right">
           <h1
             onClick={() => {
               navigate("/login");
             }}
-            className="font-medium cursor-pointer"
+            className="nav-right-title"
           >
             Log In
           </h1>
         </div>
-      </nav>
-      <Dialog
-        as="div"
-        className="lg:hidden"
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-      >
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
-            </a>
-            <button
-              type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <span className="sr-only">Close menu</span>
-              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-            </button>
-          </div>
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
-                <Disclosure as="div" className="-mx-3">
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
-                        Product
-                        <ChevronDownIcon
-                          className={classNames(
-                            open ? "rotate-180" : "",
-                            "h-5 w-5 flex-none"
-                          )}
-                          aria-hidden="true"
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className="mt-2 space-y-2">
-                        {[...products, ...callsToAction].map((item) => (
-                          <Disclosure.Button
-                            key={item.name}
-                            as="a"
-                            href={item.href}
-                            className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                          >
-                            {item.name}
-                          </Disclosure.Button>
-                        ))}
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Features
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Marketplace
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Company
-                </a>
-              </div>
-              <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Log in
-                </a>
-              </div>
-            </div>
-          </div>
-        </Dialog.Panel>
-      </Dialog>
+      </div>
     </header>
   );
 }
