@@ -25,8 +25,22 @@ const formItemLayout = {
 const DangKyPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
+    values = JSON.stringify(values);
     console.log("Success:", values);
+    try {
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: values,
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          console.log("Success:", result);
+        });
+    } catch (error) {
+      console.error("Lỗi xảy ra: ", error);
+    }
   };
   return (
     <>
@@ -58,28 +72,49 @@ const DangKyPage = () => {
             scrollToFirstError
           >
             <Form.Item
-              name="username"
+              name="name"
               tooltip="What is your name ?"
               rules={[
                 {
                   required: true,
-                  message: "Please input username!",
+                  message: "Please input name!",
                 },
                 {
                   type: "string",
                   pattern: /^\S+$/,
-                  message: "Username have't the blank!",
+                  message: "Name have't the blank!",
                 },
               ]}
             >
               <Input
-                placeholder="Username"
+                placeholder="Fullname"
                 className="border-2 border-green-600"
               />
             </Form.Item>
 
             <Form.Item
-              name="phone"
+              name="email"
+              tooltip="What is your name ?"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input email!",
+                },
+                {
+                  type: "string",
+                  pattern: /^\S+$/,
+                  message: "Email have't the blank!",
+                },
+              ]}
+            >
+              <Input
+                placeholder="Email"
+                className="border-2 border-green-600"
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="number"
               rules={[
                 {
                   required: true,

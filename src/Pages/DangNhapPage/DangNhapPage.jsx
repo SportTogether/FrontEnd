@@ -2,32 +2,88 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  DashboardTwoTone,
+  LockOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, message } from "antd";
+
 const DangNhapPage = () => {
-  const userName = "admin";
-  const passWord = "1234";
+  const userName = "test";
+  const passWord = "123456";
+
   const [userLogin, setUserLogin] = useState({
     userName,
     passWord,
   });
+
   const navigate = useNavigate();
-  const onFinish = (values) => {
-    console.log("values:", values);
-    if (values.username == userName && values.password == passWord) {
-      setUserLogin({
-        userName: values.username,
-        passWord: values.password,
-      });
-      localStorage.setItem("USER_LOGIN", userLogin);
-      message.success("Bạn Đã Đăng Nhập Thành Công!!!");
-      setTimeout(() => {
-        navigate("/");
-      }, 3000);
-    } else {
-      message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+
+  // const onFinish = (values) => {
+  //   //value : form đăng nhập
+  //   //console.log("values:", values);
+  //   values = JSON.stringify(values);
+
+  //   // fetch("http://localhost:8080/api/users/login", {
+  //   //   method: "POST",
+  //   //   headers: { "Content-Type": "application/json" },
+  //   //   body: values,
+  //   // })
+  //   //   .then((response) => response.json())
+  //   //   .then((result) => {
+  //   //     data = result;
+  //   //   });
+
+  //   if (false) {
+  //     setUserLogin({
+  //       userName: values.username,
+  //       passWord: values.password,
+  //     });
+  //     localStorage.setItem("USER_LOGIN", userLogin);
+  //     message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+  //     setTimeout(() => {
+  //       navigate("/");
+  //     }, 3000);
+  //   } else {
+  //     message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+  //   }
+  // };
+  let data = "Test";
+  const onFinish = async (values) => {
+    values = JSON.stringify(values);
+
+    try {
+      const response = await fetch("http://localhost:8080/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: values,
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          data = result;
+        });
+      console.log(data);
+      if (data.data.id != 0) {
+        setUserLogin({
+          userName: values.username,
+          passWord: values.password,
+        });
+
+        localStorage.setItem("USER_LOGIN", userLogin);
+
+        message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      } else {
+        message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+      }
+    } catch (error) {
+      console.error("Lỗi xảy ra: ", error);
     }
   };
+
   return (
     <>
       <div className="container login-page">
@@ -53,7 +109,7 @@ const DangNhapPage = () => {
             onFinish={onFinish}
           >
             <Form.Item
-              name="username"
+              name="email"
               rules={[
                 {
                   required: true,
@@ -67,7 +123,7 @@ const DangNhapPage = () => {
                 prefix={
                   <UserOutlined className="site-form-item-icon text-green-600" />
                 }
-                placeholder="Username"
+                placeholder="Email"
               />
             </Form.Item>
             <Form.Item
