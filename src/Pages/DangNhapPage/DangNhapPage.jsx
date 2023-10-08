@@ -20,9 +20,13 @@ const DangNhapPage = () => {
   let dispatch = useDispatch();
   let data = "Test";
   const onFinish = async (values) => {
-    values = JSON.stringify(values);
+    // values = JSON.stringify(values);
     try {
-      const response = await LayTaiKhoanDangNhap(values)
+      const response = await fetch("http://localhost:8080/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
         .then((response) => response.json())
         .then((result) => {
           data = result;
