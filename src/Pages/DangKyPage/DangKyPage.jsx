@@ -4,7 +4,6 @@ import Lottie from "lottie-react";
 import animateSignUp from "./animation_soccer.json";
 import { Form, Input, Checkbox, Button, message } from "antd";
 import { LayTaiKhoanDangKy } from "../../redux/QuanLyNguoiDungSlice";
-import { message } from "antd";
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -36,13 +35,12 @@ const DangKyPage = () => {
         // .then((response) => response.json())
         .then((result) => {
           data = result;
-          console.log("Success:", result);
-          if (result.statusCode !== 200) throw new Error(`status: ${result}`);
-          message.success("Đăng ký thành công!!!");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
         });
+      if (data.data.statusCodew !== 200) throw new Error(`status: ${data}`);
+      message.success("Đăng ký thành công!!!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
