@@ -28,15 +28,17 @@ const DangKyPage = () => {
   const [form] = Form.useForm();
   let data = "";
   const onFinish = async (values) => {
-    values = JSON.stringify(values);
-    console.log("Success:", values);
     try {
-      const response = await LayTaiKhoanDangKy(values)
-        // .then((response) => response.json())
+      const response = await fetch("http://localhost:8080/api/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
+        .then((response) => response.json())
         .then((result) => {
           data = result;
         });
-      if (data.data.statusCodew !== 200) throw new Error(`status: ${data}`);
+
       message.success("Đăng ký thành công!!!");
       setTimeout(() => {
         navigate("/login");
