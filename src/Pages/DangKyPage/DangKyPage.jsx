@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import animateSignUp from "./animation_soccer.json";
-import { Form, Input, Checkbox, Button } from "antd";
+import { Form, Input, Checkbox, Button, message } from "antd";
 import { LayTaiKhoanDangKy } from "../../redux/QuanLyNguoiDungSlice";
 
 const formItemLayout = {
@@ -23,6 +23,7 @@ const formItemLayout = {
     },
   },
 };
+let data = "";
 const DangKyPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -33,13 +34,14 @@ const DangKyPage = () => {
       const response = await LayTaiKhoanDangKy(values)
         .then((response) => response.json())
         .then((result) => {
+          data = result;
           console.log("Success:", result);
-          if (result.statusCode !== 200) throw new Error(`status: ${result}`);
-          message.success("Đăng ký thành công!!!");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
         });
+      if (data.statusCode !== 200) throw new Error(`status: ${data}`);
+      message.success("Đăng ký thành công!!!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
