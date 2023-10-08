@@ -15,7 +15,6 @@ import {
   LockOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useSelector } from "react-redux";
 const DangNhapPage = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
@@ -28,7 +27,7 @@ const DangNhapPage = () => {
         .then((result) => {
           data = result;
         });
-      console.log("my data: ", data);
+      console.log("my data after login : ", data);
       if (data.data.id != 0) {
         dispatch(setLogin(data.data));
         localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);

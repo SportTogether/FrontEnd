@@ -34,6 +34,11 @@ const DangKyPage = () => {
         .then((response) => response.json())
         .then((result) => {
           console.log("Success:", result);
+          if (result.statusCode !== 200) throw new Error(`status: ${result}`);
+          message.success("Đăng ký thành công!!!");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
         });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
