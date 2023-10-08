@@ -23,16 +23,12 @@ const DangNhapPage = () => {
   const onFinish = async (values) => {
     values = JSON.stringify(values);
     try {
-      const response = await fetch("http://localhost:8080/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: values,
-      })
+      const response = await LayTaiKhoanDangNhap(values)
         .then((response) => response.json())
         .then((result) => {
           data = result;
         });
-      console.log("my data after login : ", data);
+      console.log("my data: ", data);
       if (data.data.id != 0) {
         dispatch(setLogin(data.data));
         localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
@@ -47,11 +43,6 @@ const DangNhapPage = () => {
       console.error("Lỗi xảy ra: ", error);
     }
   };
-  const { checkLogin } = useSelector((state) => {
-    return state.QuanLyNguoiDungSlice;
-  });
-  console.log("check login = ", checkLogin);
-
   return (
     <>
       <div className="container login-page">

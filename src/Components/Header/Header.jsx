@@ -167,7 +167,7 @@ export default function Header() {
             }}
             className="nav-right-title"
           >
-            Log In
+            Login
           </h1>
         </div>
       </>
