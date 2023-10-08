@@ -132,12 +132,7 @@ export default function Header() {
     {
       key: "3",
       label: (
-        <h1
-          className="text-2xl"
-          onClick={() => {
-            handleLogOut();
-          }}
-        >
+        <h1 className="text-2xl" onClick={handleLogOut}>
           Đăng Xuất
         </h1>
       ),
