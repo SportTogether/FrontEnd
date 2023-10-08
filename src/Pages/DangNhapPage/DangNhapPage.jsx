@@ -15,7 +15,7 @@ import {
   LockOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-
+import { useSelector } from "react-redux";
 const DangNhapPage = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
@@ -58,7 +58,7 @@ const DangNhapPage = () => {
   // };
   let data = "Test";
   const onFinish = async (values) => {
-    console.log(values);
+    //console.log(values);
     values = JSON.stringify(values);
     // const fetch = async () => {
     //   await LayTaiKhoanDangNhap(values)
@@ -95,14 +95,16 @@ const DangNhapPage = () => {
         .then((result) => {
           data = result;
         });
-      console.log(data);
+      console.log("my data after login : ", data);
       if (data.data.id != 0) {
         setUserLogin({
           userName: values.username,
           passWord: values.password,
         });
-        dispatch(setLogin(userLogin));
-        localStorageServices.setUser(SPORT_LOCALSTORAGE, userLogin);
+        // dispatch(setLogin(userLogin));
+        // localStorageServices.setUser(SPORT_LOCALSTORAGE, userLogin);
+        dispatch(setLogin(data.data));
+        localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
         setTimeout(() => {
           navigate("/");
@@ -114,6 +116,10 @@ const DangNhapPage = () => {
       console.error("Lỗi xảy ra: ", error);
     }
   };
+  const { checkLogin } = useSelector((state) => {
+    return state.QuanLyNguoiDungSlice;
+  });
+  console.log("check login = ", checkLogin);
 
   return (
     <>

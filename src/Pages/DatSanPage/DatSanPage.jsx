@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
 import { list } from "postcss";
+let outerCheck = "";
 const onChange = (e) => {
-  console.log(`checked = ${e.target.value}`);
+  outerCheck = e.target.value;
+  //console.log(`checked = ${outerCheck}`);
 };
+console.log(outerCheck);
 let data = "";
 try {
   const response = await fetch("http://localhost:8080/api/yards", {
