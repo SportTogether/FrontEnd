@@ -48,73 +48,132 @@ const keyword = [
 ];
 const columns = [
   {
-    title: "TOPIC",
-    dataIndex: "name",
-    key: "name",
+    title: <h1 className="text-3xl">Topics</h1>,
+    dataIndex: "topics",
+    key: "topics",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: <h1 className="text-3xl">Statistics</h1>,
+    dataIndex: "statistics",
+    key: "statistics",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
+    title: <h1 className="text-3xl">Last Post</h1>,
+    dataIndex: "lastpost",
+    key: "lastpost",
   },
 ];
 const data = [
   {
     key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
+    topics: (
+      <h1 className="text-2xl text-blue-800 font-bold">UEFA AND EUROPE</h1>
+    ),
+    statistics: (
+      <>
+        <h1>
+          <i className="fas fa-comments text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">400</span>
+        </h1>
+        <h1>
+          <i className="far fa-eye text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">4,182</span>
+        </h1>
+      </>
+    ),
+    lastpost: <p className="text-xl text-gray-500">Yesterday, 11:00 AM</p>,
   },
   {
     key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
+    topics: (
+      <h1 className="text-2xl text-blue-800 font-bold">AFC: TOURNAMENT</h1>
+    ),
+    statistics: (
+      <>
+        <h1>
+          <i className="fas fa-comments text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">152</span>
+        </h1>
+        <h1>
+          <i className="far fa-eye text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">1,523</span>
+        </h1>
+      </>
+    ),
+    lastpost: <p className="text-xl text-gray-500">Friday, 06:00 AM</p>,
   },
   {
     key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
+    topics: (
+      <h1 className="text-2xl text-blue-800 font-bold">CAF: TOURNAMENTS</h1>
+    ),
+    statistics: (
+      <>
+        <h1>
+          <i className="fas fa-comments text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">989</span>
+        </h1>
+        <h1>
+          <i className="far fa-eye text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">1,200</span>
+        </h1>
+      </>
+    ),
+    lastpost: <p className="text-xl text-gray-500">Monday, 17:00 PM</p>,
+  },
+  {
+    key: "4",
+    topics: <h1 className="text-2xl text-blue-800 font-bold">CONMEBOL</h1>,
+    statistics: (
+      <>
+        <h1>
+          <i className="fas fa-comments text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">52</span>
+        </h1>
+        <h1>
+          <i className="far fa-eye text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">850</span>
+        </h1>
+      </>
+    ),
+    lastpost: <p className="text-xl text-gray-500">Sep 13, 2023</p>,
+  },
+  {
+    key: "5",
+    topics: (
+      <h1 className="text-2xl text-blue-800 font-bold">FIFA AND TOURNAMENTS</h1>
+    ),
+    statistics: (
+      <>
+        <h1>
+          <i className="fas fa-comments text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">65</span>
+        </h1>
+        <h1>
+          <i className="far fa-eye text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">1,205</span>
+        </h1>
+      </>
+    ),
+    lastpost: <p className="text-xl text-gray-500">Aug 29, 2023</p>,
+  },
+  {
+    key: "6",
+    topics: <h1 className="text-2xl text-blue-800 font-bold">CONCACAF</h1>,
+    statistics: (
+      <>
+        <h1>
+          <i className="fas fa-comments text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">385</span>
+        </h1>
+        <h1>
+          <i className="far fa-eye text-blue-800 text-3xl"></i>
+          <span className="text-xl text-gray-500 pl-4 pb-5">1,564</span>
+        </h1>
+      </>
+    ),
+    lastpost: <p className="text-xl text-gray-500">Aug 25, 2023</p>,
   },
 ];
 const ForumPage = () => {

@@ -3,10 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
-import {
-  LayTaiKhoanDangNhap,
-  setLogin,
-} from "../../redux/QuanLyNguoiDungSlice";
+import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
 import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
 import { Button, Checkbox, Form, Input, message } from "antd";

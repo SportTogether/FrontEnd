@@ -9,20 +9,6 @@ const onChange = (e) => {
   //console.log(`checked = ${outerCheck}`);
 };
 console.log(outerCheck);
-let data = "";
-try {
-  const response = await fetch("http://localhost:8080/api/yards", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((response) => response.json())
-    .then((result) => {
-      data = result;
-    });
-} catch (error) {
-  console.error("Lỗi xảy ra: ", error);
-}
-// console.log(data.data);
 const cities = [
   {
     key: "1",
@@ -190,43 +176,60 @@ const types = [
     ),
   },
 ];
-const itemsList = data.data;
-console.log(itemsList);
-// itemList = [
-//   {
-//     key: 1,
-//     name: "Sân Thành Thắng",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
-//     rate: 4,
-//     type: "Sân Bóng Đá",
-//     price: "300.000đ / trận",
-//     kilometers: "5.7km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-//   {
-//     key: 2,
-//     name: "Sân 312",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
-//     rate: 3,
-//     type: "Sân Bóng Đá",
-//     price: "250.000đ / trận",
-//     kilometers: "10km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-//   {
-//     key: 3,
-//     name: "Sân Mini Victory",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
-//     rate: 3,
-//     type: "Sân Bóng Đá",
-//     price: "350.000đ / trận",
-//     kilometers: "11.5km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-// ];
+let data = "";
+const handleDatSan = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/api/yards", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        data = result;
+      });
+  } catch (error) {
+    console.error("Lỗi xảy ra: ", error);
+  }
+  // console.log(data.data);
+};
+
+// const itemsList = data.data;
+// console.log(itemsList);
+const itemList = [
+  {
+    key: 1,
+    name: "Sân Thành Thắng",
+    image: "../../../public/image/sanThanhThang.JPG",
+    address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
+    rate: 4,
+    type: "Sân Bóng Đá",
+    price: "300.000đ / trận",
+    kilometers: "5.7km",
+    point: "Sân Cỏ Nhân Tạo",
+  },
+  {
+    key: 2,
+    name: "Sân 312",
+    image: "../../../public/image/sanThanhThang.JPG",
+    address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
+    rate: 3,
+    type: "Sân Bóng Đá",
+    price: "250.000đ / trận",
+    kilometers: "10km",
+    point: "Sân Cỏ Nhân Tạo",
+  },
+  {
+    key: 3,
+    name: "Sân Mini Victory",
+    image: "../../../public/image/sanThanhThang.JPG",
+    address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
+    rate: 3,
+    type: "Sân Bóng Đá",
+    price: "350.000đ / trận",
+    kilometers: "11.5km",
+    point: "Sân Cỏ Nhân Tạo",
+  },
+];
 const DatSanPage = () => {
   const navigate = useNavigate();
   return (
@@ -385,7 +388,7 @@ const DatSanPage = () => {
           <div className="list">
             <h1 className="list-title">CHỌN SÂN</h1>
             <div className="overflow-y-scroll h-[500px]">
-              {itemsList.map((item) => {
+              {itemList.map((item) => {
                 return (
                   <div
                     className="list-item"

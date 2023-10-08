@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import animateSignUp from "./animation_soccer.json";
 import { Form, Input, Checkbox, Button, message } from "antd";
-import { LayTaiKhoanDangKy } from "../../redux/QuanLyNguoiDungSlice";
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -38,7 +37,6 @@ const DangKyPage = () => {
         .then((result) => {
           data = result;
         });
-
       message.success("Đăng ký thành công!!!");
       setTimeout(() => {
         navigate("/login");
