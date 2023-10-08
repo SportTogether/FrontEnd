@@ -77,7 +77,7 @@ const districts = [
   {
     key: "1",
     label: (
-      <Checkbox value="Q1" onChange={onChange}>
+      <Checkbox value="quan 1" onChange={onChange}>
         <h1 className="text-2xl">Quận 1</h1>
       </Checkbox>
     ),
@@ -85,7 +85,7 @@ const districts = [
   {
     key: "2",
     label: (
-      <Checkbox value="Q2" onChange={onChange}>
+      <Checkbox value="quan 2" onChange={onChange}>
         <h1 className="text-2xl">Quận 2</h1>
       </Checkbox>
     ),
@@ -93,7 +93,7 @@ const districts = [
   {
     key: "3",
     label: (
-      <Checkbox value="Q3" onChange={onChange}>
+      <Checkbox value="quan 3" onChange={onChange}>
         <h1 className="text-2xl">Quận 3</h1>
       </Checkbox>
     ),
@@ -101,7 +101,7 @@ const districts = [
   {
     key: "4",
     label: (
-      <Checkbox value="QGV" onChange={onChange}>
+      <Checkbox value="quan go vap" onChange={onChange}>
         <h1 className="text-2xl">Quận Gò Vấp</h1>
       </Checkbox>
     ),
@@ -109,7 +109,7 @@ const districts = [
   {
     key: "5",
     label: (
-      <Checkbox value="QTB" onChange={onChange}>
+      <Checkbox value="quan tan binh" onChange={onChange}>
         <h1 className="text-2xl">Quận Tân Bình</h1>
       </Checkbox>
     ),
@@ -117,7 +117,7 @@ const districts = [
   {
     key: "6",
     label: (
-      <Checkbox value="QPN" onChange={onChange}>
+      <Checkbox value="quan phu nhuan" onChange={onChange}>
         <h1 className="text-2xl">Quận Phú Nhuận</h1>
       </Checkbox>
     ),
@@ -265,8 +265,8 @@ const DatSanPage = () => {
                       <Checkbox value="TuNhien" onChange={onChange}>
                         <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
                       </Checkbox>
-                      <Checkbox value="Futsal" onChange={onChange}>
-                        <h1 className="text-2xl">Sân Futsal</h1>
+                      <Checkbox value="mini" onChange={onChange}>
+                        <h1 className="text-2xl">Sân mini</h1>
                       </Checkbox>
                     </>
                   ),
