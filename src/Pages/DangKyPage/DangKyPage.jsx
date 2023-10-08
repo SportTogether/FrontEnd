@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import animateSignUp from "./animation_soccer.json";
 import { Form, Input, Checkbox, Button } from "antd";
+import { LayTaiKhoanDangKy } from "../../redux/QuanLyNguoiDungSlice";
 
 const formItemLayout = {
   labelCol: {
@@ -29,11 +30,7 @@ const DangKyPage = () => {
     values = JSON.stringify(values);
     console.log("Success:", values);
     try {
-      const response = await fetch("http://localhost:8080/api/users/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: values,
-      })
+      const response = await LayTaiKhoanDangKy(values)
         .then((response) => response.json())
         .then((result) => {
           console.log("Success:", result);

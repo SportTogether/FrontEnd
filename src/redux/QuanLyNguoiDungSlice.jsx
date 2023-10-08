@@ -23,7 +23,7 @@ export let LayTaiKhoanDangNhap = (values) => {
   return Domain_State.post("/api/users/login", values);
 };
 export let LayTaiKhoanDangKy = (values) => {
-  return Domain_State.post("/api/QuanLyNguoiDung/DangKy", values);
+  return Domain_State.post("/api/users/register", values);
 };
 
 export default QuanLyNguoiDungSlice.reducer;
