@@ -19,13 +19,6 @@ import { useSelector } from "react-redux";
 const DangNhapPage = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
-
-  const userName = "test";
-  const passWord = "123456";
-  const [userLogin, setUserLogin] = useState({
-    userName,
-    passWord,
-  });
   let data = "Test";
   const onFinish = async (values) => {
     values = JSON.stringify(values);

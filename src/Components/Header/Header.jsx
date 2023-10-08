@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Dropdown, Form, Modal, Select } from "antd";
-import { useSelector } from "react-redux";
-import { UserOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
 const items = [
@@ -96,6 +95,7 @@ const cities = [
 ];
 export default function Header() {
   const navigate = useNavigate();
+  let dispatch = useDispatch();
   const [form] = Form.useForm();
   const onFinish = (value) => {
     console.log(value);
