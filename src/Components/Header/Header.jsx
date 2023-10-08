@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Dropdown, Form, Modal, Select } from "antd";
+import { Avatar, Dropdown, Form, Modal, Select } from "antd";
+import { useSelector } from "react-redux";
+import { UserOutlined } from "@ant-design/icons";
+import { localStorageServices } from "../../Services/localStorageServices";
+import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
 const items = [
   {
     key: "1",
@@ -105,6 +109,68 @@ export default function Header() {
   };
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+  const { checkLogin } = useSelector((state) => {
+    return state.QuanLyNguoiDungSlice;
+  });
+  const handleLogOut = () => {
+    localStorageServices.removeUser();
+    dispatch(setLogin(null));
+    navigate("/");
+  };
+  const login = [
+    {
+      key: "1",
+      label: <h1 className="text-2xl">{checkLogin?.name}</h1>,
+    },
+    {
+      key: "2",
+      label: <h1 className="text-2xl">Trang Thông Tin</h1>,
+    },
+    {
+      key: "3",
+      label: (
+        <h1 className="text-2xl" onClick={handleLogOut}>
+          Đăng Xuất
+        </h1>
+      ),
+    },
+  ];
+
+  const checkUserLogin = () => {
+    if (checkLogin !== null) {
+      return (
+        <>
+          <Dropdown
+            menu={{
+              items: login,
+            }}
+            trigger={["click"]}
+          >
+            <Avatar
+              src="https://i.pravatar.cc/?u=fake@pravatar.com"
+              style={{ height: 50, width: 50 }}
+              onClick={(e) => e.preventDefault()}
+            ></Avatar>
+          </Dropdown>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className="nav-right">
+            <h1
+              onClick={() => {
+                navigate("/login");
+              }}
+              className="nav-right-title"
+            >
+              Log In
+            </h1>
+          </div>
+        </>
+      );
+    }
   };
   return (
     <header className="header">
@@ -272,16 +338,7 @@ export default function Header() {
             </div>
           </Modal>
         </div>
-        <div className="nav-right">
-          <h1
-            onClick={() => {
-              navigate("/login");
-            }}
-            className="nav-right-title"
-          >
-            Log In
-          </h1>
-        </div>
+        <div className="nav-right">{checkUserLogin()}</div>
       </div>
     </header>
   );

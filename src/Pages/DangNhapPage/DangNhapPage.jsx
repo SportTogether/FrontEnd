@@ -26,65 +26,9 @@ const DangNhapPage = () => {
     userName,
     passWord,
   });
-
-  // const onFinish = (values) => {
-  //   //value : form đăng nhập
-  //   //console.log("values:", values);
-  //   values = JSON.stringify(values);
-
-  //   // fetch("http://localhost:8080/api/users/login", {
-  //   //   method: "POST",
-  //   //   headers: { "Content-Type": "application/json" },
-  //   //   body: values,
-  //   // })
-  //   //   .then((response) => response.json())
-  //   //   .then((result) => {
-  //   //     data = result;
-  //   //   });
-
-  //   if (false) {
-  //     setUserLogin({
-  //       userName: values.username,
-  //       passWord: values.password,
-  //     });
-  //     localStorage.setItem("USER_LOGIN", userLogin);
-  //     message.success("Bạn Đã Đăng Nhập Thành Công!!!");
-  //     setTimeout(() => {
-  //       navigate("/");
-  //     }, 3000);
-  //   } else {
-  //     message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
-  //   }
-  // };
   let data = "Test";
   const onFinish = async (values) => {
-    //console.log(values);
     values = JSON.stringify(values);
-    // const fetch = async () => {
-    //   await LayTaiKhoanDangNhap(values)
-    //     .then((response) => response.json())
-    //     .then((result) => {
-    //       data = result;
-    //       console.log(data);
-    //       if (data.data.id != 0) {
-    //         dispatch(
-    //           setLogin({
-    //             userName: values.username,
-    //             passWord: values.password,
-    //           })
-    //         );
-    //         localStorageServices.setUser(SPORT_LOCALSTORAGE, userLogin);
-    //         // localStorage.setItem("USER_LOGIN", userLogin);
-    //         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
-    //         setTimeout(() => {
-    //           navigate("/");
-    //         }, 3000);
-    //       } else {
-    //         message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
-    //       }
-    //     })
-    //     .catch((error) => console.error("Lỗi xảy ra: ", error));
-    // };
     try {
       const response = await fetch("http://localhost:8080/api/users/login", {
         method: "POST",
@@ -97,12 +41,6 @@ const DangNhapPage = () => {
         });
       console.log("my data after login : ", data);
       if (data.data.id != 0) {
-        setUserLogin({
-          userName: values.username,
-          passWord: values.password,
-        });
-        // dispatch(setLogin(userLogin));
-        // localStorageServices.setUser(SPORT_LOCALSTORAGE, userLogin);
         dispatch(setLogin(data.data));
         localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
