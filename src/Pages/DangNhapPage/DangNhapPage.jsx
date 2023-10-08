@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { localStorageServices } from "../../Services/localStorageServices";
+import { SPORT_LOCALSTORAGE } from "../../Constants";
+import {
+  LayTaiKhoanDangNhap,
+  setLogin,
+} from "../../redux/QuanLyNguoiDungSlice";
 import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import {
-  DashboardTwoTone,
+  // DashboardTwoTone,
   LockOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, message } from "antd";
 
 const DangNhapPage = () => {
+  const navigate = useNavigate();
+  let dispatch = useDispatch();
+
   const userName = "test";
   const passWord = "123456";
-
   const [userLogin, setUserLogin] = useState({
     userName,
     passWord,
   });
-
-  const navigate = useNavigate();
 
   // const onFinish = (values) => {
   //   //value : form đăng nhập
@@ -51,8 +58,33 @@ const DangNhapPage = () => {
   // };
   let data = "Test";
   const onFinish = async (values) => {
+    console.log(values);
     values = JSON.stringify(values);
-
+    // const fetch = async () => {
+    //   await LayTaiKhoanDangNhap(values)
+    //     .then((response) => response.json())
+    //     .then((result) => {
+    //       data = result;
+    //       console.log(data);
+    //       if (data.data.id != 0) {
+    //         dispatch(
+    //           setLogin({
+    //             userName: values.username,
+    //             passWord: values.password,
+    //           })
+    //         );
+    //         localStorageServices.setUser(SPORT_LOCALSTORAGE, userLogin);
+    //         // localStorage.setItem("USER_LOGIN", userLogin);
+    //         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+    //         setTimeout(() => {
+    //           navigate("/");
+    //         }, 3000);
+    //       } else {
+    //         message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+    //       }
+    //     })
+    //     .catch((error) => console.error("Lỗi xảy ra: ", error));
+    // };
     try {
       const response = await fetch("http://localhost:8080/api/users/login", {
         method: "POST",
@@ -69,9 +101,8 @@ const DangNhapPage = () => {
           userName: values.username,
           passWord: values.password,
         });
-
-        localStorage.setItem("USER_LOGIN", userLogin);
-
+        dispatch(setLogin(userLogin));
+        localStorageServices.setUser(SPORT_LOCALSTORAGE, userLogin);
         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
         setTimeout(() => {
           navigate("/");
@@ -113,7 +144,7 @@ const DangNhapPage = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your Username!",
+                  message: "Please input your Email!",
                 },
               ]}
               initialValue={"admin"}
