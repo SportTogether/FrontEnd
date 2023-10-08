@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Dropdown, Form, Modal, Select } from "antd";
-import { useDispatch, useSelector } from "react-redux";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
 const items = [
@@ -95,7 +95,7 @@ const cities = [
 ];
 export default function Header() {
   const navigate = useNavigate();
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const onFinish = (value) => {
     console.log(value);
@@ -116,7 +116,9 @@ export default function Header() {
   const handleLogOut = () => {
     localStorageServices.removeUser();
     dispatch(setLogin(null));
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   };
   const login = [
     {
@@ -130,7 +132,12 @@ export default function Header() {
     {
       key: "3",
       label: (
-        <h1 className="text-2xl" onClick={handleLogOut}>
+        <h1
+          className="text-2xl"
+          onClick={() => {
+            handleLogOut();
+          }}
+        >
           Đăng Xuất
         </h1>
       ),
@@ -155,22 +162,21 @@ export default function Header() {
           </Dropdown>
         </>
       );
-    } else {
-      return (
-        <>
-          <div className="nav-right">
-            <h1
-              onClick={() => {
-                navigate("/login");
-              }}
-              className="nav-right-title"
-            >
-              Log In
-            </h1>
-          </div>
-        </>
-      );
     }
+    return (
+      <>
+        <div className="nav-right">
+          <h1
+            onClick={() => {
+              navigate("/login");
+            }}
+            className="nav-right-title"
+          >
+            Log In
+          </h1>
+        </div>
+      </>
+    );
   };
   return (
     <header className="header">
