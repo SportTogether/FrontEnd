@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { setListSan } from "../../redux/QuanLySanSlice";
 const onChange = (e) => {
   const outerCheck = e.target.value;
   console.log(`checked = ${outerCheck}`);
@@ -212,6 +214,7 @@ const itemsList = [
 let data = "";
 const DatSanPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchApi = async () => {
       try {
@@ -234,12 +237,15 @@ const DatSanPage = () => {
     const printData = async () => {
       const a = await data;
       console.log(a);
+      dispatch(setListSan(a.data));
     };
     printData();
+    const { listSan } = useSelector((state) => {
+      return state.QuanLySanSlice;
+    });
     // console.log("data=", resultFromPrintAddress);
     // const itemsList = data.data;
     // console.log("itemsList=", itemsList);
-
   }, []);
 
   return (
