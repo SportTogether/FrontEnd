@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { setListSan } from "../../redux/QuanLySanSlice";
+import { setDetailSan, setListSan } from "../../redux/QuanLySanSlice";
 const onChange = (e) => {
   const outerCheck = e.target.value;
   console.log(`checked = ${outerCheck}`);
@@ -175,7 +175,6 @@ const types = [
     ),
   },
 ];
-
 // const itemsList = [
 //   {
 //     key: 1,
@@ -233,6 +232,10 @@ const DatSanPage = () => {
     return state.QuanLySanSlice;
   });
   console.log("data:", listSan);
+  const handleDatSan = (event) => {
+    dispatch(setDetailSan(event));
+    navigate("/detail");
+  };
   return (
     <>
       <Breadcrumb
@@ -395,7 +398,7 @@ const DatSanPage = () => {
                     className="list-item"
                     key={item.id}
                     onClick={() => {
-                      navigate("/detail");
+                      handleDatSan(item);
                     }}
                   >
                     <div className="list-item-left">
