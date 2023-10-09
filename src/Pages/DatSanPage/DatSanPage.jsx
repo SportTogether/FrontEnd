@@ -228,7 +228,7 @@ const DatSanPage = () => {
     };
     fetchApi();
   }, []);
-  const { listSan } = useSelector((state) => {
+  const { listSan, thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
   console.log("data:", listSan);
@@ -236,6 +236,7 @@ const DatSanPage = () => {
     dispatch(setDetailSan(event));
     navigate("/detail");
   };
+  console.log(thongTinSan);
   return (
     <>
       <Breadcrumb
