@@ -9,6 +9,7 @@ import DetailSanPage from "./Pages/DetailSan/DetailSanPage";
 import UuDaiPage from "./Pages/UuDai/UuDaiPage";
 import ForumPage from "./Pages/Forum/ForumPage";
 import KetNoiPage from "./Pages/KetNoi/KetNoiPage";
+import TrangThongTinUser from "./Pages/TrangThongTinUser/TrangThongTinUser";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="forum" element={<ForumPage />} />
             <Route path="ket-noi" element={<KetNoiPage />} />
             <Route path="login" element={<DangNhapPage />} />
+            <Route path="thong-tin-user" element={<TrangThongTinUser />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="signup" element={<DangKyPage />} />
           </Route>

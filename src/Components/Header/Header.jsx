@@ -127,7 +127,16 @@ export default function Header() {
     },
     {
       key: "2",
-      label: <h1 className="text-2xl">Trang Thông Tin</h1>,
+      label: (
+        <h1
+          className="text-2xl"
+          onClick={() => {
+            navigate("/thong-tin-user");
+          }}
+        >
+          Trang Thông Tin
+        </h1>
+      ),
     },
     {
       key: "3",
