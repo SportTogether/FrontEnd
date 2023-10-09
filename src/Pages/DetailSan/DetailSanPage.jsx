@@ -14,7 +14,6 @@ const { Paragraph } = Typography;
 const onChangeTab = (key) => {
   console.log(key);
 };
-
 const times = [
   {
     key: 1,
@@ -68,167 +67,6 @@ const types = [
     ),
   },
 ];
-const items = [
-  {
-    key: "1",
-    label: (
-      <h1 className="w-[525px] text-center text-green-600 text-3xl font-bold">
-        MÔ TẢ
-      </h1>
-    ),
-    children: (
-      <div className="item-detail">
-        <div className="img-desc">
-          <img src="../../../public/image/sanThanhThang.JPG" alt="" />
-        </div>
-        <div className="text-desc">
-          <Paragraph
-            ellipsis={{
-              rows: 6,
-              expandable: true,
-              symbol: "Xem Thêm",
-            }}
-            className="text-xl"
-          >
-            Sân thành thắng là sân bóng đá lâu đời, mới được chủ đầu tư, nâng
-            cấp và là một trong những sân bóng đẹp nhất Thủ Đức. <br /> Sân bóng
-            rất đông và kín lịch, nếu bạn muốn đặt sân, hãy liên hệ với chủ sân
-            để được sắp xếp. <br /> Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Dignissimos illum porro eveniet quae. Beatae
-            voluptatibus earum, minus esse quod nulla quisquam laudantium quis
-            quaerat omnis perspiciatis nemo aut maxime? At!
-          </Paragraph>
-        </div>
-      </div>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <h1 className="w-[525px] text-center text-green-600 text-3xl font-bold">
-        ĐÁNH GIÁ
-      </h1>
-    ),
-    children: (
-      <div className="m-5">
-        <div className="rate-desc">
-          <div className="rate-otp1">
-            <h1 className="text-3xl text-yellow-300">
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-            </h1>
-          </div>
-          <div className="rate-otp2 pt-2">
-            <Progress
-              percent={85}
-              status="active"
-              showInfo={false}
-              strokeColor={"red"}
-            />
-          </div>
-          <div className="rate-otp3">
-            <h1 className="text-2xl text-green-600">(50 đánh giá)</h1>
-          </div>
-        </div>
-        <div className="rate-desc">
-          <div className="rate-otp1">
-            <h1 className="text-3xl text-yellow-300">
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-            </h1>
-          </div>
-          <div className="rate-otp2 pt-2">
-            <Progress
-              percent={60}
-              status="active"
-              showInfo={false}
-              strokeColor={"red"}
-            />
-          </div>
-          <div className="rate-otp3">
-            <h1 className="text-2xl text-green-600">(30 đánh giá)</h1>
-          </div>
-        </div>
-        <div className="rate-desc">
-          <div className="rate-otp1">
-            <h1 className="text-3xl text-yellow-300">
-              <StarFilled />
-              <StarFilled />
-              <StarFilled />
-            </h1>
-          </div>
-          <div className="rate-otp2 pt-2">
-            <Progress
-              percent={40}
-              status="active"
-              showInfo={false}
-              strokeColor={"red"}
-            />
-          </div>
-          <div className="rate-otp3">
-            <h1 className="text-2xl text-green-600">(8 đánh giá)</h1>
-          </div>
-        </div>
-        <div className="rate-desc">
-          <div className="rate-otp1">
-            <h1 className="text-3xl text-yellow-300">
-              <StarFilled />
-              <StarFilled />
-            </h1>
-          </div>
-          <div className="rate-otp2 pt-2">
-            <Progress
-              percent={10}
-              status="active"
-              showInfo={false}
-              strokeColor={"red"}
-            />
-          </div>
-          <div className="rate-otp3">
-            <h1 className="text-2xl text-green-600">(3 đánh giá)</h1>
-          </div>
-        </div>
-        <div className="rate-desc">
-          <div className="rate-otp1">
-            <h1 className="text-3xl text-yellow-300">
-              <StarFilled />
-            </h1>
-          </div>
-          <div className="rate-otp2 pt-2">
-            <Progress
-              percent={0}
-              status="active"
-              showInfo={false}
-              strokeColor={"red"}
-            />
-          </div>
-          <div className="rate-otp3">
-            <h1 className="text-2xl text-green-600">(0 đánh giá)</h1>
-          </div>
-        </div>
-        <Dropdown
-          menu={{
-            items: types,
-          }}
-          trigger={["click"]}
-        >
-          <h1
-            className="text-2xl text-green-600 font-bold cursor-pointer"
-            onClick={(e) => e.preventDefault()}
-          >
-            BÌNH LUẬN
-            <DownOutlined />
-          </h1>
-        </Dropdown>
-      </div>
-    ),
-  },
-];
 const olocks = [
   {
     id: 1,
@@ -252,6 +90,161 @@ const DetailSanPage = () => {
   const { thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
+  const items = [
+    {
+      key: "1",
+      label: (
+        <h1 className="w-[525px] text-center text-green-600 text-3xl font-bold">
+          MÔ TẢ
+        </h1>
+      ),
+      children: (
+        <div className="item-detail">
+          <div className="img-desc">
+            <img src="../../../public/image/sanThanhThang.JPG" alt="" />
+          </div>
+          <div className="text-desc">
+            <Paragraph
+              ellipsis={{
+                rows: 6,
+                expandable: true,
+                symbol: "Xem Thêm",
+              }}
+              className="text-xl"
+            >
+              {thongTinSan?.description}
+            </Paragraph>
+          </div>
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <h1 className="w-[525px] text-center text-green-600 text-3xl font-bold">
+          ĐÁNH GIÁ
+        </h1>
+      ),
+      children: (
+        <div className="m-5">
+          <div className="rate-desc">
+            <div className="rate-otp1">
+              <h1 className="text-3xl text-yellow-300">
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+              </h1>
+            </div>
+            <div className="rate-otp2 pt-2">
+              <Progress
+                percent={85}
+                status="active"
+                showInfo={false}
+                strokeColor={"red"}
+              />
+            </div>
+            <div className="rate-otp3">
+              <h1 className="text-2xl text-green-600">(50 đánh giá)</h1>
+            </div>
+          </div>
+          <div className="rate-desc">
+            <div className="rate-otp1">
+              <h1 className="text-3xl text-yellow-300">
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+              </h1>
+            </div>
+            <div className="rate-otp2 pt-2">
+              <Progress
+                percent={60}
+                status="active"
+                showInfo={false}
+                strokeColor={"red"}
+              />
+            </div>
+            <div className="rate-otp3">
+              <h1 className="text-2xl text-green-600">(30 đánh giá)</h1>
+            </div>
+          </div>
+          <div className="rate-desc">
+            <div className="rate-otp1">
+              <h1 className="text-3xl text-yellow-300">
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+              </h1>
+            </div>
+            <div className="rate-otp2 pt-2">
+              <Progress
+                percent={40}
+                status="active"
+                showInfo={false}
+                strokeColor={"red"}
+              />
+            </div>
+            <div className="rate-otp3">
+              <h1 className="text-2xl text-green-600">(8 đánh giá)</h1>
+            </div>
+          </div>
+          <div className="rate-desc">
+            <div className="rate-otp1">
+              <h1 className="text-3xl text-yellow-300">
+                <StarFilled />
+                <StarFilled />
+              </h1>
+            </div>
+            <div className="rate-otp2 pt-2">
+              <Progress
+                percent={10}
+                status="active"
+                showInfo={false}
+                strokeColor={"red"}
+              />
+            </div>
+            <div className="rate-otp3">
+              <h1 className="text-2xl text-green-600">(3 đánh giá)</h1>
+            </div>
+          </div>
+          <div className="rate-desc">
+            <div className="rate-otp1">
+              <h1 className="text-3xl text-yellow-300">
+                <StarFilled />
+              </h1>
+            </div>
+            <div className="rate-otp2 pt-2">
+              <Progress
+                percent={0}
+                status="active"
+                showInfo={false}
+                strokeColor={"red"}
+              />
+            </div>
+            <div className="rate-otp3">
+              <h1 className="text-2xl text-green-600">(0 đánh giá)</h1>
+            </div>
+          </div>
+          <Dropdown
+            menu={{
+              items: types,
+            }}
+            trigger={["click"]}
+          >
+            <h1
+              className="text-2xl text-green-600 font-bold cursor-pointer"
+              onClick={(e) => e.preventDefault()}
+            >
+              BÌNH LUẬN
+              <DownOutlined />
+            </h1>
+          </Dropdown>
+        </div>
+      ),
+    },
+  ];
   console.log("thong tin san", thongTinSan);
   return (
     <>
@@ -290,15 +283,18 @@ const DetailSanPage = () => {
               />
             </div>
             <div className="item-detail-right">
-              <h1>SÂN THÀNH THẮNG</h1>
+              <h1>{thongTinSan?.name}</h1>
               <p
                 className="text-2xl
             "
               >
-                9 Đường số 19, phường Thạnh Mỹ Lợi, TP Thủ Đức
+                {thongTinSan?.address}
               </p>
               <p className="text-2xl">
-                <b>Giá tham khảo:</b> 300.000đ
+                <b>Giá tham khảo:</b> {thongTinSan?.price}
+              </p>
+              <p>
+                <b>Loại Sân:</b> {thongTinSan?.type}
               </p>
               <div className="grid grid-cols-2 pt-3">
                 <div>
