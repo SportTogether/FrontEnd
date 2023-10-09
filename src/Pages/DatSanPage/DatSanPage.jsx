@@ -228,9 +228,20 @@ const DatSanPage = () => {
       }
       return data;
     };
-    fetchApi();
-    const itemsList = data.data;
+
+    data = fetchApi();
+
+    const printData = async () => {
+      const a = await data;
+      console.log(a);
+    };
+    printData();
+    // console.log("data=", resultFromPrintAddress);
+    // const itemsList = data.data;
+    // console.log("itemsList=", itemsList);
+
   }, []);
+
   return (
     <>
       <Breadcrumb
