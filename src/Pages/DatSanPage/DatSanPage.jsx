@@ -174,42 +174,43 @@ const types = [
     ),
   },
 ];
+
+const itemsList = [
+  {
+    key: 1,
+    name: "Sân Thành Thắng",
+    image: "../../../public/image/sanThanhThang.JPG",
+    address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
+    rate: 4,
+    type: "Sân Bóng Đá",
+    price: "300.000đ / trận",
+    kilometers: "5.7km",
+    point: "Sân Cỏ Nhân Tạo",
+  },
+  {
+    key: 2,
+    name: "Sân 312",
+    image: "../../../public/image/sanThanhThang.JPG",
+    address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
+    rate: 3,
+    type: "Sân Bóng Đá",
+    price: "250.000đ / trận",
+    kilometers: "10km",
+    point: "Sân Cỏ Nhân Tạo",
+  },
+  {
+    key: 3,
+    name: "Sân Mini Victory",
+    image: "../../../public/image/sanThanhThang.JPG",
+    address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
+    rate: 3,
+    type: "Sân Bóng Đá",
+    price: "350.000đ / trận",
+    kilometers: "11.5km",
+    point: "Sân Cỏ Nhân Tạo",
+  },
+];
 let data = "";
-// const itemList = [
-//   {
-//     key: 1,
-//     name: "Sân Thành Thắng",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
-//     rate: 4,
-//     type: "Sân Bóng Đá",
-//     price: "300.000đ / trận",
-//     kilometers: "5.7km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-//   {
-//     key: 2,
-//     name: "Sân 312",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
-//     rate: 3,
-//     type: "Sân Bóng Đá",
-//     price: "250.000đ / trận",
-//     kilometers: "10km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-//   {
-//     key: 3,
-//     name: "Sân Mini Victory",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
-//     rate: 3,
-//     type: "Sân Bóng Đá",
-//     price: "350.000đ / trận",
-//     kilometers: "11.5km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-// ];
 const DatSanPage = () => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -226,10 +227,12 @@ const DatSanPage = () => {
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
       }
+      return data;
     };
-    fetchApi();
+    data = fetchApi();
+
+    console.log("data=", data);
     const itemsList = data.data;
-    console.log(itemsList);
   }, []);
   return (
     <>
