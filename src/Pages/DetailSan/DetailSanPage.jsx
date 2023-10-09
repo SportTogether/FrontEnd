@@ -345,6 +345,7 @@ const DetailSanPage = () => {
                             key={item.id}
                             onClick={() => {
                               setOlock(item);
+                              console.log(olock);
                             }}
                           >
                             <button className="bg-gray-200 text-2xl rounded-2xl p-2 focus:bg-green-600 focus:text-white">
