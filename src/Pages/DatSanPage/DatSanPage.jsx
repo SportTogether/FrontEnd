@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
-import { list } from "postcss";
 const onChange = (e) => {
   const outerCheck = e.target.value;
   console.log(`checked = ${outerCheck}`);
@@ -226,8 +225,9 @@ const DatSanPage = () => {
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
       }
+      return data;
     };
-    fetchApi();
+    data = fetchApi();
     const itemsList = data.data;
     console.log(itemsList);
   }, []);
@@ -387,7 +387,7 @@ const DatSanPage = () => {
           <div className="list">
             <h1 className="list-title">CHỌN SÂN</h1>
             <div className="overflow-y-scroll h-[500px]">
-              {itemsList.map((item) => {
+              {itemsList?.map((item) => {
                 return (
                   <div
                     className="list-item"
