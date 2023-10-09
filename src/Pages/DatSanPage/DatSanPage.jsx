@@ -215,8 +215,6 @@ let data = "";
 const DatSanPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [result, setResult] = useState([]);
-  let data = "";
   useEffect(() => {
     const fetchApi = async () => {
       try {
@@ -224,22 +222,27 @@ const DatSanPage = () => {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         }).then((response) => response.json());
+
         // .then((result) => {
         dispatch(setListSan(response.data));
         console.log(response.data); //->set state
-        return data;
         // });
+        dispatch(setListSan(response.data));
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
       }
+      return data;
     };
 
     fetchApi();
+
   }, []);
   const { listSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
+
   console.log("data list san ", listSan);
+
   return (
     <>
       <Breadcrumb
