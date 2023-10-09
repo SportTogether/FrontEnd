@@ -92,7 +92,7 @@ const DetailSanPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const { thongTinSan } = useSelector((state) => {
+  const { thongTinSan, thongTinSanDaDat } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
   const [olock, setOlock] = useState({});
@@ -268,6 +268,7 @@ const DetailSanPage = () => {
       return;
     }
   };
+  console.log(thongTinSanDaDat);
   return (
     <>
       <Breadcrumb
