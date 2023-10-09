@@ -100,6 +100,7 @@ const DetailSanPage = () => {
   const [dateTime, setDateTime] = useState({});
   const { date, day } = dateTime;
   const detailDateTime = { ocl1, ocl2, date, day };
+
   const items = [
     {
       key: "1",
@@ -255,14 +256,69 @@ const DetailSanPage = () => {
       ),
     },
   ];
+
   const handleDatSan = () => {
     if (olock !== null && dateTime !== null) {
-      const newThongTinSanDaDat = { ...thongTinSan, detailDateTime };
+      const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
       dispatch(setDatSan(newThongTinSanDaDat));
-      message.success("Chúc mừng bạn đã đặt sân thành công");
+
+      console.log("thong tin dat san ", newThongTinSanDaDat);
+      let user_id = JSON.parse(
+        localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
+      ).id;
+      let yards_id = newThongTinSanDaDat.id;
+      let status_id = 1;
+      let start_date =
+        newThongTinSanDaDat.day +
+        "," +
+        newThongTinSanDaDat.date +
+        "/10/2023," +
+        newThongTinSanDaDat.ocl1 +
+        "PM";
+      let end_date =
+        newThongTinSanDaDat.day +
+        "," +
+        newThongTinSanDaDat.date +
+        "/10/2023," +
+        newThongTinSanDaDat.ocl2 +
+        "PM";
+
+      if (
+        newThongTinSanDaDat.date === undefined ||
+        newThongTinSanDaDat.ocl1 === undefined ||
+        newThongTinSanDaDat.ocl2 === undefined
+      ) {
+        start_date = null;
+        end_date = null;
+      }
+      console.log("start date ", start_date);
+      console.log("end date ", end_date);
+      let values = {
+        users_id: user_id,
+        yards_id: yards_id,
+        status_id: status_id,
+        start_date: start_date,
+        end_date: end_date,
+      };
+
+      console.log("values ", values);
+
+      const response = fetch("http://localhost:8080/api/orders/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.data) {
+            message.success("Chúc mừng bạn đã đặt sân thành công");
+          } else {
+            message.error("Vui lòng chọn ngày và giờ");
+          }
+        });
       setTimeout(() => {
         navigate("/dat-san");
-      }, 2000);
+      }, 1000);
     } else {
       alert("Vui lòng chọn ngày và thời gian");
       return;
