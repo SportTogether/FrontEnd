@@ -222,18 +222,27 @@ const DatSanPage = () => {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         }).then((response) => response.json());
+
+        // .then((result) => {
+        dispatch(setListSan(response.data));
+        console.log(response.data); //->set state
+        // });
         dispatch(setListSan(response.data));
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
       }
       return data;
     };
-    // fetchApi();
+
+    fetchApi();
+
   }, []);
   const { listSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
-  console.log(listSan);
+
+  console.log("data list san ", listSan);
+
   return (
     <>
       <Breadcrumb
