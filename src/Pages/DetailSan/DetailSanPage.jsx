@@ -263,9 +263,17 @@ const DetailSanPage = () => {
       dispatch(setDatSan(newThongTinSanDaDat));
 
       console.log("thong tin dat san ", newThongTinSanDaDat);
-      let user_id = JSON.parse(
-        localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
-      ).id;
+      try {
+        let user_id = JSON.parse(
+          localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
+        ).id;
+      } catch (error) {
+        message.error("Vui lòng đăng nhập");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
+
       let yards_id = newThongTinSanDaDat.id;
       let status_id = 1;
       let start_date =
