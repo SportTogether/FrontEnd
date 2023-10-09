@@ -176,42 +176,42 @@ const types = [
   },
 ];
 
-const itemsList = [
-  {
-    key: 1,
-    name: "Sân Thành Thắng",
-    image: "../../../public/image/sanThanhThang.JPG",
-    address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
-    rate: 4,
-    type: "Sân Bóng Đá",
-    price: "300.000đ / trận",
-    kilometers: "5.7km",
-    point: "Sân Cỏ Nhân Tạo",
-  },
-  {
-    key: 2,
-    name: "Sân 312",
-    image: "../../../public/image/sanThanhThang.JPG",
-    address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
-    rate: 3,
-    type: "Sân Bóng Đá",
-    price: "250.000đ / trận",
-    kilometers: "10km",
-    point: "Sân Cỏ Nhân Tạo",
-  },
-  {
-    key: 3,
-    name: "Sân Mini Victory",
-    image: "../../../public/image/sanThanhThang.JPG",
-    address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
-    rate: 3,
-    type: "Sân Bóng Đá",
-    price: "350.000đ / trận",
-    kilometers: "11.5km",
-    point: "Sân Cỏ Nhân Tạo",
-  },
-];
-let data = "";
+// const itemsList = [
+//   {
+//     key: 1,
+//     name: "Sân Thành Thắng",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
+//     rate: 4,
+//     type: "Sân Bóng Đá",
+//     price: "300.000đ / trận",
+//     kilometers: "5.7km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+//   {
+//     key: 2,
+//     name: "Sân 312",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
+//     rate: 3,
+//     type: "Sân Bóng Đá",
+//     price: "250.000đ / trận",
+//     kilometers: "10km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+//   {
+//     key: 3,
+//     name: "Sân Mini Victory",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
+//     rate: 3,
+//     type: "Sân Bóng Đá",
+//     price: "350.000đ / trận",
+//     kilometers: "11.5km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+// ];
+// let data = "";
 const DatSanPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -222,27 +222,17 @@ const DatSanPage = () => {
           method: "GET",
           headers: { "Content-Type": "application/json" },
         }).then((response) => response.json());
-
-        // .then((result) => {
-        dispatch(setListSan(response.data));
-        console.log(response.data); //->set state
-        // });
         dispatch(setListSan(response.data));
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
       }
-      return data;
     };
-
     fetchApi();
-
   }, []);
   const { listSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
-
-  console.log("data list san ", listSan);
-
+  console.log("data:", listSan);
   return (
     <>
       <Breadcrumb
@@ -399,11 +389,11 @@ const DatSanPage = () => {
           <div className="list">
             <h1 className="list-title">CHỌN SÂN</h1>
             <div className="overflow-y-scroll h-[500px]">
-              {itemsList?.map((item) => {
+              {listSan?.map((item) => {
                 return (
                   <div
                     className="list-item"
-                    key={item.key}
+                    key={item.id}
                     onClick={() => {
                       navigate("/detail");
                     }}
