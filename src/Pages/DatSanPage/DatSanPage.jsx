@@ -215,35 +215,34 @@ let data = "";
 const DatSanPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [result, setResult] = useState([]);
+  let data = "";
   useEffect(() => {
     const fetchApi = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/yards", {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-        })
-          .then((response) => response.json())
-          .then((result) => {
-            data = result;
-          });
+        }).then((response) => response.json());
+        // .then((result) => {
+        data = response;
+        // });
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
       }
-      return data;
     };
 
-    data = fetchApi();
-
-    const printData = async () => {
-      const a = await data;
-      console.log(a);
-      dispatch(setListSan(a.data));
-    };
-    printData();
-    const { listSan } = useSelector((state) => {
-      return state.QuanLySanSlice;
-    });
-    // console.log("data=", resultFromPrintAddress);
+    console.log("response = ", fetchApi());
+    // const printData = async () => {
+    //   const a = await data;
+    //   // console.log(a);
+    //   dispatch(setListSan(a.data));
+    // };
+    // printData();
+    // const { listSan } = useSelector((state) => {
+    //   return state.QuanLySanSlice;
+    // });
+    // console.log("data=", listSan);
     // const itemsList = data.data;
     // console.log("itemsList=", itemsList);
   }, []);

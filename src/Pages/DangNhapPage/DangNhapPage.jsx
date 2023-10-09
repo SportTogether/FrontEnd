@@ -23,11 +23,11 @@ const DangNhapPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          data = result;
-        });
+      }).then((response) => response.json());
+      //   .then((result) => {
+      //     data = result;
+      //   });
+      data = response;
       console.log("my data after login : ", data);
       if (data.data.id != 0) {
         dispatch(setLogin(data.data));
