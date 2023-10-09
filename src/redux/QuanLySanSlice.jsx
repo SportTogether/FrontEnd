@@ -4,6 +4,7 @@ import { SPORT_LOCALSTORAGE } from "../Constants";
 const initialState = {
   listSan: [],
   thongTinSan: {},
+  thongTinNgayGio: {},
 };
 const QuanLySanSlice = createSlice({
   name: SPORT_LOCALSTORAGE,
@@ -15,7 +16,10 @@ const QuanLySanSlice = createSlice({
     setDetailSan: (state, { type, payload }) => {
       state.thongTinSan = payload;
     },
+    setNgayGio: (state, { type, payload }) => {
+      state.thongTinNgayGio = payload;
+    },
   },
 });
-export const { setListSan, setDetailSan } = QuanLySanSlice.actions;
+export const { setListSan, setDetailSan, setNgayGio } = QuanLySanSlice.actions;
 export default QuanLySanSlice.reducer;

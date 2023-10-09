@@ -85,11 +85,17 @@ const olocks = [
   },
 ];
 const DetailSanPage = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [olock, setOlock] = useState({});
-  const { thongTinSan } = useSelector((state) => {
+  const { thongTinSan, thongTinNgayGio } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
+  const [olock, setOlock] = useState({});
+  const [dateTime, setDateTime] = useState({});
+  const detailDateTime = { ...olock, ...dateTime };
+  console.log(detailDateTime);
+  dispatch(setDateTime(detailDateTime));
+  console.log(thongTinNgayGio);
   const items = [
     {
       key: "1",
@@ -324,6 +330,9 @@ const DetailSanPage = () => {
                           <button
                             className="border bg-gray-200 rounded-2xl text-center focus:bg-green-600"
                             key={item.key}
+                            onClick={() => {
+                              setDateTime(item);
+                            }}
                           >
                             <h1 className="text-black text-4xl font-bold py-3">
                               {item.date}
@@ -345,7 +354,6 @@ const DetailSanPage = () => {
                             key={item.id}
                             onClick={() => {
                               setOlock(item);
-                              console.log(olock);
                             }}
                           >
                             <button className="bg-gray-200 text-2xl rounded-2xl p-2 focus:bg-green-600 focus:text-white">
