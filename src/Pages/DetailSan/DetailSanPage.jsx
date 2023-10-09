@@ -10,8 +10,10 @@ import {
   Progress,
   Tabs,
   Typography,
+  message,
 } from "antd";
 import { DownOutlined, StarFilled, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 const { Paragraph } = Typography;
 const onChangeTab = (key) => {
   console.log(key);
@@ -88,6 +90,7 @@ const olocks = [
 ];
 const DetailSanPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
@@ -256,6 +259,10 @@ const DetailSanPage = () => {
     if (olock !== null && dateTime !== null) {
       const newThongTinSanDaDat = { ...thongTinSan, detailDateTime };
       dispatch(setDatSan(newThongTinSanDaDat));
+      message.success("Chúc mừng bạn đã đặt sân thành công");
+      setTimeout(() => {
+        navigate("/dat-san");
+      }, 2000);
     } else {
       alert("Vui lòng chọn ngày và thời gian");
       return;
@@ -388,6 +395,11 @@ const DetailSanPage = () => {
                       <span className="bg-green-100 p-3 ml-2 rounded-xl">
                         00
                       </span>
+                    </h1>
+                    <h1 className="text-center text-2xl py-5">
+                      Ngày Và Giờ Đã Chọn: {detailDateTime.day},{" "}
+                      {detailDateTime.date} lúc {detailDateTime.ocl1} : 00 -{" "}
+                      {detailDateTime.ocl2} : 00
                     </h1>
                   </Modal>
                 </div>
