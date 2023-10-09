@@ -5,6 +5,7 @@ const initialState = {
   listSan: [],
   thongTinSan: {},
   thongTinNgayGio: {},
+  thongTinSanDaDat: {},
 };
 const QuanLySanSlice = createSlice({
   name: SPORT_LOCALSTORAGE,
@@ -19,7 +20,11 @@ const QuanLySanSlice = createSlice({
     setNgayGio: (state, { type, payload }) => {
       state.thongTinNgayGio = payload;
     },
+    setDatSan: (state, { type, payload }) => {
+      state.thongTinSanDaDat = payload;
+    },
   },
 });
-export const { setListSan, setDetailSan, setNgayGio } = QuanLySanSlice.actions;
+export const { setListSan, setDetailSan, setNgayGio, setDatSan } =
+  QuanLySanSlice.actions;
 export default QuanLySanSlice.reducer;

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setDatSan } from "../../redux/QuanLySanSlice";
+
 import {
   Avatar,
   Breadcrumb,
@@ -87,15 +89,14 @@ const olocks = [
 const DetailSanPage = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { thongTinSan, thongTinNgayGio } = useSelector((state) => {
+  const { thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
   const [olock, setOlock] = useState({});
+  const { ocl1, ocl2 } = olock;
   const [dateTime, setDateTime] = useState({});
-  const detailDateTime = { ...olock, ...dateTime };
-  console.log(detailDateTime);
-  dispatch(setDateTime(detailDateTime));
-  console.log(thongTinNgayGio);
+  const { date, day } = dateTime;
+  const detailDateTime = { ocl1, ocl2, date, day };
   const items = [
     {
       key: "1",
@@ -251,7 +252,15 @@ const DetailSanPage = () => {
       ),
     },
   ];
-  console.log("thong tin san", thongTinSan);
+  const handleDatSan = () => {
+    if (olock !== null && dateTime !== null) {
+      const newThongTinSanDaDat = { ...thongTinSan, detailDateTime };
+      dispatch(setDatSan(newThongTinSanDaDat));
+    } else {
+      alert("Vui lòng chọn ngày và thời gian");
+      return;
+    }
+  };
   return (
     <>
       <Breadcrumb
@@ -383,7 +392,12 @@ const DetailSanPage = () => {
                   </Modal>
                 </div>
                 <div className="text-right pr-5">
-                  <button className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600">
+                  <button
+                    className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
+                    onClick={() => {
+                      handleDatSan();
+                    }}
+                  >
                     ĐẶT SÂN
                   </button>
                 </div>
