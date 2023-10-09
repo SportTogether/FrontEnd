@@ -236,7 +236,7 @@ const DatSanPage = () => {
     dispatch(setDetailSan(event));
     navigate("/detail");
   };
-  console.log(thongTinSan);
+
   return (
     <>
       <Breadcrumb

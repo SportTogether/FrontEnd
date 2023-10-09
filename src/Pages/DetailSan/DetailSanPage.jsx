@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Avatar,
   Breadcrumb,
@@ -248,6 +249,10 @@ const olocks = [
 const DetailSanPage = () => {
   const [open, setOpen] = useState(false);
   const [olock, setOlock] = useState({});
+  const { thongTinSan } = useSelector((state) => {
+    return state.QuanLySanSlice;
+  });
+  console.log("thong tin san", thongTinSan);
   return (
     <>
       <Breadcrumb
