@@ -118,7 +118,7 @@ export default function Header() {
     dispatch(setLogin(null));
     setTimeout(() => {
       navigate("/");
-    }, 2000);
+    }, 1000);
   };
   const login = [
     {
