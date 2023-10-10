@@ -31,9 +31,10 @@ const TrangThongTinUser = () => {
   try {
     user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
   } catch (error) {
+    console.log("lỗi ", error);
     setTimeout(() => {
-      navigate("");
-    }, 2000);
+      navigate("/");
+    }, 1000);
   }
 
   // console.log("user_id thong tin user ", user_id);
