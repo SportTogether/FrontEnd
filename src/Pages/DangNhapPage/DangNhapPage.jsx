@@ -7,26 +7,18 @@ import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
 import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
 import { Button, Checkbox, Form, Input, message } from "antd";
-import {
-  // DashboardTwoTone,
-  LockOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 const DangNhapPage = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
   let data = "Test";
   const onFinish = async (values) => {
-    // values = JSON.stringify(values);
     try {
       const response = await fetch("http://localhost:8080/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       }).then((response) => response.json());
-      //   .then((result) => {
-      //     data = result;
-      //   });
       data = response;
       console.log("my data after login : ", data);
       if (data.data.id != 0) {

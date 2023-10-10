@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, Breadcrumb, Table } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { localStorageServices } from "../../Services/localStorageServices";
+import { SPORT_LOCALSTORAGE } from "../../Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { setlistSanUserDaDat } from "../../redux/QuanLyNguoiDungSlice";
 
 const columns = [
   {
@@ -20,17 +24,6 @@ const columns = [
     key: "status",
   },
 ];
-let user_id = JSON.parse(localStorage.getItem("CYPERLEARN_LOCALSTORAGE")).id;
-console.log("user_id thong tin user ", user_id);
-let myData = "";
-const response = fetch("http://localhost:8080/api/orders/find/user_id", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ id: user_id }),
-})
-  .then((response) => response.json())
-  .then((result) => {});
-console.log("all orders : ", myData);
 const list = [
   {
     id: 1,
@@ -86,6 +79,25 @@ const data = list.map((item) => {
   };
 });
 const TrangThongTinUser = () => {
+  const dispatch = useDispatch();
+  let user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE)).id;
+  // console.log("user_id thong tin user ", user_id);
+  useEffect(() => {
+    const response = fetch("http://localhost:8080/api/orders/find/user_id", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: user_id }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        dispatch(setlistSanUserDaDat(result));
+      });
+  }, []);
+  const { listSanUserDaDat } = useSelector((state) => {
+    return state.QuanLyNguoiDungSlice;
+  });
+  console.log(listSanUserDaDat);
   return (
     <>
       <Breadcrumb

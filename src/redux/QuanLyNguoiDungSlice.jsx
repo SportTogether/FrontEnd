@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { localStorageServices } from "../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../Constants";
-import { Domain_State } from "../Services/config";
 //---------------state-----------------
 const initialState = {
   checkLogin: localStorageServices.getUser(SPORT_LOCALSTORAGE),
+  listSanUserDaDat: [],
 };
 const QuanLyNguoiDungSlice = createSlice({
   name: SPORT_LOCALSTORAGE,
@@ -13,18 +13,12 @@ const QuanLyNguoiDungSlice = createSlice({
     setLogin: (state, { type, payload }) => {
       state.checkLogin = payload;
     },
+    setlistSanUserDaDat: (state, { type, payload }) => {
+      state.listSanUserDaDat = payload;
+    },
   },
 });
-export const { setLogin } = QuanLyNguoiDungSlice.actions;
+export const { setLogin, setlistSanUserDaDat } = QuanLyNguoiDungSlice.actions;
 //------------------------------------------
-
-//-----------------api----------------------
-export let LayTaiKhoanDangNhap = (values) => {
-  return Domain_State.post("/api/users/login", values);
-};
-export let LayTaiKhoanDangKy = (values) => {
-  return Domain_State.post("/api/users/register", values);
-};
-
 export default QuanLyNguoiDungSlice.reducer;
 //-----------------------------------------

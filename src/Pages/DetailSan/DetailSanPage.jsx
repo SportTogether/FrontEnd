@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { setDatSan } from "../../redux/QuanLySanSlice";
-
 import {
   Avatar,
   Breadcrumb,
@@ -13,7 +13,6 @@ import {
   message,
 } from "antd";
 import { DownOutlined, StarFilled, UserOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 const { Paragraph } = Typography;
 const onChangeTab = (key) => {
   console.log(key);
@@ -100,7 +99,6 @@ const DetailSanPage = () => {
   const [dateTime, setDateTime] = useState({});
   const { date, day } = dateTime;
   const detailDateTime = { ocl1, ocl2, date, day };
-
   const items = [
     {
       key: "1",
@@ -256,12 +254,10 @@ const DetailSanPage = () => {
       ),
     },
   ];
-
   const handleDatSan = () => {
     if (olock !== null && dateTime !== null) {
       const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
       dispatch(setDatSan(newThongTinSanDaDat));
-
       console.log("thong tin dat san ", newThongTinSanDaDat);
       let user_id = "";
       try {
@@ -309,9 +305,7 @@ const DetailSanPage = () => {
         start_date: start_date,
         end_date: end_date,
       };
-
       console.log("values ", values);
-
       const response = fetch("http://localhost:8080/api/orders/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
