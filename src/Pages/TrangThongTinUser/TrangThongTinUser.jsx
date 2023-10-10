@@ -80,7 +80,7 @@ const data = list.map((item) => {
 });
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
-  let user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE)).id;
+  let user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
   // console.log("user_id thong tin user ", user_id);
   useEffect(() => {
     const response = fetch("http://localhost:8080/api/orders/find/user_id", {
