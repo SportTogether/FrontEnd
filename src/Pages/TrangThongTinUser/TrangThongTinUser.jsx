@@ -5,7 +5,6 @@ import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setlistSanUserDaDat } from "../../redux/QuanLyNguoiDungSlice";
-
 const columns = [
   {
     title: <h1 className="text-3xl">Tên Sân</h1>,
@@ -24,60 +23,6 @@ const columns = [
     key: "status",
   },
 ];
-const list = [
-  {
-    id: 1,
-    name: "SÂN THÀNH THẮNG",
-    time: "T5, 05/10/2023",
-    status: false,
-  },
-  {
-    id: 2,
-    name: "SÂN 302",
-    time: "CN, 01/10/2023",
-    status: true,
-  },
-  {
-    id: 3,
-    name: "SÂN ĐẠI NAM",
-    time: "T2, 26/09/2023",
-    status: true,
-  },
-  {
-    id: 4,
-    name: "SÂN VƯỜN LÀI",
-    time: "T4, 13/09/2023",
-    status: true,
-  },
-  {
-    id: 5,
-    name: "SÂN 5 NHỎ",
-    time: "T2, 03/09/2023",
-    status: true,
-  },
-  {
-    id: 6,
-    name: "SÂN PHÁT ĐẠT",
-    time: "T6, 15/08/2023",
-    status: true,
-  },
-];
-const data = list.map((item) => {
-  return {
-    key: item.id,
-    name: <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>,
-    time: <h1 className="text-2xl text-blue-800 text-center">{item.time}</h1>,
-    status: item.status ? (
-      <h1 className="text-2xl text-blue-800 font-bold text-right">
-        ĐÃ THANH TOÁN
-      </h1>
-    ) : (
-      <h1 className="text-2xl text-blue-800 font-bold text-right">
-        CHƯA THANH TOÁN
-      </h1>
-    ),
-  };
-});
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
   let user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
@@ -98,6 +43,60 @@ const TrangThongTinUser = () => {
     return state.QuanLyNguoiDungSlice;
   });
   console.log(listSanUserDaDat);
+  const list = [
+    {
+      id: 1,
+      name: "SÂN THÀNH THẮNG",
+      time: "T5, 05/10/2023",
+      status: false,
+    },
+    {
+      id: 2,
+      name: "SÂN 302",
+      time: "CN, 01/10/2023",
+      status: true,
+    },
+    {
+      id: 3,
+      name: "SÂN ĐẠI NAM",
+      time: "T2, 26/09/2023",
+      status: true,
+    },
+    {
+      id: 4,
+      name: "SÂN VƯỜN LÀI",
+      time: "T4, 13/09/2023",
+      status: true,
+    },
+    {
+      id: 5,
+      name: "SÂN 5 NHỎ",
+      time: "T2, 03/09/2023",
+      status: true,
+    },
+    {
+      id: 6,
+      name: "SÂN PHÁT ĐẠT",
+      time: "T6, 15/08/2023",
+      status: true,
+    },
+  ];
+  const data = list.map((item) => {
+    return {
+      key: item.id,
+      name: <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>,
+      time: <h1 className="text-2xl text-blue-800 text-center">{item.time}</h1>,
+      status: item.status ? (
+        <h1 className="text-2xl text-blue-800 font-bold text-right">
+          ĐÃ THANH TOÁN
+        </h1>
+      ) : (
+        <h1 className="text-2xl text-blue-800 font-bold text-right">
+          CHƯA THANH TOÁN
+        </h1>
+      ),
+    };
+  });
   return (
     <>
       <Breadcrumb
