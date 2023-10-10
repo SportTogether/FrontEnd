@@ -5,6 +5,7 @@ import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setlistSanUserDaDat } from "../../redux/QuanLyNguoiDungSlice";
+
 const columns = [
   {
     title: <h1 className="text-3xl">Tên Sân</h1>,
@@ -36,13 +37,15 @@ const TrangThongTinUser = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        dispatch(setlistSanUserDaDat(result));
+        dispatch(setlistSanUserDaDat(result.data));
       });
   }, []);
-  const { listSanUserDaDat } = useSelector((state) => {
+  const { listSanUserDaDat, checkLogin } = useSelector((state) => {
     return state.QuanLyNguoiDungSlice;
   });
   console.log(listSanUserDaDat);
+
+  console.log(checkLogin);
   const data = listSanUserDaDat.map((item) => {
     return {
       key: 1,
@@ -88,18 +91,20 @@ const TrangThongTinUser = () => {
             <h1>
               <i className="fas fa-user text-3xl text-green-600"></i>
               <span className="pl-5 text-3xl text-blue-800 font-bold">
-                NGUYỄN VĂN ANH
+                {checkLogin.name}
               </span>
             </h1>
             <h1 className="py-3">
               <i className="fas fa-envelope text-3xl text-green-600"></i>
               <span className="pl-5 text-3xl text-blue-800">
-                vananhnguyen19@gmail.com
+                {checkLogin.email}
               </span>
             </h1>
             <h1>
               <i className="fas fa-phone-alt text-3xl text-green-600"></i>
-              <span className="pl-5 text-3xl text-blue-800">0385624215</span>
+              <span className="pl-5 text-3xl text-blue-800">
+                {checkLogin.number}
+              </span>
             </h1>
           </div>
         </div>
