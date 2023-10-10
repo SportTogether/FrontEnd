@@ -261,9 +261,7 @@ const DetailSanPage = () => {
       console.log("thong tin dat san ", newThongTinSanDaDat);
       let user_id = "";
       try {
-        user_id = JSON.parse(
-          localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
-        ).id;
+        user_id = JSON.parse(localStorage.getItem("SPORT_LOCALSTORAGE")).id;
       } catch (error) {
         message.error("Vui lòng đăng nhập");
         setTimeout(() => {
@@ -275,16 +273,16 @@ const DetailSanPage = () => {
       let status_id = 1;
       let start_date =
         newThongTinSanDaDat.day +
-        "," +
+        ", " +
         newThongTinSanDaDat.date +
-        "/10/2023," +
+        "/10/2023, " +
         newThongTinSanDaDat.ocl1 +
         "PM";
       let end_date =
         newThongTinSanDaDat.day +
-        "," +
+        ", " +
         newThongTinSanDaDat.date +
-        "/10/2023," +
+        "/10/2023, " +
         newThongTinSanDaDat.ocl2 +
         "PM";
 

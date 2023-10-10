@@ -5,7 +5,7 @@ import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setlistSanUserDaDat } from "../../redux/QuanLyNguoiDungSlice";
-
+import { useNavigate } from "react-router-dom";
 const columns = [
   {
     title: <h1 className="text-3xl">Tên Sân</h1>,
@@ -26,7 +26,16 @@ const columns = [
 ];
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
-  let user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
+  const navigate = useNavigate();
+  let user_id = "";
+  try {
+    user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
+  } catch (error) {
+    setTimeout(() => {
+      navigate("");
+    }, 2000);
+  }
+
   // console.log("user_id thong tin user ", user_id);
   useEffect(() => {
     const response = fetch("http://localhost:8080/api/orders/find/user_id", {
