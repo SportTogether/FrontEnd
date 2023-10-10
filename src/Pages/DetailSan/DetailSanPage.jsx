@@ -263,8 +263,9 @@ const DetailSanPage = () => {
       dispatch(setDatSan(newThongTinSanDaDat));
 
       console.log("thong tin dat san ", newThongTinSanDaDat);
+      let user_id = "";
       try {
-        let user_id = JSON.parse(
+        user_id = JSON.parse(
           localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
         ).id;
       } catch (error) {
@@ -320,6 +321,7 @@ const DetailSanPage = () => {
         .then((result) => {
           if (result.data) {
             message.success("Chúc mừng bạn đã đặt sân thành công");
+            console.log("thong tin dat san", thongTinSanDaDat);
           } else {
             message.error("Vui lòng chọn ngày và giờ");
           }
@@ -332,7 +334,7 @@ const DetailSanPage = () => {
       return;
     }
   };
-  console.log(thongTinSanDaDat);
+
   return (
     <>
       <Breadcrumb

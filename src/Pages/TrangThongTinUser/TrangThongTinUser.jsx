@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Breadcrumb, Table } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+
 const columns = [
   {
     title: <h1 className="text-3xl">Tên Sân</h1>,
@@ -19,6 +20,17 @@ const columns = [
     key: "status",
   },
 ];
+let user_id = JSON.parse(localStorage.getItem("CYPERLEARN_LOCALSTORAGE")).id;
+console.log("user_id thong tin user ", user_id);
+let myData = "";
+const response = fetch("http://localhost:8080/api/orders/find/user_id", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ id: user_id }),
+})
+  .then((response) => response.json())
+  .then((result) => {});
+console.log("all orders : ", myData);
 const list = [
   {
     id: 1,
