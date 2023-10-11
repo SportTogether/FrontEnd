@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Breadcrumb } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { localStorageServices } from "../../Services/localStorageServices";
+import { SPORT_LOCALSTORAGE } from "../../Constants";
 class ThanhToanPage extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +30,6 @@ class ThanhToanPage extends Component {
     const seconds = timeInSeconds % 60;
     return `${minutes} phút ${seconds} giây`;
   }
-
   render() {
     return (
       <>
@@ -64,12 +64,7 @@ class ThanhToanPage extends Component {
             className="mx-auto object-cover"
           />
           <h1 className="text-2xl font-medium py-10" id="countdown">
-
-            HẾT HẠN SAU{" "}
-            <h1 className="text-2xl font-medium py-10" id="countdown">
-              HẾT HẠN SAU {this.formatTime(this.state.timeRemaining)}
-            </h1>
-
+            HẾT HẠN SAU {this.formatTime(this.state.timeRemaining)}
           </h1>
           <h1 className="text-2xl font-medium py-10">
             THANH TOÁN XONG VUI LÒNG NHẤN VÀO NÚT
@@ -79,25 +74,26 @@ class ThanhToanPage extends Component {
             className="text-2xl font-medium mt-10 bg-green-600 p-3 rounded-2xl"
             onClick={() => {
               alert("Chúc mừng bạn đã thành công!!!");
-              // let orders_id = ???
-              console.log(orders_id);
+              let users_id = JSON.parse(
+                localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+              );
 
               let values = {
-                id: orders_id,
-                status: 3,
+                users_id: users_id,
+                status_id: 3,
               };
-              // try {
-              //   const response = fetch(
-              //     "http://localhost:8080/api/orders/update/status_id",
-              //     {
-              //       method: "POST",
-              //       headers: { "Content-Type": "application/json" },
-              //       body: JSON.stringify(values),
-              //     }
-              //   ).then((response) => response.json());
-              // } catch (error) {
-              //   console.error("Lỗi xảy ra: ", error);
-              // }
+              try {
+                const response = fetch(
+                  "http://localhost:8080/api/orders/update/status_id",
+                  {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(values),
+                  }
+                ).then((response) => response.json());
+              } catch (error) {
+                console.error("Lỗi xảy ra: ", error);
+              }
 
               setTimeout(() => {
                 window.location.href = "/dat-san";
