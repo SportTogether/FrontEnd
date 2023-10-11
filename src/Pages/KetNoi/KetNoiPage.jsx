@@ -219,7 +219,7 @@ const KetNoiPage = () => {
           },
         ]}
       />
-      <div className="container">
+      <div className="container pb-[100px]">
         <div className="flex justify-center items-center px-10 py-3 mb-8 bg-gray-400">
           <div className="w-1/3">
             <Dropdown
