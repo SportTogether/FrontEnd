@@ -71,7 +71,7 @@ class ThanhToanPage extends Component {
           </h1>
           <button
             type="button"
-            className="text-2xl font-medium mt-10 bg-green-600 p-3 rounded-2xl"
+            className="text-2xl font-medium mt-10 bg-green-600 p-3 rounded-2xl mb-[100px]"
             onClick={() => {
               alert("Chúc mừng bạn đã thành công!!!");
               let users_id = JSON.parse(
