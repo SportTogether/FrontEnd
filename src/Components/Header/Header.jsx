@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, Dropdown, Form, Modal, Select } from "antd";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
+
 const items = [
   {
     key: "1",
@@ -340,6 +341,13 @@ export default function Header() {
                   <button
                     type="submit"
                     className="bg-blue-900 rounded-lg text-base font-medium py-2 px-10 text-green-600 delay-200 transition hover:text-white"
+                    onClick={() => {
+                      console.log("chon mon the thao ", chonMonTheThao);
+
+                      setTimeout(() => {
+                        navigate("/dat-san");
+                      }, 1000);
+                    }}
                   >
                     Tìm Kiếm Sân Chơi
                   </button>
