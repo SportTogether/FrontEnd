@@ -62,7 +62,10 @@ class ThanhToanPage extends Component {
             className="mx-auto object-cover"
           />
           <h1 className="text-2xl font-medium py-10" id="countdown">
-            HẾT HẠN SAU {this.state.timeRemaining}
+            HẾT HẠN SAU{" "}
+            <h1 className="text-2xl font-medium py-10" id="countdown">
+              HẾT HẠN SAU {this.formatTime(this.state.timeRemaining)}
+            </h1>
           </h1>
           <h1 className="text-2xl font-medium py-10">
             THANH TOÁN XONG VUI LÒNG NHẤN VÀO NÚT
