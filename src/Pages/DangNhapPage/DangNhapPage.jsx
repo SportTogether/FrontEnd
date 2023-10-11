@@ -27,7 +27,7 @@ const DangNhapPage = () => {
         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
         setTimeout(() => {
           navigate("/");
-        }, 3000);
+        }, 1000);
       } else {
         message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
       }

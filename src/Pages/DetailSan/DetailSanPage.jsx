@@ -264,7 +264,7 @@ const DetailSanPage = () => {
       let user_id = "";
       try {
         user_id = JSON.parse(
-          localStorageServices.getUser(SPORT_LOCALSTORAGE)
+          localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
         ).id;
       } catch (error) {
         message.error("Vui lòng đăng nhập");
@@ -277,16 +277,16 @@ const DetailSanPage = () => {
       let status_id = 1;
       let start_date =
         newThongTinSanDaDat.day +
-        "," +
+        ", " +
         newThongTinSanDaDat.date +
-        "/10/2023," +
+        "/10/2023, " +
         newThongTinSanDaDat.ocl1 +
         "PM";
       let end_date =
         newThongTinSanDaDat.day +
-        "," +
+        ", " +
         newThongTinSanDaDat.date +
-        "/10/2023," +
+        "/10/2023, " +
         newThongTinSanDaDat.ocl2 +
         "PM";
 
