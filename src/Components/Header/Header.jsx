@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Dropdown, Form, Modal, Select } from "antd";
+import { Avatar, Dropdown, Form, Modal, Select, message } from "antd";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
+import { setValueSearch } from "../../redux/QuanLySanSlice";
 
 const items = [
   {
@@ -99,7 +100,15 @@ export default function Header() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const onFinish = (value) => {
+    if (value === null) {
+      message.error("Vui Lòng Chọn Thông Tin Cần Tìm Kiếm!!!");
+      return;
+    }
     console.log(value);
+    dispatch(setValueSearch(value));
+    // setTimeout(() => {
+    //   navigate("/dat-san");
+    // }, 1000);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -114,6 +123,10 @@ export default function Header() {
   const { checkLogin } = useSelector((state) => {
     return state.QuanLyNguoiDungSlice;
   });
+  const { valueSearch } = useSelector((state) => {
+    return state.QuanLySanSlice;
+  });
+  console.log(valueSearch);
   const handleLogOut = () => {
     localStorageServices.removeUser();
     dispatch(setLogin(null));
@@ -341,13 +354,6 @@ export default function Header() {
                   <button
                     type="submit"
                     className="bg-blue-900 rounded-lg text-base font-medium py-2 px-10 text-green-600 delay-200 transition hover:text-white"
-                    onClick={() => {
-                      console.log("chon mon the thao ", chonMonTheThao);
-
-                      setTimeout(() => {
-                        navigate("/dat-san");
-                      }, 1000);
-                    }}
                   >
                     Tìm Kiếm Sân Chơi
                   </button>

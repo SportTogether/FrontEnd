@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { SPORT_LOCALSTORAGE } from "../Constants";
 //---------------state-----------------
 const initialState = {
+  valueSearch: {},
   listSan: [],
   thongTinSan: {},
   thongTinNgayGio: {},
@@ -11,6 +12,9 @@ const QuanLySanSlice = createSlice({
   name: SPORT_LOCALSTORAGE,
   initialState,
   reducers: {
+    setValueSearch: (state, { type, payload }) => {
+      state.valueSearch = payload;
+    },
     setListSan: (state, { type, payload }) => {
       state.listSan = payload;
     },
@@ -25,6 +29,11 @@ const QuanLySanSlice = createSlice({
     },
   },
 });
-export const { setListSan, setDetailSan, setNgayGio, setDatSan } =
-  QuanLySanSlice.actions;
+export const {
+  setValueSearch,
+  setListSan,
+  setDetailSan,
+  setNgayGio,
+  setDatSan,
+} = QuanLySanSlice.actions;
 export default QuanLySanSlice.reducer;
