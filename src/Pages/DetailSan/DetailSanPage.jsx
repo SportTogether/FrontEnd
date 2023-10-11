@@ -264,8 +264,8 @@ const DetailSanPage = () => {
       let user_id = "";
       try {
         user_id = JSON.parse(
-          localStorageServices.getUser(SPORT_LOCALSTORAGE)
-        ).id;
+          localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+        );
       } catch (error) {
         message.error("Vui lòng đăng nhập");
         setTimeout(() => {

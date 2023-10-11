@@ -66,7 +66,7 @@ const TrangThongTinUser = () => {
         <h1 className="text-2xl text-blue-800 text-center">{item.startDate}</h1>
       ),
       status:
-        item.status == "Processing" ? (
+        item.status === 3 ? (
           <h1 className="text-2xl text-blue-800 font-bold text-right">
             ĐÃ THANH TOÁN
           </h1>
