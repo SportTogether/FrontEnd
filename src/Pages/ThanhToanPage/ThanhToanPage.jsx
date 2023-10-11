@@ -23,6 +23,11 @@ class ThanhToanPage extends Component {
       clearInterval(this.interval);
     }
   };
+  formatTime(timeInSeconds) {
+    const minutes = Math.floor(timeInSeconds / 60);
+    const seconds = timeInSeconds % 60;
+    return `${minutes} phút ${seconds} giây`;
+  }
   render() {
     return (
       <>
