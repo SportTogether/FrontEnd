@@ -95,20 +95,20 @@ const cities = [
     cityName: "Bình Dương",
   },
 ];
+let valueTimKiem = "";
 export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const onFinish = (value) => {
-    if (value === null) {
-      message.error("Vui Lòng Chọn Thông Tin Cần Tìm Kiếm!!!");
+    console.log("value ");
+    if (value.monTheThao === undefined || value.khuVuc === undefined) {
       return;
+    } else {
+      setTimeout(() => {
+        navigate("/dat-san");
+      }, 1000);
     }
-    console.log(value);
-    dispatch(setValueSearch(value));
-    // setTimeout(() => {
-    //   navigate("/dat-san");
-    // }, 1000);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -123,10 +123,7 @@ export default function Header() {
   const { checkLogin } = useSelector((state) => {
     return state.QuanLyNguoiDungSlice;
   });
-  const { valueSearch } = useSelector((state) => {
-    return state.QuanLySanSlice;
-  });
-  console.log(valueSearch);
+
   const handleLogOut = () => {
     localStorageServices.removeUser();
     dispatch(setLogin(null));
@@ -354,6 +351,7 @@ export default function Header() {
                   <button
                     type="submit"
                     className="bg-blue-900 rounded-lg text-base font-medium py-2 px-10 text-green-600 delay-200 transition hover:text-white"
+                    onClick={onFinish}
                   >
                     Tìm Kiếm Sân Chơi
                   </button>
