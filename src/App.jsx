@@ -10,6 +10,7 @@ import UuDaiPage from "./Pages/UuDai/UuDaiPage";
 import ForumPage from "./Pages/Forum/ForumPage";
 import KetNoiPage from "./Pages/KetNoi/KetNoiPage";
 import TrangThongTinUser from "./Pages/TrangThongTinUser/TrangThongTinUser";
+import ThanhToanPage from "./Pages/ThanhToanPage/ThanhToanPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="dat-san" element={<DatSanPage />} />
             <Route path="uu-dai" element={<UuDaiPage />} />
             <Route path="detail" element={<DetailSanPage />} />
+            <Route path="thanh-toan" element={<ThanhToanPage />} />
             <Route path="forum" element={<ForumPage />} />
             <Route path="ket-noi" element={<KetNoiPage />} />
             <Route path="login" element={<DangNhapPage />} />

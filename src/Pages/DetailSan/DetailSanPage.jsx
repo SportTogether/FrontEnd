@@ -13,6 +13,8 @@ import {
   message,
 } from "antd";
 import { DownOutlined, StarFilled, UserOutlined } from "@ant-design/icons";
+import { localStorageServices } from "../../Services/localStorageServices";
+import { SPORT_LOCALSTORAGE } from "../../Constants";
 const { Paragraph } = Typography;
 const onChangeTab = (key) => {
   console.log(key);
@@ -262,7 +264,7 @@ const DetailSanPage = () => {
       let user_id = "";
       try {
         user_id = JSON.parse(
-          localStorage.getItem("CYPERLEARN_LOCALSTORAGE")
+          localStorageServices.getUser(SPORT_LOCALSTORAGE)
         ).id;
       } catch (error) {
         message.error("Vui lòng đăng nhập");
@@ -321,8 +323,8 @@ const DetailSanPage = () => {
           }
         });
       setTimeout(() => {
-        navigate("/dat-san");
-      }, 1000);
+        navigate("/thanh-toan");
+      }, 2000);
     } else {
       alert("Vui lòng chọn ngày và thời gian");
       return;
