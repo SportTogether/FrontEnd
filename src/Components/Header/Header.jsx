@@ -197,7 +197,7 @@ export default function Header() {
             height={70}
             alt=""
           />
-          <h1 className="logo-title">SPORTTORGETHER</h1>
+          <h1 className="logo-title">SPORTTOGETHER</h1>
         </div>
       </div>
       <div className="nav">
