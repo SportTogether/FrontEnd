@@ -46,7 +46,7 @@ const TrangThongTinUser = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        console.log("thong tin user :", result);
         dispatch(setlistSanUserDaDat(result.data));
       });
   }, []);
@@ -95,7 +95,11 @@ const TrangThongTinUser = () => {
       <div className="container">
         <div className="flex justify-center items-center">
           <div className="w-[20%] text-center">
-            <Avatar size={200} icon={<UserOutlined />} />
+            <Avatar
+              src="../../../public/image/avatar.png"
+              size={200}
+              icon={<UserOutlined />}
+            />
           </div>
           <div className="w-[80%] pl-5">
             <h1>

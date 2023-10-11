@@ -82,11 +82,11 @@ const DangKyPage = () => {
                   required: true,
                   message: "Please input name!",
                 },
-                {
-                  type: "string",
-                  pattern: /^\S+$/,
-                  message: "Name have't the blank!",
-                },
+                // {
+                //   type: "string",
+                //   pattern: /^\S+$/,
+                //   message: "Name have't the blank!",
+                // },
               ]}
             >
               <Input

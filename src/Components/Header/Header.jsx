@@ -159,7 +159,7 @@ export default function Header() {
             trigger={["click"]}
           >
             <Avatar
-              src="https://i.pravatar.cc/?u=fake@pravatar.com"
+              src="../../../public/image/avatar.png"
               style={{ height: 50, width: 50 }}
               onClick={(e) => e.preventDefault()}
             ></Avatar>

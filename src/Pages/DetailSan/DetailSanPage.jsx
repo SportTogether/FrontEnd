@@ -317,14 +317,18 @@ const DetailSanPage = () => {
         .then((result) => {
           if (result.data) {
             message.success("Chúc mừng bạn đã đặt sân thành công");
+
             console.log("thong tin dat san", thongTinSanDaDat);
+            setTimeout(() => {
+              navigate("/thanh-toan");
+            }, 1000);
           } else {
             message.error("Vui lòng chọn ngày và giờ");
+            setTimeout(() => {
+              navigate("/dat-san");
+            }, 1000);
           }
         });
-      setTimeout(() => {
-        navigate("/thanh-toan");
-      }, 2000);
     } else {
       alert("Vui lòng chọn ngày và thời gian");
       return;
