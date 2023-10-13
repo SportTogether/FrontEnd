@@ -37,7 +37,7 @@ const TrangThongTinUser = () => {
     }, 1000);
   }
 
-  // console.log("user_id thong tin user ", user_id);
+  console.log("test");
   useEffect(() => {
     const response = fetch("http://localhost:8080/api/orders/find/user_id", {
       method: "POST",
