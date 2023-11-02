@@ -308,7 +308,7 @@ const DetailSanPage = () => {
         end_date: end_date,
       };
       console.log("values ", values);
-      const response = fetch("http://localhost:8080/api/orders/add", {
+      const response = fetch("https://leethanh.up.railway.app/api/orders/add", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

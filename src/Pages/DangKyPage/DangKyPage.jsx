@@ -28,11 +28,14 @@ const DangKyPage = () => {
   let data = "";
   const onFinish = async (values) => {
     try {
-      const response = await fetch("http://localhost:8080/api/users/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      })
+      const response = await fetch(
+        "https://leethanh.up.railway.app/api/users/register",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        }
+      )
         .then((response) => response.json())
         .then((result) => {
           data = result;

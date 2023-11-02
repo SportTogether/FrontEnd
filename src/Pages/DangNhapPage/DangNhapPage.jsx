@@ -14,11 +14,14 @@ const DangNhapPage = () => {
   let data = "Test";
   const onFinish = async (values) => {
     try {
-      const response = await fetch("http://localhost:8080/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      }).then((response) => response.json());
+      const response = await fetch(
+        "https://leethanh.up.railway.app/api/users/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        }
+      ).then((response) => response.json());
       data = response;
       console.log("my data after login : ", data);
       if (data.data.id != 0) {

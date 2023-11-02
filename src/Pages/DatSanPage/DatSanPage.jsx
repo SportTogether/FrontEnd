@@ -217,10 +217,13 @@ const DatSanPage = () => {
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/yards", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }).then((response) => response.json());
+        const response = await fetch(
+          "https://leethanh.up.railway.app/api/yards",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        ).then((response) => response.json());
         dispatch(setListSan(response.data));
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
