@@ -37,13 +37,16 @@ const TrangThongTinUser = () => {
     }, 1000);
   }
 
-  console.log("test");
+  // console.log("user_id thong tin user ", user_id);
   useEffect(() => {
-    const response = fetch("http://localhost:8080/api/orders/find/user_id", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: user_id }),
-    })
+    const response = fetch(
+      "https://leethanh.up.railway.app/api/orders/find/user_id",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: user_id }),
+      }
+    )
       .then((response) => response.json())
       .then((result) => {
         console.log("thong tin user :", result);
@@ -55,7 +58,7 @@ const TrangThongTinUser = () => {
   });
   console.log(listSanUserDaDat);
 
-  console.log(checkLogin);
+  console.log("checklogin =", checkLogin);
   const data = listSanUserDaDat.map((item) => {
     return {
       key: 1,

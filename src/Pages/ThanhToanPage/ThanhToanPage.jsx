@@ -84,7 +84,7 @@ class ThanhToanPage extends Component {
               };
               try {
                 const response = fetch(
-                  "http://localhost:8080/api/orders/update/status_id",
+                  "https://leethanh.up.railway.app/api/orders/update/status_id",
                   {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
