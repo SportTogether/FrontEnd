@@ -382,7 +382,7 @@ const DetailSanPage = () => {
               <p className="text-2xl">
                 <b>Giá tham khảo:</b> {thongTinSan?.price}
               </p>
-              <p>
+              <p className="text-xl">
                 <b>Loại Sân:</b> {thongTinSan?.type}
               </p>
               <div className="grid grid-cols-2 pt-3">

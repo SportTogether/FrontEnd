@@ -1,217 +1,199 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
+import { Breadcrumb, Checkbox, Collapse, Dropdown, Radio, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { setDetailSan, setListSan } from "../../redux/QuanLySanSlice";
-const onChange = (e) => {
-  const outerCheck = e.target.value;
-  console.log(`checked = ${outerCheck}`);
-};
-const cities = [
-  {
-    key: "1",
-    label: (
-      <Checkbox value="TPHCM" onChange={onChange}>
-        <h1 className="text-2xl">Thành phố Hồ Chí Minh</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <Checkbox value="HANOI" onChange={onChange}>
-        <h1 className="text-2xl">Hà Nội</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "3",
-    label: (
-      <Checkbox value="DANANG" onChange={onChange}>
-        <h1 className="text-2xl">Đà Nẵng</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "4",
-    label: (
-      <Checkbox value="THUDUC" onChange={onChange}>
-        <h1 className="text-2xl">Thủ Đức</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "5",
-    label: (
-      <Checkbox value="HAIPHONG" onChange={onChange}>
-        <h1 className="text-2xl">Hải Phòng</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "6",
-    label: (
-      <Checkbox value="BINHDUONG" onChange={onChange}>
-        <h1 className="text-2xl">Bình Dương</h1>
-      </Checkbox>
-    ),
-  },
-];
-const districts = [
-  {
-    key: "1",
-    label: (
-      <Checkbox value="quan 1" onChange={onChange}>
-        <h1 className="text-2xl">Quận 1</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <Checkbox value="quan 2" onChange={onChange}>
-        <h1 className="text-2xl">Quận 2</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "3",
-    label: (
-      <Checkbox value="quan 3" onChange={onChange}>
-        <h1 className="text-2xl">Quận 3</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "4",
-    label: (
-      <Checkbox value="quan go vap" onChange={onChange}>
-        <h1 className="text-2xl">Quận Gò Vấp</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "5",
-    label: (
-      <Checkbox value="quan tan binh" onChange={onChange}>
-        <h1 className="text-2xl">Quận Tân Bình</h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "6",
-    label: (
-      <Checkbox value="quan phu nhuan" onChange={onChange}>
-        <h1 className="text-2xl">Quận Phú Nhuận</h1>
-      </Checkbox>
-    ),
-  },
-];
-const types = [
-  {
-    key: "1",
-    label: (
-      <Checkbox value="SBD" onChange={onChange}>
-        <h1 className="text-2xl">
-          <i className="fas fa-futbol"></i>{" "}
-          <span className="pl-2">Sân Bóng Đá</span>
-        </h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "2",
-    label: (
-      <Checkbox value="SCL" onChange={onChange}>
-        <div className="flex">
-          <img
-            src="../../../public/image/badminton.png"
-            width={24}
-            height={24}
-            alt=""
-          />
-          <span className="text-2xl pl-2">Sân Cầu Lông</span>
-        </div>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "3",
-    label: (
-      <Checkbox value="ST" onChange={onChange}>
-        <div className="flex">
-          <img
-            src="../../../public/image/tennis.png"
-            width={24}
-            height={24}
-            alt=""
-          />
-          <span className="text-2xl pl-2">Sân Tennis</span>
-        </div>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "4",
-    label: (
-      <Checkbox value="SBR" onChange={onChange}>
-        <h1 className="text-2xl">
-          <i className="fas fa-basketball-ball"></i>
-          <span className="pl-2">Sân Bóng Rổ</span>
-        </h1>
-      </Checkbox>
-    ),
-  },
-  {
-    key: "5",
-    label: (
-      <Checkbox value="SBB" onChange={onChange}>
-        <h1 className="text-2xl">
-          <i className="fas fa-table-tennis"></i>
-          <span className="pl-2">Sân Bóng Bàn</span>
-        </h1>
-      </Checkbox>
-    ),
-  },
-];
-// const itemsList = [
-//   {
-//     key: 1,
-//     name: "Sân Thành Thắng",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
-//     rate: 4,
-//     type: "Sân Bóng Đá",
-//     price: "300.000đ / trận",
-//     kilometers: "5.7km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-//   {
-//     key: 2,
-//     name: "Sân 312",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
-//     rate: 3,
-//     type: "Sân Bóng Đá",
-//     price: "250.000đ / trận",
-//     kilometers: "10km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-//   {
-//     key: 3,
-//     name: "Sân Mini Victory",
-//     image: "../../../public/image/sanThanhThang.JPG",
-//     address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
-//     rate: 3,
-//     type: "Sân Bóng Đá",
-//     price: "350.000đ / trận",
-//     kilometers: "11.5km",
-//     point: "Sân Cỏ Nhân Tạo",
-//   },
-// ];
-// let data = "";
 const DatSanPage = () => {
+  const [valueRadio, setValueRadio] = useState(1);
+  const onChange = (e) => {
+    const outerCheck = e.target.value;
+    console.log(`checked = ${outerCheck}`);
+    setValueRadio(outerCheck);
+    const fetchApiRadioCheck = async () => {
+      try {
+        const response = await fetch(
+          "https://leethanh.up.railway.app/api/yards",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(valueRadio),
+          }
+        ).then((response) => response.json());
+        dispatch(setListSan(response.data));
+      } catch (error) {
+        console.error("Lỗi xảy ra: ", error);
+      }
+    };
+    fetchApiRadioCheck();
+  };
+  const cities = [
+    {
+      key: "1",
+      label: (
+        <Checkbox value="TPHCM" onChange={onChange}>
+          <h1 className="text-2xl">Thành phố Hồ Chí Minh</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Checkbox value="HANOI" onChange={onChange}>
+          <h1 className="text-2xl">Hà Nội</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Checkbox value="DANANG" onChange={onChange}>
+          <h1 className="text-2xl">Đà Nẵng</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Checkbox value="THUDUC" onChange={onChange}>
+          <h1 className="text-2xl">Thủ Đức</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <Checkbox value="HAIPHONG" onChange={onChange}>
+          <h1 className="text-2xl">Hải Phòng</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "6",
+      label: (
+        <Checkbox value="BINHDUONG" onChange={onChange}>
+          <h1 className="text-2xl">Bình Dương</h1>
+        </Checkbox>
+      ),
+    },
+  ];
+  const districts = [
+    {
+      key: "1",
+      label: (
+        <Checkbox value="quan 1" onChange={onChange}>
+          <h1 className="text-2xl">Quận 1</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Checkbox value="quan 2" onChange={onChange}>
+          <h1 className="text-2xl">Quận 2</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Checkbox value="quan 3" onChange={onChange}>
+          <h1 className="text-2xl">Quận 3</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Checkbox value="quan go vap" onChange={onChange}>
+          <h1 className="text-2xl">Quận Gò Vấp</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <Checkbox value="quan tan binh" onChange={onChange}>
+          <h1 className="text-2xl">Quận Tân Bình</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "6",
+      label: (
+        <Checkbox value="quan phu nhuan" onChange={onChange}>
+          <h1 className="text-2xl">Quận Phú Nhuận</h1>
+        </Checkbox>
+      ),
+    },
+  ];
+  const types = [
+    {
+      key: "1",
+      label: (
+        <Checkbox value="SBD" onChange={onChange}>
+          <h1 className="text-2xl">
+            <i className="fas fa-futbol"></i>{" "}
+            <span className="pl-2">Sân Bóng Đá</span>
+          </h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Checkbox value="SCL" onChange={onChange}>
+          <div className="flex">
+            <img
+              src="../../../public/image/badminton.png"
+              width={24}
+              height={24}
+              alt=""
+            />
+            <span className="text-2xl pl-2">Sân Cầu Lông</span>
+          </div>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Checkbox value="ST" onChange={onChange}>
+          <div className="flex">
+            <img
+              src="../../../public/image/tennis.png"
+              width={24}
+              height={24}
+              alt=""
+            />
+            <span className="text-2xl pl-2">Sân Tennis</span>
+          </div>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Checkbox value="SBR" onChange={onChange}>
+          <h1 className="text-2xl">
+            <i className="fas fa-basketball-ball"></i>
+            <span className="pl-2">Sân Bóng Rổ</span>
+          </h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <Checkbox value="SBB" onChange={onChange}>
+          <h1 className="text-2xl">
+            <i className="fas fa-table-tennis"></i>
+            <span className="pl-2">Sân Bóng Bàn</span>
+          </h1>
+        </Checkbox>
+      ),
+    },
+  ];
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -270,15 +252,17 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Checkbox value="NhanTao" onChange={onChange}>
-                        <h1 className="text-2xl">Sân cỏ nhân tạo</h1>
-                      </Checkbox>
-                      <Checkbox value="TuNhien" onChange={onChange}>
-                        <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
-                      </Checkbox>
-                      <Checkbox value="mini" onChange={onChange}>
-                        <h1 className="text-2xl">Sân mini</h1>
-                      </Checkbox>
+                      <Radio.Group onChange={onChange} value={valueRadio}>
+                        <Radio value="Sân cỏ nhân tạo">
+                          <h1 className="text-2xl">Sân cỏ nhân tạo</h1>
+                        </Radio>
+                        <Radio value="Sân cỏ tự nhiên">
+                          <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
+                        </Radio>
+                        <Radio value="Sân mini">
+                          <h1 className="text-2xl">Sân mini</h1>
+                        </Radio>
+                      </Radio.Group>
                     </>
                   ),
                 },
@@ -298,43 +282,43 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Checkbox value="5SAO" onChange={onChange}>
-                        <h1 className="text-3xl text-yellow-300">
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                        </h1>
-                      </Checkbox>
-                      <Checkbox value="4SAO" onChange={onChange}>
-                        <h1 className="text-3xl text-yellow-300">
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                        </h1>
-                      </Checkbox>
-                      <Checkbox value="3SAO" onChange={onChange}>
-                        <h1 className="text-3xl text-yellow-300">
-                          <StarFilled />
-                          <StarFilled />
-                          <StarFilled />
-                        </h1>
-                      </Checkbox>{" "}
-                      <br />
-                      <Checkbox value="2SAO" onChange={onChange}>
-                        <h1 className="text-3xl text-yellow-300">
-                          <StarFilled />
-                          <StarFilled />
-                        </h1>
-                      </Checkbox>
-                      <br />
-                      <Checkbox value="1SAO" onChange={onChange}>
-                        <h1 className="text-3xl text-yellow-300">
-                          <StarFilled />
-                        </h1>
-                      </Checkbox>
+                      <Radio.Group onChange={onChange} value={valueRadio}>
+                        <Radio value={5}>
+                          <h1 className="text-3xl text-yellow-300">
+                            <StarFilled />
+                            <StarFilled />
+                            <StarFilled />
+                            <StarFilled />
+                            <StarFilled />
+                          </h1>
+                        </Radio>
+                        <Radio value={4}>
+                          <h1 className="text-3xl text-yellow-300">
+                            <StarFilled />
+                            <StarFilled />
+                            <StarFilled />
+                            <StarFilled />
+                          </h1>
+                        </Radio>
+                        <Radio value={3}>
+                          <h1 className="text-3xl text-yellow-300">
+                            <StarFilled />
+                            <StarFilled />
+                            <StarFilled />
+                          </h1>
+                        </Radio> <br />
+                        <Radio value={2}>
+                          <h1 className="text-3xl text-yellow-300">
+                            <StarFilled />
+                            <StarFilled />
+                          </h1>
+                        </Radio> <br />
+                        <Radio value={1}>
+                          <h1 className="text-3xl text-yellow-300">
+                            <StarFilled />
+                          </h1>
+                        </Radio>
+                      </Radio.Group>
                     </>
                   ),
                 },
