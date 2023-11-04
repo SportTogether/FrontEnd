@@ -8,7 +8,7 @@ const items = [
   {
     id: 1,
     maVe: "giam10%",
-    image: "../../../public/image/IMG_2315.png",
+    image: "https://leethanh.netlify.app/image/IMG_2315.png",
     title: "Giảm 10%",
     text: "Khi đặt từ thứ 2 - thứ 6",
     boolean: false,
@@ -16,7 +16,7 @@ const items = [
   {
     id: 2,
     maVe: "tangNuoc",
-    image: "../../../public/image/drinkBonusIcon.png",
+    image: "https://leethanh.netlify.app/image/drinkBonusIcon.png",
     title: "Tặng Nước",
     text: "Khi đặt sân tại quận 2",
     boolean: false,
@@ -24,7 +24,7 @@ const items = [
   {
     id: 3,
     maVe: "giam20%",
-    image: "../../../public/image/20percentDiscountIcon.png",
+    image: "https://leethanh.netlify.app/image/20percentDiscountIcon.png",
     title: "Giảm 20%",
     text: "Đặt dịch vụ trọng tài và livestream",
     boolean: false,
@@ -32,7 +32,7 @@ const items = [
   {
     id: 4,
     maVe: "giam30%",
-    image: "../../../public/image/30percentDiscountIcon.png",
+    image: "https://leethanh.netlify.app/image/30percentDiscountIcon.png",
     title: "Giảm 30%",
     text: "Khi đặt từ 9h - 15h",
     boolean: false,
@@ -40,7 +40,7 @@ const items = [
   {
     id: 5,
     maVe: "giam5%",
-    image: "../../../public/image/5percentDiscountIcon.png",
+    image: "https://leethanh.netlify.app/image/5percentDiscountIcon.png",
     title: "Giảm 5%",
     text: "Khi đặt dịch vụ livestream",
     boolean: false,
@@ -48,7 +48,7 @@ const items = [
   {
     id: 6,
     maVe: "giam50%",
-    image: "../../../public/image/blackfridayIcon.png",
+    image: "https://leethanh.netlify.app/image/blackfridayIcon.png",
     title: "Giảm 50%",
     text: "Chỉ áp dụng ngày 24/11/2023",
     boolean: false,
@@ -146,13 +146,16 @@ const UuDaiPage = () => {
       />
       <div className="uu-dai">
         <div className="uu-dai-left">
-          <img src="../../../public/image/ChonsanBackgr.png" alt="" />
+          <img
+            src="https://leethanh.netlify.app/image/ChonsanBackgr.png"
+            alt=""
+          />
         </div>
         <div className="uu-dai-right">
           <div className="flex justify-center items-center">
             <div className="w-2/5">
               <img
-                src="../../../public/image/hotsaleIcon.png"
+                src="https://leethanh.netlify.app/image/hotsaleIcon.png"
                 width={180}
                 height={180}
                 className="float-right"
@@ -177,7 +180,7 @@ const UuDaiPage = () => {
               <div className="bg-green-200 rounded-3xl grid grid-cols-2">
                 <div className="flex justify-center items-center">
                   <img
-                    src="../../../public/image/couponIcon.png"
+                    src="https://leethanh.netlify.app/image/couponIcon.png"
                     width={100}
                     height={100}
                     className="pr-2"
@@ -193,7 +196,7 @@ const UuDaiPage = () => {
                 </div>
                 <div className="border-l-2 border-white flex justify-center items-center">
                   <img
-                    src="../../../public/image/mygiftIcon.png"
+                    src="https://leethanh.netlify.app/image/mygiftIcon.png"
                     width={100}
                     height={100}
                     className="pr-1"
