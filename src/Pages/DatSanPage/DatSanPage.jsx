@@ -397,7 +397,7 @@ const DatSanPage = () => {
                     }}
                   >
                     <div className="list-item-left">
-                      <img src="./T/image/santhanhthang.jpg" alt="" />
+                      <img src="https://leethanh.netlify.app/image/santhanhthang.jpg" alt="" />
                     </div>
                     <div className="list-item-right">
                       <div className="grid grid-cols-2">
