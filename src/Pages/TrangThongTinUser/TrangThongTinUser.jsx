@@ -99,7 +99,7 @@ const TrangThongTinUser = () => {
         <div className="flex justify-center items-center">
           <div className="w-[20%] text-center">
             <Avatar
-              src="../../../public/image/avatar.png"
+              src="https://leethanh.netlify.app/image/avatar.png"
               size={200}
               icon={<UserOutlined />}
             />

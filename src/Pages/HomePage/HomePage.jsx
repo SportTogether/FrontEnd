@@ -52,7 +52,7 @@ const HomePage = () => {
             navigate("/dat-san");
           }}
         >
-          <img src="../../../public/image/datsanIcon.png" alt="" />
+          <img src="https://leethanh.netlify.app/image/datsanIcon.png" alt="" />
           <h1 className="text-center">ĐẶT SÂN</h1>
         </div>
         <div
@@ -61,7 +61,7 @@ const HomePage = () => {
             navigate("/ket-noi");
           }}
         >
-          <img src="../../../public/image/ketnoiIcon.png" alt="" />
+          <img src="https://leethanh.netlify.app/image/ketnoiIcon.png" alt="" />
           <h1 className="text-center">KẾT NỐI</h1>
         </div>
         <div
@@ -70,7 +70,7 @@ const HomePage = () => {
             navigate("/forum");
           }}
         >
-          <img src="../../../public/image/forumIcon.png" alt="" />
+          <img src="https://leethanh.netlify.app/image/forumIcon.png" alt="" />
           <h1 className="text-center">FORUM</h1>
         </div>
       </div>

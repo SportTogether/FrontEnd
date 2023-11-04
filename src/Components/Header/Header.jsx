@@ -21,7 +21,7 @@ const items = [
     label: (
       <div className="flex">
         <img
-          src="../../../public/image/badminton.png"
+          src="https://leethanh.netlify.app/image/badminton.png"
           width={24}
           height={24}
           alt=""
@@ -35,7 +35,7 @@ const items = [
     label: (
       <div className="flex">
         <img
-          src="../../../public/image/tennis.png"
+          src="https://leethanh.netlify.app/image/tennis.png"
           width={24}
           height={24}
           alt=""
@@ -170,7 +170,7 @@ export default function Header() {
             trigger={["click"]}
           >
             <Avatar
-              src="../../../public/image/avatar.png"
+              src="https://leethanh.netlify.app/image/avatar.png"
               style={{ height: 50, width: 50 }}
               onClick={(e) => e.preventDefault()}
             ></Avatar>
@@ -203,7 +203,7 @@ export default function Header() {
           }}
         >
           <img
-            src="../../../public/image/logoIcon.png"
+            src="https://leethanh.netlify.app/image/logoIcon.png"
             width={70}
             height={70}
             alt=""
@@ -296,7 +296,7 @@ export default function Header() {
                     <Select.Option value="CauLong">
                       <div className="flex">
                         <img
-                          src="../../../public/image/badminton.png"
+                          src="https://leethanh.netlify.app/image/badminton.png"
                           width={24}
                           height={24}
                           alt=""
@@ -307,7 +307,7 @@ export default function Header() {
                     <Select.Option value="Tennis">
                       <div className="flex">
                         <img
-                          src="../../../public/image/tennis.png"
+                          src="https://leethanh.netlify.app/image/tennis.png"
                           width={24}
                           height={24}
                           alt=""

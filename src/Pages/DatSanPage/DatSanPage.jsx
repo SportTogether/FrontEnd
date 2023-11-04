@@ -150,7 +150,7 @@ const DatSanPage = () => {
         <Checkbox value="SCL" onChange={onChange}>
           <div className="flex">
             <img
-              src="../../../public/image/badminton.png"
+              src="https://leethanh.netlify.app/image/badminton.png"
               width={24}
               height={24}
               alt=""
@@ -166,7 +166,7 @@ const DatSanPage = () => {
         <Checkbox value="ST" onChange={onChange}>
           <div className="flex">
             <img
-              src="../../../public/image/tennis.png"
+              src="https://leethanh.netlify.app/image/tennis.png"
               width={24}
               height={24}
               alt=""
@@ -397,7 +397,10 @@ const DatSanPage = () => {
                     }}
                   >
                     <div className="list-item-left">
-                      <img src="dist/image/sanThanhThang.JPG" alt="" />
+                      <img
+                        src="https://leethanh.netlify.app/image/santhanhthang.jpg"
+                        alt=""
+                      />
                     </div>
                     <div className="list-item-right">
                       <div className="grid grid-cols-2">
