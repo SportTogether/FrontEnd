@@ -57,7 +57,7 @@ class ThanhToanPage extends Component {
             QUÉT MÃ QR ĐỂ THANH TOÁN
           </h1>
           <img
-            src="../../../public/image/hinhMaQr.jpg"
+            src="https://leethanh.netlify.app/image/hinhMaQr.jpg"
             width={400}
             height={400}
             alt=""

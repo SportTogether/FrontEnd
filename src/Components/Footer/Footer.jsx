@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-left">
         <img
-          src="../../../public/image/flagIcon.png"
+          src="https://leethanh.netlify.app/image/flagIcon.png"
           width={70}
           height={70}
           alt=""
@@ -14,7 +14,7 @@ const Footer = () => {
       </div>
       <div className="footer-right">
         <img
-          src="../../../public/image/hot.png"
+          src="https://leethanh.netlify.app/image/hot.png"
           width={195}
           height={195}
           alt=""

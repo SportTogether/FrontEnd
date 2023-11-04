@@ -24,7 +24,7 @@ const types = [
       <Checkbox value="CL" onChange={onChange}>
         <div className="flex">
           <img
-            src="../../../public/image/badminton.png"
+            src="https://leethanh.netlify.app/image/badminton.png"
             width={24}
             height={24}
             alt=""
@@ -40,7 +40,7 @@ const types = [
       <Checkbox value="T" onChange={onChange}>
         <div className="flex">
           <img
-            src="../../../public/image/tennis.png"
+            src="https://leethanh.netlify.app/image/tennis.png"
             width={24}
             height={24}
             alt=""
@@ -176,28 +176,28 @@ const districts = [
 const itemKetNoi = [
   {
     key: 1,
-    image: "../../../public/image/ANHEMFC_ICON.png",
+    image: "https://leethanh.netlify.app/image/ANHEMFC_ICON.png",
     name: "ANH EM FC",
     date: "Thứ 7, 12/10/2023, 20:30",
     location: "Sân Thành Thắng, quận 12",
   },
   {
     key: 2,
-    image: "../../../public/image/HUUNGHIFC_KETNOI.png",
+    image: "https://leethanh.netlify.app/image/HUUNGHIFC_KETNOI.png",
     name: "HỮU NGHỊ FC",
     date: "Thứ 7, 12/10/2023, 18:30",
     location: "Sân Đại Nam, quận 12",
   },
   {
     key: 3,
-    image: "../../../public/image/ICON_VIPFC_KETNOI.png",
+    image: "https://leethanh.netlify.app/image/ICON_VIPFC_KETNOI.png",
     name: "VIP FC",
     date: "Thứ 7, 12/10/2023, 19:00",
     location: "Sân Phát Đạt, quận 12",
   },
   {
     key: 4,
-    image: "../../../public/image/icon_StrongFC_Ketnoi.png",
+    image: "https://leethanh.netlify.app/image/icon_StrongFC_Ketnoi.png",
     name: "STRONG FC",
     date: "Thứ 7, 12/10/2023, 17:30",
     location: "Sân Vườn Lài, quận 12",
@@ -287,7 +287,7 @@ const KetNoiPage = () => {
                     </div>
                     <div className="mx-auto pt-5">
                       <img
-                        src="../../../public/image/ICON_KETNOI.png"
+                        src="https://leethanh.netlify.app/image/ICON_KETNOI.png"
                         width={100}
                         height={100}
                         alt=""
@@ -295,7 +295,7 @@ const KetNoiPage = () => {
                     </div>
                     <div className="mx-auto">
                       <img
-                        src="../../../public/image/ICON___KETNOI.png"
+                        src="https://leethanh.netlify.app/image/ICON___KETNOI.png"
                         width={100}
                         height={100}
                         alt=""
@@ -306,7 +306,7 @@ const KetNoiPage = () => {
                     <div className="flex justify-center items-center">
                       <div className="w-[40%]">
                         <img
-                          src="../../../public/image/ICON_LICH_KETNOI.png"
+                          src="https://leethanh.netlify.app/image/ICON_LICH_KETNOI.png"
                           width={50}
                           height={50}
                           alt=""
@@ -320,7 +320,7 @@ const KetNoiPage = () => {
                     <div className="flex justify-center items-center">
                       <div className="w-[40%]">
                         <img
-                          src="../../../public/image/ICON_VITRI_KETNOI.png"
+                          src="https://leethanh.netlify.app/image/ICON_VITRI_KETNOI.png"
                           width={50}
                           height={50}
                           alt=""
@@ -336,7 +336,7 @@ const KetNoiPage = () => {
                 <div className="grid grid-cols-2 py-1">
                   <div>
                     <img
-                      src="../../../public/image/ICON_CMT_KETNOI.png"
+                      src="https://leethanh.netlify.app/image/ICON_CMT_KETNOI.png"
                       width={50}
                       height={50}
                       alt=""
@@ -345,7 +345,7 @@ const KetNoiPage = () => {
                   </div>
                   <div className=" border-l-2 border-l-gray-500">
                     <img
-                      src="../../../public/image/ICON_CHIASE_KETNOI.png"
+                      src="https://leethanh.netlify.app/image/ICON_CHIASE_KETNOI.png"
                       width={50}
                       height={50}
                       alt=""

@@ -112,7 +112,10 @@ const DetailSanPage = () => {
       children: (
         <div className="item-detail">
           <div className="img-desc">
-            <img src="../../../public/image/sanThanhThang.JPG" alt="" />
+            <img
+              src="https://leethanh.netlify.app/image/sanThanhThang.JPG"
+              alt=""
+            />
           </div>
           <div className="text-desc">
             <Paragraph
@@ -356,7 +359,7 @@ const DetailSanPage = () => {
       <div className="detail">
         <div className="detail-left">
           <img
-            src="../../../public/image/BackgroundChonsan.jpg"
+            src="https://leethanh.netlify.app/image/BackgroundChonsan.jpg"
             width="100%"
             height="100%"
             alt=""
@@ -366,7 +369,7 @@ const DetailSanPage = () => {
           <div className="item-detail">
             <div className="item-detail-left">
               <img
-                src="../../../public/image/sanThanhThang.JPG"
+                src="https://leethanh.netlify.app/image/sanThanhThang.JPG"
                 width={300}
                 alt=""
               />
