@@ -397,10 +397,7 @@ const DatSanPage = () => {
                     }}
                   >
                     <div className="list-item-left">
-                      <img
-                        src="../../../public/image/sanThanhThang.JPG"
-                        alt=""
-                      />
+                      <img src="./T/public/image/sanThanhThang.JPG" alt="" />
                     </div>
                     <div className="list-item-right">
                       <div className="grid grid-cols-2">
