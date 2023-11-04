@@ -8,18 +8,23 @@ const DatSanPage = () => {
   const [valueRadio, setValueRadio] = useState(1);
   const onChange = (e) => {
     const outerCheck = e.target.value;
-    console.log(`checked = ${outerCheck}`);
     setValueRadio(outerCheck);
+    // console.log(`checked = ${valueRadio}`);
+    // if ()
+    console.log("value", outerCheck);
+    const params = new URLSearchParams();
+    params.append("name", outerCheck);
+
     const fetchApiRadioCheck = async () => {
       try {
         const response = await fetch(
-          "https://leethanh.up.railway.app/api/yards",
+          "https://leethanh.up.railway.app/api/yards/filter",
           {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(valueRadio),
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params,
           }
-        ).then((response) => response.json());
+        ).then((res) => res.json());
         dispatch(setListSan(response.data));
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
@@ -306,13 +311,15 @@ const DatSanPage = () => {
                             <StarFilled />
                             <StarFilled />
                           </h1>
-                        </Radio> <br />
+                        </Radio>{" "}
+                        <br />
                         <Radio value={2}>
                           <h1 className="text-3xl text-yellow-300">
                             <StarFilled />
                             <StarFilled />
                           </h1>
-                        </Radio> <br />
+                        </Radio>{" "}
+                        <br />
                         <Radio value={1}>
                           <h1 className="text-3xl text-yellow-300">
                             <StarFilled />
