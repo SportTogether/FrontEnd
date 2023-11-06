@@ -8,6 +8,37 @@ const DatSanPage = () => {
   const [valueRadio, setValueRadio] = useState(1);
   const [selectedValues, setSelectedValues] = useState([]);
 
+  // const handleCheckboxChange = async (value) => {
+  //   const updatedValues = [...selectedValues];
+  //   if (updatedValues.includes(value)) {
+  //     // Nếu giá trị đã được chọn, loại bỏ nó ra khỏi mảng
+  //     updatedValues.splice(updatedValues.indexOf(value), 1);
+  //     setSelectedValues(updatedValues);
+  //   } else {
+  //     // Nếu giá trị chưa được chọn, thêm nó vào mảng
+  //     setSelectedValues([...selectedValues, value]);
+  //   }
+  //   // setSelectedValues(updatedValues);
+
+  //   const fetchApiRadioCheck = async () => {
+  //     const params = new URLSearchParams();
+  //     params.append("name", selectedValues[0]);
+  //     try {
+  //       const response = await fetch(
+  //         "https://leethanh.up.railway.app/api/yards/filter",
+  //         {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //           body: params,
+  //         }
+  //       ).then((res) => res.json());
+  //       dispatch(setListSan(response.data));
+  //     } catch (error) {
+  //       console.error("Lỗi xảy ra: ", error);
+  //     }
+  //   };
+
+  // };
   const handleCheckboxChange = (value) => {
     const updatedValues = [...selectedValues];
     if (updatedValues.includes(value)) {
@@ -18,27 +49,47 @@ const DatSanPage = () => {
       // Nếu giá trị chưa được chọn, thêm nó vào mảng
       setSelectedValues([...selectedValues, value]);
     }
-    // setSelectedValues(updatedValues);
+  };
 
+  useEffect(() => {
     const fetchApiRadioCheck = async () => {
-      const params = new URLSearchParams();
-      params.append("name", selectedValues[0]);
-      try {
-        const response = await fetch(
-          "https://leethanh.up.railway.app/api/yards/filter",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: params,
+      if (selectedValues.length !== 0) {
+        const params = new URLSearchParams();
+        params.append("name", selectedValues[0]);
+        try {
+          const response = await fetch(
+            "https://leethanh.up.railway.app/api/yards/filter",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: params,
+            }
+          ).then((res) => res.json());
+          dispatch(setListSan(response.data));
+        } catch (error) {
+          console.error("Lỗi xảy ra: ", error);
+        }
+      } else {
+        const fetchApi = async () => {
+          try {
+            const response = await fetch(
+              "https://leethanh.up.railway.app/api/yards",
+              {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+              }
+            ).then((response) => response.json());
+            dispatch(setListSan(response.data));
+          } catch (error) {
+            console.error("Lỗi xảy ra: ", error);
           }
-        ).then((res) => res.json());
-        dispatch(setListSan(response.data));
-      } catch (error) {
-        console.error("Lỗi xảy ra: ", error);
+        };
+        fetchApi();
       }
     };
+
     fetchApiRadioCheck();
-  };
+  }, [selectedValues]);
 
   const handleCheckboxClick = (value) => {
     // Kiểm tra nếu giá trị đã được chọn, thì xóa nó ra khỏi mảng
