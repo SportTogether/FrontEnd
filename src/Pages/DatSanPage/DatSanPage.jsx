@@ -212,6 +212,254 @@ const types = [
 // ];
 // let data = "";
 const DatSanPage = () => {
+
+  const [valueRadio, setValueRadio] = useState(1);
+  const [selectedValues, setSelectedValues] = useState([]);
+
+  useEffect(() => {
+    const fetchApiRadioCheck = async () => {
+      if (selectedValues.length !== 0) {
+        const params = new URLSearchParams();
+        params.append("name", selectedValues[0]);
+        try {
+          const response = await fetch(
+            "https://leethanh.up.railway.app/api/yards/filter",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: params,
+            }
+          ).then((res) => res.json());
+          dispatch(setListSan(response.data));
+        } catch (error) {
+          console.error("Lỗi xảy ra: ", error);
+        }
+      } else {
+        const fetchApi = async () => {
+          try {
+            const response = await fetch(
+              "https://leethanh.up.railway.app/api/yards",
+              {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+              }
+            ).then((response) => response.json());
+            dispatch(setListSan(response.data));
+          } catch (error) {
+            console.error("Lỗi xảy ra: ", error);
+          }
+        };
+        fetchApi();
+      }
+    };
+
+    fetchApiRadioCheck();
+  }, [selectedValues]);
+
+  const handleCheckboxClick = (value) => {
+    // Kiểm tra nếu giá trị đã được chọn, thì xóa nó ra khỏi mảng
+    if (selectedValues.includes(value)) {
+      const updatedValues = selectedValues.filter((v) => v !== value);
+      setSelectedValues(updatedValues);
+    }
+    // console.log(selectedValues);
+  };
+
+  console.log("check", selectedValues);
+
+  const onChange = (e) => {
+    const outerCheck = e.target.value;
+    setValueRadio(outerCheck);
+
+    console.log("value", outerCheck);
+    const params = new URLSearchParams();
+    params.append("name", outerCheck);
+
+    const fetchApiRadioCheck = async () => {
+      try {
+        const response = await fetch(
+          "https://leethanh.up.railway.app/api/yards/filter",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params,
+          }
+        ).then((res) => res.json());
+        dispatch(setListSan(response.data));
+      } catch (error) {
+        console.error("Lỗi xảy ra: ", error);
+      }
+    };
+    fetchApiRadioCheck();
+  };
+  const cities = [
+    {
+      key: "1",
+      label: (
+        <Checkbox value="TPHCM" onChange={onChange}>
+          <h1 className="text-2xl">Thành phố Hồ Chí Minh</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Checkbox value="HANOI" onChange={onChange}>
+          <h1 className="text-2xl">Hà Nội</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Checkbox value="DANANG" onChange={onChange}>
+          <h1 className="text-2xl">Đà Nẵng</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Checkbox value="THUDUC" onChange={onChange}>
+          <h1 className="text-2xl">Thủ Đức</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <Checkbox value="HAIPHONG" onChange={onChange}>
+          <h1 className="text-2xl">Hải Phòng</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "6",
+      label: (
+        <Checkbox value="BINHDUONG" onChange={onChange}>
+          <h1 className="text-2xl">Bình Dương</h1>
+        </Checkbox>
+      ),
+    },
+  ];
+  const districts = [
+    {
+      key: "1",
+      label: (
+        <Checkbox value="quan 1" onChange={onChange}>
+          <h1 className="text-2xl">Quận 1</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Checkbox value="quan 2" onChange={onChange}>
+          <h1 className="text-2xl">Quận 2</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Checkbox value="quan 3" onChange={onChange}>
+          <h1 className="text-2xl">Quận 3</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Checkbox value="quan go vap" onChange={onChange}>
+          <h1 className="text-2xl">Quận Gò Vấp</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <Checkbox value="quan tan binh" onChange={onChange}>
+          <h1 className="text-2xl">Quận Tân Bình</h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "6",
+      label: (
+        <Checkbox value="quan phu nhuan" onChange={onChange}>
+          <h1 className="text-2xl">Quận Phú Nhuận</h1>
+        </Checkbox>
+      ),
+    },
+  ];
+  const types = [
+    {
+      key: "1",
+      label: (
+        <Checkbox value="SBD" onChange={onChange}>
+          <h1 className="text-2xl">
+            <i className="fas fa-futbol"></i>{" "}
+            <span className="pl-2">Sân Bóng Đá</span>
+          </h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <Checkbox value="SCL" onChange={onChange}>
+          <div className="flex">
+            <img
+              src="https://leethanh.netlify.app/image/badminton.png"
+              width={24}
+              height={24}
+              alt=""
+            />
+            <span className="text-2xl pl-2">Sân Cầu Lông</span>
+          </div>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "3",
+      label: (
+        <Checkbox value="ST" onChange={onChange}>
+          <div className="flex">
+            <img
+              src="https://leethanh.netlify.app/image/tennis.png"
+              width={24}
+              height={24}
+              alt=""
+            />
+            <span className="text-2xl pl-2">Sân Tennis</span>
+          </div>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "4",
+      label: (
+        <Checkbox value="SBR" onChange={onChange}>
+          <h1 className="text-2xl">
+            <i className="fas fa-basketball-ball"></i>
+            <span className="pl-2">Sân Bóng Rổ</span>
+          </h1>
+        </Checkbox>
+      ),
+    },
+    {
+      key: "5",
+      label: (
+        <Checkbox value="SBB" onChange={onChange}>
+          <h1 className="text-2xl">
+            <i className="fas fa-table-tennis"></i>
+            <span className="pl-2">Sân Bóng Bàn</span>
+          </h1>
+        </Checkbox>
+      ),
+    },
+  ];
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
