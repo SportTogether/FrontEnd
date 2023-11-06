@@ -1,260 +1,226 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
 import { setDetailSan, setListSan } from "../../redux/QuanLySanSlice";
+const onChange = (e) => {
+  const outerCheck = e.target.value;
+  console.log(`checked = ${outerCheck}`);
+};
+const cities = [
+  {
+    key: "1",
+    label: (
+      <Checkbox value="TPHCM" onChange={onChange}>
+        <h1 className="text-2xl">Thành phố Hồ Chí Minh</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <Checkbox value="HANOI" onChange={onChange}>
+        <h1 className="text-2xl">Hà Nội</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "3",
+    label: (
+      <Checkbox value="DANANG" onChange={onChange}>
+        <h1 className="text-2xl">Đà Nẵng</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "4",
+    label: (
+      <Checkbox value="THUDUC" onChange={onChange}>
+        <h1 className="text-2xl">Thủ Đức</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "5",
+    label: (
+      <Checkbox value="HAIPHONG" onChange={onChange}>
+        <h1 className="text-2xl">Hải Phòng</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "6",
+    label: (
+      <Checkbox value="BINHDUONG" onChange={onChange}>
+        <h1 className="text-2xl">Bình Dương</h1>
+      </Checkbox>
+    ),
+  },
+];
+const districts = [
+  {
+    key: "1",
+    label: (
+      <Checkbox value="quan 1" onChange={onChange}>
+        <h1 className="text-2xl">Quận 1</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <Checkbox value="quan 2" onChange={onChange}>
+        <h1 className="text-2xl">Quận 2</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "3",
+    label: (
+      <Checkbox value="quan 3" onChange={onChange}>
+        <h1 className="text-2xl">Quận 3</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "4",
+    label: (
+      <Checkbox value="quan go vap" onChange={onChange}>
+        <h1 className="text-2xl">Quận Gò Vấp</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "5",
+    label: (
+      <Checkbox value="quan tan binh" onChange={onChange}>
+        <h1 className="text-2xl">Quận Tân Bình</h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "6",
+    label: (
+      <Checkbox value="quan phu nhuan" onChange={onChange}>
+        <h1 className="text-2xl">Quận Phú Nhuận</h1>
+      </Checkbox>
+    ),
+  },
+];
+const types = [
+  {
+    key: "1",
+    label: (
+      <Checkbox value="SBD" onChange={onChange}>
+        <h1 className="text-2xl">
+          <i className="fas fa-futbol"></i>{" "}
+          <span className="pl-2">Sân Bóng Đá</span>
+        </h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "2",
+    label: (
+      <Checkbox value="SCL" onChange={onChange}>
+        <div className="flex">
+          <img
+            src="../../../public/image/badminton.png"
+            width={24}
+            height={24}
+            alt=""
+          />
+          <span className="text-2xl pl-2">Sân Cầu Lông</span>
+        </div>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "3",
+    label: (
+      <Checkbox value="ST" onChange={onChange}>
+        <div className="flex">
+          <img
+            src="../../../public/image/tennis.png"
+            width={24}
+            height={24}
+            alt=""
+          />
+          <span className="text-2xl pl-2">Sân Tennis</span>
+        </div>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "4",
+    label: (
+      <Checkbox value="SBR" onChange={onChange}>
+        <h1 className="text-2xl">
+          <i className="fas fa-basketball-ball"></i>
+          <span className="pl-2">Sân Bóng Rổ</span>
+        </h1>
+      </Checkbox>
+    ),
+  },
+  {
+    key: "5",
+    label: (
+      <Checkbox value="SBB" onChange={onChange}>
+        <h1 className="text-2xl">
+          <i className="fas fa-table-tennis"></i>
+          <span className="pl-2">Sân Bóng Bàn</span>
+        </h1>
+      </Checkbox>
+    ),
+  },
+];
+// const itemsList = [
+//   {
+//     key: 1,
+//     name: "Sân Thành Thắng",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "9 Đường số 19, P Thạnh Mỹ Lợi, TP Thủ Đức.",
+//     rate: 4,
+//     type: "Sân Bóng Đá",
+//     price: "300.000đ / trận",
+//     kilometers: "5.7km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+//   {
+//     key: 2,
+//     name: "Sân 312",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "5 Trần Cao Vân, P Võ Thị Sáu, Q.3, TP HCM.",
+//     rate: 3,
+//     type: "Sân Bóng Đá",
+//     price: "250.000đ / trận",
+//     kilometers: "10km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+//   {
+//     key: 3,
+//     name: "Sân Mini Victory",
+//     image: "../../../public/image/sanThanhThang.JPG",
+//     address: "426 Bình Qưới, P.28, Q. Bình Thạnh, TP HCM.",
+//     rate: 3,
+//     type: "Sân Bóng Đá",
+//     price: "350.000đ / trận",
+//     kilometers: "11.5km",
+//     point: "Sân Cỏ Nhân Tạo",
+//   },
+// ];
+// let data = "";
 const DatSanPage = () => {
-  const [valueRadio, setValueRadio] = useState(1);
-  const [selectedValues, setSelectedValues] = useState([]);
-
-  const handleCheckboxChange = (value) => {
-    const updatedValues = [...selectedValues];
-    if (updatedValues.includes(value)) {
-      // Nếu giá trị đã được chọn, loại bỏ nó ra khỏi mảng
-      updatedValues.splice(updatedValues.indexOf(value), 1);
-      setSelectedValues(updatedValues);
-    } else {
-      // Nếu giá trị chưa được chọn, thêm nó vào mảng
-      setSelectedValues([...selectedValues, value]);
-    }
-    // setSelectedValues(updatedValues);
-
-    const fetchApiRadioCheck = async () => {
-      const params = new URLSearchParams();
-      params.append("name", selectedValues[0]);
-      try {
-        const response = await fetch(
-          "https://leethanh.up.railway.app/api/yards/filter",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: params,
-          }
-        ).then((res) => res.json());
-        dispatch(setListSan(response.data));
-      } catch (error) {
-        console.error("Lỗi xảy ra: ", error);
-      }
-    };
-    fetchApiRadioCheck();
-  };
-
-  const handleCheckboxClick = (value) => {
-    // Kiểm tra nếu giá trị đã được chọn, thì xóa nó ra khỏi mảng
-    if (selectedValues.includes(value)) {
-      const updatedValues = selectedValues.filter((v) => v !== value);
-      setSelectedValues(updatedValues);
-    }
-    // console.log(selectedValues);
-  };
-
-  console.log("check", selectedValues);
-
-  const onChange = (e) => {
-    const outerCheck = e.target.value;
-    setValueRadio(outerCheck);
-
-    console.log("value", outerCheck);
-    const params = new URLSearchParams();
-    params.append("name", outerCheck);
-
-    const fetchApiRadioCheck = async () => {
-      try {
-        const response = await fetch(
-          "https://leethanh.up.railway.app/api/yards/filter",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: params,
-          }
-        ).then((res) => res.json());
-        dispatch(setListSan(response.data));
-      } catch (error) {
-        console.error("Lỗi xảy ra: ", error);
-      }
-    };
-    fetchApiRadioCheck();
-  };
-  const cities = [
-    {
-      key: "1",
-      label: (
-        <Checkbox value="TPHCM" onChange={onChange}>
-          <h1 className="text-2xl">Thành phố Hồ Chí Minh</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <Checkbox value="HANOI" onChange={onChange}>
-          <h1 className="text-2xl">Hà Nội</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <Checkbox value="DANANG" onChange={onChange}>
-          <h1 className="text-2xl">Đà Nẵng</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "4",
-      label: (
-        <Checkbox value="THUDUC" onChange={onChange}>
-          <h1 className="text-2xl">Thủ Đức</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "5",
-      label: (
-        <Checkbox value="HAIPHONG" onChange={onChange}>
-          <h1 className="text-2xl">Hải Phòng</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "6",
-      label: (
-        <Checkbox value="BINHDUONG" onChange={onChange}>
-          <h1 className="text-2xl">Bình Dương</h1>
-        </Checkbox>
-      ),
-    },
-  ];
-  const districts = [
-    {
-      key: "1",
-      label: (
-        <Checkbox value="quan 1" onChange={onChange}>
-          <h1 className="text-2xl">Quận 1</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <Checkbox value="quan 2" onChange={onChange}>
-          <h1 className="text-2xl">Quận 2</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <Checkbox value="quan 3" onChange={onChange}>
-          <h1 className="text-2xl">Quận 3</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "4",
-      label: (
-        <Checkbox value="quan go vap" onChange={onChange}>
-          <h1 className="text-2xl">Quận Gò Vấp</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "5",
-      label: (
-        <Checkbox value="quan tan binh" onChange={onChange}>
-          <h1 className="text-2xl">Quận Tân Bình</h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "6",
-      label: (
-        <Checkbox value="quan phu nhuan" onChange={onChange}>
-          <h1 className="text-2xl">Quận Phú Nhuận</h1>
-        </Checkbox>
-      ),
-    },
-  ];
-  const types = [
-    {
-      key: "1",
-      label: (
-        <Checkbox value="SBD" onChange={onChange}>
-          <h1 className="text-2xl">
-            <i className="fas fa-futbol"></i>{" "}
-            <span className="pl-2">Sân Bóng Đá</span>
-          </h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "2",
-      label: (
-        <Checkbox value="SCL" onChange={onChange}>
-          <div className="flex">
-            <img
-              src="https://leethanh.netlify.app/image/badminton.png"
-              width={24}
-              height={24}
-              alt=""
-            />
-            <span className="text-2xl pl-2">Sân Cầu Lông</span>
-          </div>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "3",
-      label: (
-        <Checkbox value="ST" onChange={onChange}>
-          <div className="flex">
-            <img
-              src="https://leethanh.netlify.app/image/tennis.png"
-              width={24}
-              height={24}
-              alt=""
-            />
-            <span className="text-2xl pl-2">Sân Tennis</span>
-          </div>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "4",
-      label: (
-        <Checkbox value="SBR" onChange={onChange}>
-          <h1 className="text-2xl">
-            <i className="fas fa-basketball-ball"></i>
-            <span className="pl-2">Sân Bóng Rổ</span>
-          </h1>
-        </Checkbox>
-      ),
-    },
-    {
-      key: "5",
-      label: (
-        <Checkbox value="SBB" onChange={onChange}>
-          <h1 className="text-2xl">
-            <i className="fas fa-table-tennis"></i>
-            <span className="pl-2">Sân Bóng Bàn</span>
-          </h1>
-        </Checkbox>
-      ),
-    },
-  ];
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchApi = async () => {
       try {
-        const response = await fetch(
-          "https://leethanh.up.railway.app/api/yards",
-          {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }
-        ).then((response) => response.json());
+        const response = await fetch("http://localhost:8080/api/yards", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }).then((response) => response.json());
         dispatch(setListSan(response.data));
       } catch (error) {
         console.error("Lỗi xảy ra: ", error);
@@ -301,25 +267,13 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Checkbox
-                        value="Sân cỏ nhân tạo"
-                        onChange={() => handleCheckboxChange("Sân cỏ nhân tạo")}
-                        onClick={() => handleCheckboxClick("Sân cỏ nhân tạo")}
-                      >
+                      <Checkbox value="NhanTao" onChange={onChange}>
                         <h1 className="text-2xl">Sân cỏ nhân tạo</h1>
                       </Checkbox>
-                      <Checkbox
-                        value="Sân cỏ tự nhiên"
-                        onChange={() => handleCheckboxChange("Sân cỏ tự nhiên")}
-                        onClick={() => handleCheckboxClick("Sân cỏ tự nhiên")}
-                      >
+                      <Checkbox value="TuNhien" onChange={onChange}>
                         <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
                       </Checkbox>
-                      <Checkbox
-                        value="Sân mini"
-                        onChange={() => handleCheckboxChange("Sân mini")}
-                        onClick={() => handleCheckboxClick("Sân mini")}
-                      >
+                      <Checkbox value="mini" onChange={onChange}>
                         <h1 className="text-2xl">Sân mini</h1>
                       </Checkbox>
                     </>
@@ -341,11 +295,7 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Checkbox
-                        value={5}
-                        onChange={() => handleCheckboxChange(5)}
-                        onClick={() => handleCheckboxClick(5)}
-                      >
+                      <Checkbox value="5SAO" onChange={onChange}>
                         <h1 className="text-3xl text-yellow-300">
                           <StarFilled />
                           <StarFilled />
@@ -354,11 +304,7 @@ const DatSanPage = () => {
                           <StarFilled />
                         </h1>
                       </Checkbox>
-                      <Checkbox
-                        value={4}
-                        onChange={() => handleCheckboxChange(4)}
-                        onClick={() => handleCheckboxClick(4)}
-                      >
+                      <Checkbox value="4SAO" onChange={onChange}>
                         <h1 className="text-3xl text-yellow-300">
                           <StarFilled />
                           <StarFilled />
@@ -366,11 +312,7 @@ const DatSanPage = () => {
                           <StarFilled />
                         </h1>
                       </Checkbox>
-                      <Checkbox
-                        value={3}
-                        onChange={() => handleCheckboxChange(3)}
-                        onClick={() => handleCheckboxClick(3)}
-                      >
+                      <Checkbox value="3SAO" onChange={onChange}>
                         <h1 className="text-3xl text-yellow-300">
                           <StarFilled />
                           <StarFilled />
@@ -378,24 +320,15 @@ const DatSanPage = () => {
                         </h1>
                       </Checkbox>{" "}
                       <br />
-                      <Checkbox
-                        value={2}
-                        onChange={() => handleCheckboxChange(2)}
-                        onClick={() => handleCheckboxClick(2)}
-                      >
+                      <Checkbox value="2SAO" onChange={onChange}>
                         <h1 className="text-3xl text-yellow-300">
                           <StarFilled />
                           <StarFilled />
                         </h1>
-                      </Checkbox>{" "}
+                      </Checkbox>
                       <br />
-                      <Checkbox
-                        value={1}
-                        onChange={() => handleCheckboxChange(1)}
-                        onClick={() => handleCheckboxClick(1)}
-                      >
+                      <Checkbox value="1SAO" onChange={onChange}>
                         <h1 className="text-3xl text-yellow-300">
-                          <StarFilled />
                           <StarFilled />
                         </h1>
                       </Checkbox>
@@ -471,7 +404,7 @@ const DatSanPage = () => {
                   >
                     <div className="list-item-left">
                       <img
-                        src="https://leethanh.netlify.app/image/santhanhthang.jpg"
+                        src="../../../public/image/sanThanhThang.JPG"
                         alt=""
                       />
                     </div>
