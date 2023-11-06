@@ -8,6 +8,46 @@ import Lottie from "lottie-react";
 import animateLogin from "./animation_login.json";
 import { Button, Checkbox, Form, Input, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+
+const googleApiScript = document.createElement("script");
+googleApiScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBh95ExKKtwAIPTnQGcDDL7XiUfjma97rA&libraries=places`;
+googleApiScript.defer = true;
+document.head.appendChild(googleApiScript);
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    document.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+function showPosition(position) {
+  // let location =
+  //   "Latitude: " +
+  //   position.coords.latitude +
+  //   "Longitude: " +
+  //   position.coords.longitude;
+  // console.log("current location : ", location);
+
+  var geocoder = new google.maps.Geocoder();
+
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+
+  var latlng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+
+  geocoder.geocode({ location: latlng }, function (results, status) {
+    if (status === google.maps.GeocoderStatus.OK) {
+      if (results[1]) {
+        console.log(results[1].place_id);
+      } else {
+        window.alert("No results found");
+      }
+    } else {
+      window.alert("Geocoder failed due to: " + status);
+    }
+  });
+}
+
 const DangNhapPage = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
@@ -30,6 +70,7 @@ const DangNhapPage = () => {
         message.success("Bạn Đã Đăng Nhập Thành Công!!!");
         setTimeout(() => {
           navigate("/");
+          getLocation();
         }, 1000);
       } else {
         message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");

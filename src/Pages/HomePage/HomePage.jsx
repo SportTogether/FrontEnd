@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Typography } from "antd";
 const { Paragraph } = Typography;
+
 const itemNews = [
   {
     id: 1,
