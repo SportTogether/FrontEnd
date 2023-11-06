@@ -1,11 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Breadcrumb, Checkbox, Collapse, Dropdown, Radio, Rate } from "antd";
-import { DownOutlined, StarFilled } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
+import { DownOutlined, StarFilled } from "@ant-design/icons";
 import { setDetailSan, setListSan } from "../../redux/QuanLySanSlice";
 const DatSanPage = () => {
   const [valueRadio, setValueRadio] = useState(1);
+  const [selectedValues, setSelectedValues] = useState([]);
+
+  const handleCheckboxChange = (value) => {
+    const updatedValues = [...selectedValues];
+    if (updatedValues.includes(value)) {
+      // Nếu giá trị đã được chọn, loại bỏ nó ra khỏi mảng
+      updatedValues.splice(updatedValues.indexOf(value), 1);
+      setSelectedValues(updatedValues);
+    } else {
+      // Nếu giá trị chưa được chọn, thêm nó vào mảng
+      setSelectedValues([...selectedValues, value]);
+    }
+    // setSelectedValues(updatedValues);
+    // console.log(selectedValues);
+  };
+
+  const handleCheckboxClick = (value) => {
+    // Kiểm tra nếu giá trị đã được chọn, thì xóa nó ra khỏi mảng
+    if (selectedValues.includes(value)) {
+      const updatedValues = selectedValues.filter((v) => v !== value);
+      setSelectedValues(updatedValues);
+    }
+    // console.log(selectedValues);
+  };
   const onChange = (e) => {
     const outerCheck = e.target.value;
     setValueRadio(outerCheck);
@@ -14,7 +38,6 @@ const DatSanPage = () => {
     console.log("value", outerCheck);
     const params = new URLSearchParams();
     params.append("name", outerCheck);
-
     const fetchApiRadioCheck = async () => {
       try {
         const response = await fetch(
@@ -221,7 +244,7 @@ const DatSanPage = () => {
   const { listSan, thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
-  console.log("data:", listSan);
+  // console.log("data:", listSan);
   const handleDatSan = (event) => {
     dispatch(setDetailSan(event));
     navigate("/detail");
@@ -257,17 +280,27 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Radio.Group onChange={onChange} value={valueRadio}>
-                        <Radio value="Sân cỏ nhân tạo">
-                          <h1 className="text-2xl">Sân cỏ nhân tạo</h1>
-                        </Radio>
-                        <Radio value="Sân cỏ tự nhiên">
-                          <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
-                        </Radio>
-                        <Radio value="Sân mini">
-                          <h1 className="text-2xl">Sân mini</h1>
-                        </Radio>
-                      </Radio.Group>
+                      <Checkbox
+                        value="Sân cỏ nhân tạo"
+                        onChange={() => handleCheckboxChange("Sân cỏ nhân tạo")}
+                        onClick={() => handleCheckboxClick("Sân cỏ nhân tạo")}
+                      >
+                        <h1 className="text-2xl">Sân cỏ nhân tạo</h1>
+                      </Checkbox>
+                      <Checkbox
+                        value="Sân cỏ tự nhiên"
+                        onChange={() => handleCheckboxChange("Sân cỏ tự nhiên")}
+                        onClick={() => handleCheckboxClick("Sân cỏ tự nhiên")}
+                      >
+                        <h1 className="text-2xl">Sân cỏ tự nhiên</h1>
+                      </Checkbox>
+                      <Checkbox
+                        value="Sân mini"
+                        onChange={() => handleCheckboxChange("Sân mini")}
+                        onClick={() => handleCheckboxClick("Sân mini")}
+                      >
+                        <h1 className="text-2xl">Sân mini</h1>
+                      </Checkbox>
                     </>
                   ),
                 },
@@ -287,45 +320,62 @@ const DatSanPage = () => {
                   ),
                   children: (
                     <>
-                      <Radio.Group onChange={onChange} value={valueRadio}>
-                        <Radio value={5}>
-                          <h1 className="text-3xl text-yellow-300">
-                            <StarFilled />
-                            <StarFilled />
-                            <StarFilled />
-                            <StarFilled />
-                            <StarFilled />
-                          </h1>
-                        </Radio>
-                        <Radio value={4}>
-                          <h1 className="text-3xl text-yellow-300">
-                            <StarFilled />
-                            <StarFilled />
-                            <StarFilled />
-                            <StarFilled />
-                          </h1>
-                        </Radio>
-                        <Radio value={3}>
-                          <h1 className="text-3xl text-yellow-300">
-                            <StarFilled />
-                            <StarFilled />
-                            <StarFilled />
-                          </h1>
-                        </Radio>{" "}
-                        <br />
-                        <Radio value={2}>
-                          <h1 className="text-3xl text-yellow-300">
-                            <StarFilled />
-                            <StarFilled />
-                          </h1>
-                        </Radio>{" "}
-                        <br />
-                        <Radio value={1}>
-                          <h1 className="text-3xl text-yellow-300">
-                            <StarFilled />
-                          </h1>
-                        </Radio>
-                      </Radio.Group>
+                      <Checkbox
+                        value={5}
+                        onChange={() => handleCheckboxChange(5)}
+                        onClick={() => handleCheckboxClick(5)}
+                      >
+                        <h1 className="text-3xl text-yellow-300">
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                        </h1>
+                      </Checkbox>
+                      <Checkbox
+                        value={4}
+                        onChange={() => handleCheckboxChange(4)}
+                        onClick={() => handleCheckboxClick(4)}
+                      >
+                        <h1 className="text-3xl text-yellow-300">
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                        </h1>
+                      </Checkbox>
+                      <Checkbox
+                        value={3}
+                        onChange={() => handleCheckboxChange(3)}
+                        onClick={() => handleCheckboxClick(3)}
+                      >
+                        <h1 className="text-3xl text-yellow-300">
+                          <StarFilled />
+                          <StarFilled />
+                          <StarFilled />
+                        </h1>
+                      </Checkbox> <br />
+                      <Checkbox
+                        value={2}
+                        onChange={() => handleCheckboxChange(2)}
+                        onClick={() => handleCheckboxClick(2)}
+                      >
+                        <h1 className="text-3xl text-yellow-300">
+                          <StarFilled />
+                          <StarFilled />
+                        </h1>
+                      </Checkbox> <br />
+                      <Checkbox
+                        value={1}
+                        onChange={() => handleCheckboxChange(1)}
+                        onClick={() => handleCheckboxClick(1)}
+                      >
+                        <h1 className="text-3xl text-yellow-300">
+                          <StarFilled />
+                          <StarFilled />
+                        </h1>
+                      </Checkbox>
                     </>
                   ),
                 },
