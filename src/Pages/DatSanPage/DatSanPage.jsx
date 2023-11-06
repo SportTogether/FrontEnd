@@ -19,7 +19,25 @@ const DatSanPage = () => {
       setSelectedValues([...selectedValues, value]);
     }
     // setSelectedValues(updatedValues);
-    // console.log(selectedValues);
+
+    const fetchApiRadioCheck = async () => {
+      const params = new URLSearchParams();
+      params.append("name", selectedValues[0]);
+      try {
+        const response = await fetch(
+          "https://leethanh.up.railway.app/api/yards/filter",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params,
+          }
+        ).then((res) => res.json());
+        dispatch(setListSan(response.data));
+      } catch (error) {
+        console.error("Lỗi xảy ra: ", error);
+      }
+    };
+    fetchApiRadioCheck();
   };
 
   const handleCheckboxClick = (value) => {
@@ -30,14 +48,17 @@ const DatSanPage = () => {
     }
     // console.log(selectedValues);
   };
+
+  console.log("check", selectedValues);
+
   const onChange = (e) => {
     const outerCheck = e.target.value;
     setValueRadio(outerCheck);
-    // console.log(`checked = ${valueRadio}`);
-    // if ()
+
     console.log("value", outerCheck);
     const params = new URLSearchParams();
     params.append("name", outerCheck);
+
     const fetchApiRadioCheck = async () => {
       try {
         const response = await fetch(
@@ -355,7 +376,8 @@ const DatSanPage = () => {
                           <StarFilled />
                           <StarFilled />
                         </h1>
-                      </Checkbox> <br />
+                      </Checkbox>{" "}
+                      <br />
                       <Checkbox
                         value={2}
                         onChange={() => handleCheckboxChange(2)}
@@ -365,7 +387,8 @@ const DatSanPage = () => {
                           <StarFilled />
                           <StarFilled />
                         </h1>
-                      </Checkbox> <br />
+                      </Checkbox>{" "}
+                      <br />
                       <Checkbox
                         value={1}
                         onChange={() => handleCheckboxChange(1)}
@@ -447,9 +470,10 @@ const DatSanPage = () => {
                     }}
                   >
                     <div className="list-item-left">
-
-                      <img src="https://leethanh.netlify.app/image/santhanhthang.jpg" alt="" />
-
+                      <img
+                        src="https://leethanh.netlify.app/image/santhanhthang.jpg"
+                        alt=""
+                      />
                     </div>
                     <div className="list-item-right">
                       <div className="grid grid-cols-2">
