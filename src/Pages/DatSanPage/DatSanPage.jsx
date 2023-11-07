@@ -22,7 +22,35 @@ const DatSanPage = () => {
 
   useEffect(() => {
     const fetchApiRadioCheck = async () => {
-      if (selectedValues.length !== 0) {
+      if (selectedValues.length === 2) {
+        let value1 = selectedValues[0];
+        let value2 = selectedValues[1];
+        const params = new URLSearchParams();
+
+        if (typeof value1 === "number") {
+          console.log("stars :", value1, ", name :", value2);
+          params.append("name", value2);
+          params.append("stars", +value1);
+        } else {
+          console.log("stars :", value2, ", name :", value1);
+          params.append("name", value1);
+          params.append("stars", +value2);
+        }
+        console.log("param: ", params);
+        try {
+          const response = await fetch(
+            "http://localhost:8080/api/yards/filter/all",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: params,
+            }
+          ).then((res) => res.json());
+          dispatch(setListSan(response.data));
+        } catch (error) {
+          console.error("Lỗi xảy ra: ", error);
+        }
+      } else if (selectedValues.length !== 0) {
         const params = new URLSearchParams();
         params.append("name", selectedValues[0]);
         try {
