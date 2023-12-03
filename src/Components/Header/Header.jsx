@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Dropdown, Form, Modal, Select, message } from "antd";
+import { Avatar, Dropdown } from "antd";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
-import { setValueSearch } from "../../redux/QuanLySanSlice";
-
+import ModalSearch from "../Modal/ModalSearch";
 const items = [
   {
     key: "1",
@@ -63,60 +62,11 @@ const items = [
     ),
   },
 ];
-const cities = [
-  {
-    id: 1,
-    value: "TpHCM",
-    cityName: "Thành phố Hồ Chí Minh",
-  },
-  {
-    id: 2,
-    value: "HaNoi",
-    cityName: "Hà Nội",
-  },
-  {
-    id: 3,
-    value: "DaNang",
-    cityName: "Đà Nẵng",
-  },
-  {
-    id: 4,
-    value: "ThuDuc",
-    cityName: "Thủ Đức",
-  },
-  {
-    id: 5,
-    value: "HaiPhong",
-    cityName: "Hải Phòng",
-  },
-  {
-    id: 6,
-    value: "BinhDuong",
-    cityName: "Bình Dương",
-  },
-];
-let valueTimKiem = "";
+
 export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [form] = Form.useForm();
-  const onFinish = (value) => {
-    console.log("value ");
-    if (value.monTheThao === undefined || value.khuVuc === undefined) {
-      return;
-    } else {
-      setTimeout(() => {
-        navigate("/dat-san");
-      }, 1000);
-    }
-  };
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -253,112 +203,16 @@ export default function Header() {
             KẾT NỐI
           </div>
           <div className="nav-left-title">
-            <h1 onClick={showModal}>
+            <h1 onClick={() => {
+              setIsModalOpen(true)
+            }}>
               TÌM KIẾM{" "}
               <span>
                 <i className="fas fa-search"></i>
               </span>
             </h1>
+            <ModalSearch isOpen={isModalOpen} onClose={handleCancel} />
           </div>
-          <Modal
-            title="Chọn Môn Thể Thao Và Khu Vực"
-            open={isModalOpen}
-            onOk={handleOk}
-            footer={false}
-            onCancel={handleCancel}
-            width="100%"
-          >
-            <div className="flex">
-              <Form
-                form={form}
-                name="booking"
-                onFinish={onFinish}
-                className="container flex"
-                scrollToFirstError
-              >
-                <Form.Item
-                  name="monTheThao"
-                  className="w-[285px]"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng chọn môn thể thao!!!",
-                    },
-                  ]}
-                >
-                  <Select defaultValue={"Chọn Môn Thể Thao"} size="large">
-                    <Select.Option value="BongDa">
-                      <h1>
-                        <i className="fas fa-futbol text-xl"></i>{" "}
-                        <span className="pl-2 text-xl">Sân Bóng Đá</span>
-                      </h1>
-                    </Select.Option>
-                    <Select.Option value="CauLong">
-                      <div className="flex">
-                        <img
-                          src="https://leethanh.netlify.app/image/badminton.png"
-                          width={24}
-                          height={24}
-                          alt=""
-                        />
-                        <span className="text-xl pl-2">Sân Cầu Lông</span>
-                      </div>
-                    </Select.Option>
-                    <Select.Option value="Tennis">
-                      <div className="flex">
-                        <img
-                          src="https://leethanh.netlify.app/image/tennis.png"
-                          width={24}
-                          height={24}
-                          alt=""
-                        />
-                        <span className="text-xl pl-2">Sân Tennis</span>
-                      </div>
-                    </Select.Option>
-                    <Select.Option value=" Ro">
-                      <h1>
-                        <i className="fas fa-basketball-ball text-xl"></i>
-                        <span className="pl-2 text-xl">Sân Bóng Rổ</span>
-                      </h1>
-                    </Select.Option>
-                    <Select.Option value="BongBan">
-                      <i className="fas fa-table-tennis text-xl"></i>
-                      <span className="pl-2 text-xl">Sân Bóng Bàn</span>
-                    </Select.Option>
-                  </Select>
-                </Form.Item>
-                <Form.Item
-                  name="khuVuc"
-                  className="w-[1000px] px-5"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng chọn khu vực!!!",
-                    },
-                  ]}
-                >
-                  <Select defaultValue={"Chọn Khu Vực"} size="large">
-                    {cities.map((item) => {
-                      return (
-                        <Select.Option key={item.id} value={item.value}>
-                          <h1 className="text-xl">{item.cityName}</h1>
-                        </Select.Option>
-                      );
-                    })}
-                  </Select>
-                </Form.Item>
-                <Form.Item className="w-[285px]">
-                  <button
-                    type="submit"
-                    className="bg-blue-900 rounded-lg text-base font-medium py-2 px-10 text-green-600 delay-200 transition hover:text-white"
-                    onClick={onFinish}
-                  >
-                    Tìm Kiếm Sân Chơi
-                  </button>
-                </Form.Item>
-              </Form>
-            </div>
-          </Modal>
         </div>
         <div className="nav-right">{checkUserLogin()}</div>
       </div>

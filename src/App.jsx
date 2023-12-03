@@ -11,6 +11,8 @@ import ForumPage from "./Pages/Forum/ForumPage";
 import KetNoiPage from "./Pages/KetNoi/KetNoiPage";
 import TrangThongTinUser from "./Pages/TrangThongTinUser/TrangThongTinUser";
 import ThanhToanPage from "./Pages/ThanhToanPage/ThanhToanPage";
+import DangKyDoiTacPage from "./Pages/DangKyDoiTac/DangKyDoiTacPage";
+import NewsPage from "./Pages/News/NewsPage";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route path="thanh-toan" element={<ThanhToanPage />} />
             <Route path="forum" element={<ForumPage />} />
             <Route path="ket-noi" element={<KetNoiPage />} />
+            <Route path="news" element={<NewsPage />} />
+            <Route path="dang-ky-doi-tac" element={<DangKyDoiTacPage />} />
             <Route path="login" element={<DangNhapPage />} />
             <Route path="thong-tin-user" element={<TrangThongTinUser />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />

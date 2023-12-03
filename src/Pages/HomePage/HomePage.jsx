@@ -1,119 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import { Typography } from "antd";
-const { Paragraph } = Typography;
-
-const itemNews = [
-  {
-    id: 1,
-    image:
-      "https://www.baobariavungtau.com.vn/dataimages/202309/original/images1878521_9M1.jpeg",
-    description:
-      "Phong trào bóng đá cộng đồng đang thu hút ngày càng nhiều người tham gia. Đây không chỉ là sân chơi bổ ích giúp người dân rèn luyện sức khỏe, gắn kết cộng đồng mà còn là cơ hội để ngành thể thao tìm kiếm, phát hiện và đào tạo nguồn tài năng cho nền bóng đá tỉnh Bà Rịa-Vũng Tàu.",
-    url: "https://www.baobariavungtau.com.vn/the-thao/202309/lan-toa-phong-trao-bong-da-cong-dong-990870/",
-  },
-  {
-    id: 2,
-    image:
-      "https://baoangiang.com.vn/image/fckeditor/upload/2023/20230925/images/TT_MD(1).jpg",
-    description:
-      "Bóng đá phong trào hay còn gọi là “bóng đá phủi” đang phát triển mạnh mẽ, từ thành thị đến nông thôn. Nhiều câu lạc bộ (CLB) được thành lập, sân bóng đá được đầu tư xây dựng khắp nơi, các giải đấu được tổ chức thường xuyên… góp phần phát triển phong trào luyện tập thể dục - thể thao (TDTT) ở các địa phương.",
-    url: "https://baoangiang.com.vn/soi-noi-phong-trao-bong-da-phui--a375479.html",
-  },
-  {
-    id: 3,
-    image:
-      "https://cdn.tuoitre.vn/471584752817336320/2023/9/22/cong-doan-nghe-an-16953480380661590503888.png",
-    description:
-      "Giải vô địch bóng đá công nhân toàn quốc 2023: Công nhân Nghệ An mong ngày ra sân. Lần đầu dự giải bóng đá dành cho công nhân có quy mô toàn quốc, đội bóng Công đoàn Nghệ An đặt mục tiêu thi đấu với quyết tâm cao nhất và xem mỗi trận đấu như một trận chung kết.",
-    url: "https://tuoitre.vn/giai-vo-dich-bong-da-cong-nhan-toan-quoc-2023-cong-nhan-nghe-an-mong-ngay-ra-san-2023092209064613.htm",
-  },
-  {
-    id: 4,
-    image:
-      "https://cdnimg.vietnamplus.vn/uploaded/ivpycivo/2023_07_07/ttxvn_bong_da.jpg",
-    description:
-      "World Cup Nữ 2023: Các Sân Vận động Đội tuyển Nữ Việt Nam thi đấu. Tại Vòng Chung kết World Cup Nữ 2023, Sân Vận động Waitako là nơi tổ chức 5 trận đấu vòng bảng, trong đó có trận đấu giữa Đội tuyển Nữ Việt Nam và Đội tuyển Nữ Bồ Đào Nha vào ngày 27/7.",
-    url: "https://www.vietnamplus.vn/world-cup-nu-2023-cac-san-van-dong-doi-tuyen-nu-viet-nam-thi-dau/873622.vnp",
-  },
-];
+import { Input } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import ModalSearch from "../../Components/Modal/ModalSearch";
 const HomePage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
-    <div className="container home-page">
-      <div className="home-page-left">
-        <div
-          className="home-page-left-items"
-          onClick={() => {
-            navigate("/dat-san");
-          }}
-        >
-          <img src="https://leethanh.netlify.app/image/datsanIcon.png" alt="" />
-          <h1 className="text-center">ĐẶT SÂN</h1>
-        </div>
-        <div
-          className="home-page-left-items"
-          onClick={() => {
-            navigate("/ket-noi");
-          }}
-        >
-          <img src="https://leethanh.netlify.app/image/ketnoiIcon.png" alt="" />
-          <h1 className="text-center">KẾT NỐI</h1>
-        </div>
-        <div
-          className="home-page-left-items"
-          onClick={() => {
-            navigate("/forum");
-          }}
-        >
-          <img src="https://leethanh.netlify.app/image/forumIcon.png" alt="" />
-          <h1 className="text-center">FORUM</h1>
-        </div>
+    <>
+      <div className="video-background">
+        <video autoPlay muted loop id="" className="w-full h-full">
+          <source src="../../../public/image/video_background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
-      <div className="home-page-right">
-        <div className="news">
-          <h1 className="news-title">TIN TỨC NHANH</h1>
-          <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-            {itemNews.map((item) => {
-              return (
-                <SwiperSlide key={item.id}>
-                  <div
-                    className="news-slider"
-                    onClick={() => {
-                      window.location.href = item.url;
-                    }}
-                  >
-                    <img
-                      src={item.image}
-                      alt=""
-                      width={350}
-                      height={350}
-                      className="mx-auto rounded-2xl"
-                    />
-                    <Paragraph
-                      className="pt-3 mx-auto"
-                      ellipsis={{
-                        rows: 4,
-                        expandable: true,
-                        symbol: "more",
-                      }}
-                      style={{ width: 350 }}
-                    >
-                      {item.description}
-                    </Paragraph>
-                  </div>
-                </SwiperSlide>
-              );
-            })}
-          </Swiper>
+      <div className="container home-page">
+        <div className="pt-[200px] pb-24 w-">
+          <h1 className="text-3xl font-medium text-white pl-[100px] pb-[50px]">Chào buổi sáng</h1>
+          <Input size="large" className="w-[400px] h-[50px] text-2xl font-medium ml-[70px]" placeholder="Tìm Kiếm Sân..." prefix={<SearchOutlined className="text-green-500 font-bold" onClick={() => { setIsModalOpen(true) }} />} />
+          <ModalSearch isOpen={isModalOpen} onClose={handleCancel} />
         </div>
+        <div className="home-page-group bg-green-200 rounded-[40px]">
+          <div
+            className="home-page-item border-r-2 border-white"
+            onClick={() => {
+              navigate("/dat-san");
+            }}
+          >
+            <img src="../../../public/image/icon_datsan.png" alt="" />
+            <h1>ĐẶT SÂN</h1>
+          </div>
+          <div
+            className="home-page-item border-r-2 border-white"
+            onClick={() => {
+              navigate("/ket-noi");
+            }}
+          >
+            <img src="../../../public/image/icon_ketnoi.png" alt="" />
+            <h1>KẾT NỐI</h1>
+          </div>
+          <div
+            className="home-page-item border-r-2 border-white"
+            onClick={() => {
+              navigate("/forum");
+            }}
+          >
+            <img src="../../../public/image/icon_diendan.png" alt="" />
+            <h1>DIỄN ĐÀN</h1>
+          </div>
+          <div
+            className="home-page-item border-r-2 border-white"
+            onClick={() => {
+              navigate("/uu-dai");
+            }}
+          >
+            <img src="../../../public/image/icon_uudai.png" alt="" />
+            <h1>ƯU ĐÃI</h1>
+          </div>
+          <div
+            className="home-page-item border-r-2 border-white"
+            onClick={() => {
+              navigate("/news");
+            }}
+          >
+            <img src="../../../public/image/icon_tintuc.png" alt="" />
+            <h1>TIN TỨC</h1>
+          </div>
+          <div
+            className="home-page-item"
+            onClick={() => {
+              navigate("/dang-ky-doi-tac");
+            }}
+          >
+            <img src="../../../public/image/icon_doitac.png" alt="" />
+            <h1>ĐĂNG KÝ ĐỐI TÁC</h1>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </>
   );
 };
 

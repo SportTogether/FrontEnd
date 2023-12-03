@@ -1,0 +1,39 @@
+<i class="fad fa-user-circle" style="--fa-primary-color: #d1cccc; --fa-secondary-color: #f7f2f2;"></i> //icon đăng nhập
+
+<i class="fas fa-eye-slash" style="color: #31a07b;"></i> //ẩn mật khẩu
+
+<i class="fas fa-eye" style="color: #31a07b;"></i> //hiện mật khẩu
+
+<i class="fas fa-star" style="color: #ffdd00;"></i> //icon sao phần lọc
+
+<i class="fal fa-star" style="color: #ffdd00;"></i> //icon sao trống
+
+<i class="far fa-hand-point-right" style="color: #000000;"></i> //icon chỉ đường
+
+<i class="fas fa-star" style="color: #ffdd00;"></i> //icon sao phần đánh giá
+
+<i class="fal fa-star" style="color: #ffdd00;"></i> //icon sao phần bình luận
+
+<i class="fal fa-star" style="color: #ffdd00;"></i> //icon sao trống phần bình luận
+
+<i class="far fa-thumbs-up" style="color: #b0b0b0;"></i> //icon like phần bình luậnn
+
+<i class="far fa-thumbs-down fa-flip-horizontal" style="color: #b0b0b0;"></i> //icon dislike phần bình  luận
+
+//dattimepiker chỗ 15/11/2023
+
+<i class="fas fa-caret-down" style="color: #488964;"></i> //icon mũi tên phần thời lượng
+
+<i class="fas fa-chevron-right" style="color: #059651;"></i>
+//icon trượt giờ phải
+
+<i class="fas fa-chevron-left" style="color: #059651;"></i>
+//icon trượt giờ trái
+
+
+
+
+
+
+
+
