@@ -12,7 +12,7 @@ const HomePage = () => {
   return (
     <>
       <div className="video-background">
-        <video autoPlay muted loop id="" className="w-full h-full">
+        <video autoPlay muted loop id="" className="w-auto h-full max-w-fit">
           <source src="../../../public/image/video_background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
