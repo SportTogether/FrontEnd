@@ -9,15 +9,11 @@
 }
 
 @media only screen and (max-width: 2000px) {
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-left,
-  .signup-page .item-left,
   .resetpassword-page .item-left {
     width: 50%;
     height: 100vh;
@@ -25,22 +21,16 @@
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-right,
-  .signup-page .item-right,
   .resetpassword-page .item-right {
     width: 50%;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1600px) {
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-left,
-  .signup-page .item-left,
   .resetpassword-page .item-left {
     width: 50%;
     height: 100vh;
@@ -48,22 +38,16 @@
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-right,
-  .signup-page .item-right,
   .resetpassword-page .item-right {
     width: 50%;
   }
 }
 @media only screen and (min-width: 834px) and (max-width: 1024px) {
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-left,
-  .signup-page .item-left,
   .resetpassword-page .item-left {
     width: 50%;
     height: 100vh;
@@ -71,39 +55,27 @@
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-right,
-  .signup-page .item-right,
   .resetpassword-page .item-right {
     width: 50%;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 834px) {
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: block;
   }
-  .login-page .item-left,
-  .signup-page .item-left,
   .resetpassword-page .item-left {
     width: 100%;
   }
-  .login-page .item-right,
-  .signup-page .item-right,
   .resetpassword-page .item-right {
     width: 100%;
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 768px) {
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-left,
-  .signup-page .item-left,
   .resetpassword-page .item-left {
     width: 50%;
     height: 100vh;
@@ -111,29 +83,67 @@
     justify-content: center;
     align-items: center;
   }
-  .login-page .item-right,
-  .signup-page .item-right,
   .resetpassword-page .item-right {
     width: 50%;
   }
 }
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: block;
   }
-  .login-page .item-left,
-  .signup-page .item-left,
   .resetpassword-page .item-left {
     width: 100%;
   }
-  .login-page .item-right,
-  .signup-page .item-right,
   .resetpassword-page .item-right {
     width: 100%;
   }
 }
+.login-page {
+  background: url("../public/image/background_login.png") no-repeat;
+  background-position: top;
+  background-size: cover;
+  height: 130vh;
+  display: flex;
+  align-items: center;
+}
+.login-page .login-item {
+  margin-left: 30px;
+  padding: 50px 40px;
+  background-color: white;
+  border-radius: 20px;
+  width: 500px;
+}
+.login-page .title-login {
+  padding-bottom: 20px;
+  padding-bottom: 50px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 2.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74/var(--tw-text-opacity));
+}
+.login-page .login-form .login-form-forgot {
+  float: right;
+}
+.login-page .login-form .ant-col-rtl .login-form-forgot {
+  float: left;
+}
+.login-page .login-form .btn {
+  width: 100%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74/var(--tw-bg-opacity));
+}
+.login-page .login-form .login-form-text-bottom {
+  text-align: center;
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74/var(--tw-text-opacity));
+}
+.login-page .login-form .login-form-text-bottom span {
+  font-weight: 500;
+  cursor: pointer;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -436,6 +446,15 @@
   background-size: cover;
   background-position: center;
 }
+.dangKyDoiTac .breadcrumb-dangKyDoiTac {
+  font-size: 1.875rem;
+  /* 30px */
+  line-height: 2.25rem;
+  /* 36px */
+  color: white;
+  font-weight: 500;
+  padding-bottom: 20px;
+}
 .dangKyDoiTac .formDangKy {
   margin: 0 auto;
   padding: 30px 30px 20px 30px;
@@ -443,57 +462,62 @@
   border-radius: 30px;
   max-width: 500px;
 }
+.dangKyDoiTac .formDangKy .label-dangKyDoiTac {
+  padding-left: 20px;
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74/var(--tw-text-opacity));
+}
+.dangKyDoiTac .formDangKy .title-dangKyDoiTac {
+  text-align: center;
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  --tw-text-opacity: 1;
+  color: rgb(21 128 61/var(--tw-text-opacity));
+  font-weight: 700;
+  padding-bottom: 10px;
+}
 
-.login-form {
-  max-width: 300px;
-  margin: 0 auto;
+.signup {
+  background: url("../public/image/background_resgister.png") no-repeat;
+  background-size: cover;
+  background-position: top;
+  height: 130vh;
+  display: flex;
+  align-items: center;
 }
-.login-form .login-form-forgot {
-  float: right;
+.signup .signup-item {
+  margin-left: 30px;
+  padding: 30px 40px;
+  background-color: white;
+  border-radius: 20px;
+  width: 500px;
 }
-.login-form .ant-col-rtl .login-form-forgot {
-  float: left;
-}
-.login-form .btn {
-  width: 100%;
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74/var(--tw-bg-opacity));
-}
-.login-form .login-form-text-bottom {
+.signup .signup-item .signup-title {
+  padding-bottom: 20px;
   text-align: center;
   --tw-text-opacity: 1;
   color: rgb(22 163 74/var(--tw-text-opacity));
-}
-.login-form .login-form-text-bottom span {
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.signup .signup-title {
-  margin-left: 150px;
-  padding: 30px 0;
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
-  font-size: 1.5rem;
+  font-size: 40px;
   line-height: 2rem;
-  font-weight: 500;
+  font-weight: 700;
 }
-
-.signup-form {
-  margin-left: 150px;
+.signup .signup-item .signup-form .title-label {
+  padding-left: 20px;
+  --tw-text-opacity: 1;
+  color: rgb(22 163 74/var(--tw-text-opacity));
 }
-.signup-form .btn {
+.signup .signup-item .signup-form .btn {
   width: 100%;
   --tw-bg-opacity: 1;
   background-color: rgb(22 163 74/var(--tw-bg-opacity));
 }
-.signup-form .signup-form-text-bottom {
+.signup .signup-item .signup-form .signup-form-text-bottom {
   text-align: center;
   --tw-text-opacity: 1;
   color: rgb(22 163 74/var(--tw-text-opacity));
 }
-.signup-form .signup-form-text-bottom span {
-  text-decoration: underline;
+.signup .signup-item .signup-form .signup-form-text-bottom span {
+  font-weight: 500;
   cursor: pointer;
 }
 

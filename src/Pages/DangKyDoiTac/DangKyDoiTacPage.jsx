@@ -1,24 +1,28 @@
 import React from 'react'
 import { RightOutlined } from "@ant-design/icons";
-import { Form, Input } from 'antd';
+import { Form, Input, Typography } from 'antd';
+const { Title } = Typography;
 const DangKyDoiTacPage = () => {
-    // const [form] = Form.useForm();
+    const [form] = Form.useForm();
     const onFinish = (value) => {
         console.log(value);
     }
     return (
         <div className='container dangKyDoiTac'>
-            <h1 className='text-3xl text-white font-medium pb-5'>TRANG CHỦ <RightOutlined /> ĐĂNG KÝ ĐỐI TÁC</h1>
+            <h1 className='breadcrumb-dangKyDoiTac'>TRANG CHỦ <RightOutlined /> ĐĂNG KÝ ĐỐI TÁC</h1>
             <div className='formDangKy'>
-                <h1 className='text-4xl text-center text-green-700 font-bold pb-2'>Liên Hệ</h1>
+                <h1 className='title-dangKyDoiTac'>Liên Hệ</h1>
                 <Form
+                    form={form}
                     name="formDangKyDoiTac"
                     onFinish={onFinish}
                     initialValues={{
                         remember: true,
                     }}
                 >
+                    <Title level={4} className='label-dangKyDoiTac'>Họ Và Tên*</Title>
                     <Form.Item
+                        className="mb-4"
                         name="username"
                         rules={[
                             {
@@ -29,8 +33,9 @@ const DangKyDoiTacPage = () => {
                     >
                         <Input className='bg-gray-100 rounded-xl text-xl' placeholder='Họ Và Tên*' />
                     </Form.Item>
-
+                    <Title level={4} className='label-dangKyDoiTac'>Điện Thoại*</Title>
                     <Form.Item
+                        className="mb-4"
                         name="phone"
                         rules={[
                             {
@@ -41,8 +46,9 @@ const DangKyDoiTacPage = () => {
                     >
                         <Input className='bg-gray-100 rounded-xl text-xl' placeholder="Điện Thoại*" />
                     </Form.Item>
-
+                    <Title level={4} className='label-dangKyDoiTac'>Email*</Title>
                     <Form.Item
+                        className="mb-4"
                         name="email"
                         rules={[
                             {
@@ -57,8 +63,9 @@ const DangKyDoiTacPage = () => {
                     >
                         <Input className='bg-gray-100 rounded-xl text-xl' placeholder="Email" />
                     </Form.Item>
-
+                    <Title level={4} className='label-dangKyDoiTac'>Địa Chỉ*</Title>
                     <Form.Item
+                        className="mb-4"
                         name="address"
                         rules={[
                             {
@@ -69,8 +76,9 @@ const DangKyDoiTacPage = () => {
                     >
                         <Input className='bg-gray-100 rounded-xl text-xl' placeholder="Địa Chỉ" />
                     </Form.Item>
-
+                    <Title level={4} className='label-dangKyDoiTac'>Nội Dung*</Title>
                     <Form.Item
+                        className="mb-4"
                         name="content"
                         rules={[
                             {

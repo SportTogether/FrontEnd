@@ -1,28 +1,9 @@
 
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Lottie from "lottie-react";
-import animateSignUp from "./animation_soccer.json";
-import { Form, Input, Checkbox, Button, message } from "antd";
-const formItemLayout = {
-  labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
-  },
-  wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
-  },
-};
-let data = "";
+import { Form, Input, Checkbox, Button, message, Typography } from "antd";
+const { Title } = Typography;
+// let data = "";
 const DangKyPage = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
@@ -51,20 +32,10 @@ const DangKyPage = () => {
   };
   return (
     <>
-      <div className="container signup-page">
-        <div className="item-left">
-          <Lottie
-            animationData={animateSignUp}
-            className=""
-            loop={true}
-            width="100%"
-            height="100%"
-          />
-        </div>
-        <div className="item-right signup">
-          <h1 className="signup-title">Sign Up</h1>
+      <div className="container signup">
+        <div className="signup-item">
+          <Title className="signup-title">Đăng Ký</Title>
           <Form
-            {...formItemLayout}
             form={form}
             name="register"
             className="signup-form"
@@ -78,8 +49,10 @@ const DangKyPage = () => {
             }}
             scrollToFirstError
           >
+            <Title level={4} className="title-label">Họ Và Tên*</Title>
             <Form.Item
               name="name"
+              className="mb-3"
               tooltip="What is your name ?"
               rules={[
                 {
@@ -94,13 +67,15 @@ const DangKyPage = () => {
               ]}
             >
               <Input
+                size="large"
                 placeholder="Fullname"
                 className="border-2 border-green-600"
               />
             </Form.Item>
-
+            <Title level={4} className="title-label">Email*</Title>
             <Form.Item
               name="email"
+              className="mb-3"
               tooltip="What is your name ?"
               rules={[
                 {
@@ -115,13 +90,15 @@ const DangKyPage = () => {
               ]}
             >
               <Input
+                size="large"
                 placeholder="Email"
                 className="border-2 border-green-600"
               />
             </Form.Item>
-
+            <Title level={4} className="title-label">Số Điện Thoại*</Title>
             <Form.Item
               name="number"
+              className="mb-3"
               rules={[
                 {
                   required: true,
@@ -134,13 +111,15 @@ const DangKyPage = () => {
               ]}
             >
               <Input
+                size="large"
                 placeholder="Phone Number"
                 className="border-2 border-green-600"
               />
             </Form.Item>
-
+            <Title level={4} className="title-label">Mật Khẩu*</Title>
             <Form.Item
               name="password"
+              className="mb-3"
               rules={[
                 {
                   required: true,
@@ -150,12 +129,15 @@ const DangKyPage = () => {
               hasFeedback
             >
               <Input.Password
+                size="large"
                 placeholder="Password"
                 className="border-2 border-green-600"
               />
             </Form.Item>
+            <Title level={4} className="title-label">Nhập Lại Mật Khẩu*</Title>
             <Form.Item
               name="confirm"
+              className="mb-3"
               dependencies={["password"]}
               hasFeedback
               rules={[
@@ -178,6 +160,7 @@ const DangKyPage = () => {
               ]}
             >
               <Input.Password
+                size="large"
                 placeholder="Confirm Password"
                 className="border-2 border-green-600"
               />
@@ -191,16 +174,16 @@ const DangKyPage = () => {
 
             <Form.Item>
               <Button type="primary" htmlType="submit" className="btn">
-                Sign Up
+                Đăng Ký
               </Button>
               <p className="signup-form-text-bottom">
-                Already Have Account?{" "}
+                Bạn Đã Có Tài Khoản?{" "}
                 <span
                   onClick={() => {
                     navigate("/login");
                   }}
                 >
-                  Login
+                  Đăng Nhập
                 </span>
               </p>
             </Form.Item>

@@ -11,9 +11,6 @@
 // css login page / sign up page / reset password page
 // desktop
 @media only screen and (max-width: 2000px) {
-
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
@@ -35,9 +32,6 @@
 
 // laptop
 @media only screen and (min-width: 1024px) and (max-width: 1600px) {
-
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
@@ -59,9 +53,6 @@
 
 // tablet ngang
 @media only screen and (min-width: 834px) and (max-width: 1024px) {
-
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
@@ -83,9 +74,6 @@
 
 // tablet dọc
 @media only screen and (min-width: 768px) and (max-width: 834px) {
-
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: block;
 
@@ -101,9 +89,6 @@
 
 // mobile ngang
 @media only screen and (min-width: 480px) and (max-width: 768px) {
-
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: flex;
     justify-content: center;
@@ -125,9 +110,6 @@
 
 // mobile dọc
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-
-  .login-page,
-  .signup-page,
   .resetpassword-page {
     display: block;
 
@@ -140,7 +122,57 @@
     }
   }
 }
+.login-page {
+  background: url("../public/image/background_login.png") no-repeat;
+  background-position: top;
+  background-size: cover;
+  height: 130vh;
+  display: flex;
+  align-items: center;
+  .login-item {
+    margin-left: 30px;
+    padding: 50px 40px;
+    background-color: white;
+    border-radius: 20px;
+    width: 500px;
+  }
+  .title-login {
+    padding-bottom: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 2.25rem; // 36px
+    --tw-text-opacity: 1;
+    color: rgb(22 163 74 / var(--tw-text-opacity));
+  }
+  .login-form {
+    .login-form-forgot {
+      float: right;
+    }
 
+    .ant-col-rtl .login-form-forgot {
+      float: left;
+    }
+
+    .btn {
+      width: 100%;
+      --tw-bg-opacity: 1;
+      background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+    }
+
+    .login-form-text-bottom {
+      text-align: center;
+      --tw-text-opacity: 1;
+      color: rgb(22 163 74 / var(--tw-text-opacity));
+
+      span {
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+}
 .header {
   position: fixed;
   top: 0;
@@ -277,9 +309,6 @@
       }
     }
   }
-
-
-
 }
 
 .dat-san-page {
@@ -491,75 +520,86 @@
   background: url("../public/image/homepageBackground.JPG") no-repeat;
   background-size: cover;
   background-position: center;
-
+  .breadcrumb-dangKyDoiTac {
+      font-size: 1.875rem;
+      /* 30px */
+      line-height: 2.25rem;
+      /* 36px */
+      color: white;
+      font-weight: 500;
+      padding-bottom: 20px;
+    }
   .formDangKy {
     margin: 0 auto;
     padding: 30px 30px 20px 30px;
     background-color: white;
     border-radius: 30px;
     max-width: 500px;
-  }
-}
-
-.login-form {
-  max-width: 300px;
-  margin: 0 auto;
-
-  .login-form-forgot {
-    float: right;
-  }
-
-  .ant-col-rtl .login-form-forgot {
-    float: left;
-  }
-
-  .btn {
-    width: 100%;
-    --tw-bg-opacity: 1;
-    background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-  }
-
-  .login-form-text-bottom {
-    text-align: center;
-    --tw-text-opacity: 1;
-    color: rgb(22 163 74 / var(--tw-text-opacity));
-
-    span {
-      text-decoration: underline;
-      cursor: pointer;
+    .label-dangKyDoiTac{
+      padding-left: 20px;
+        --tw-text-opacity: 1;
+        color: rgb(22 163 74 / var(--tw-text-opacity));
+    }
+    .title-dangKyDoiTac{
+      text-align: center;
+      font-size: 2.25rem
+          /* 36px */
+        ;
+        line-height: 2.5rem
+          /* 40px */
+        ;
+      --tw-text-opacity: 1;
+        color: rgb(21 128 61 / var(--tw-text-opacity));
+      font-weight: 700;
+      padding-bottom: 10px;
     }
   }
 }
 
 .signup {
-  .signup-title {
-    margin-left: 150px;
-    padding: 30px 0;
-    --tw-text-opacity: 1;
-    color: rgb(22 163 74 / var(--tw-text-opacity));
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 500;
-  }
-}
+  background: url("../public/image/background_resgister.png") no-repeat;
+  background-size: cover;
+  background-position: top;
+  height: 130vh;
+  display: flex;
+  align-items: center;
+  .signup-item {
+    margin-left: 30px;
+    padding: 30px 40px;
+    background-color: white;
+    border-radius: 20px;
+    width: 500px;
+    .signup-title {
+      padding-bottom: 20px;
+      text-align: center;
+      --tw-text-opacity: 1;
+      color: rgb(22 163 74 / var(--tw-text-opacity));
+      font-size: 40px;
+      line-height: 2rem;
+      font-weight: 700;
+    }
+    .signup-form {
+      .title-label {
+        padding-left: 20px;
+        --tw-text-opacity: 1;
+        color: rgb(22 163 74 / var(--tw-text-opacity));
+      }
+      .btn {
+        width: 100%;
+        --tw-bg-opacity: 1;
+        background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+      }
 
-.signup-form {
-  margin-left: 150px;
+      .signup-form-text-bottom {
+        text-align: center;
+        --tw-text-opacity: 1;
+        color: rgb(22 163 74 / var(--tw-text-opacity));
 
-  .btn {
-    width: 100%;
-    --tw-bg-opacity: 1;
-    background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-  }
-
-  .signup-form-text-bottom {
-    text-align: center;
-    --tw-text-opacity: 1;
-    color: rgb(22 163 74 / var(--tw-text-opacity));
-
-    span {
-      text-decoration: underline;
-      cursor: pointer;
+        span {
+          font-weight: 500;
+          cursor: pointer;
+        }
+      }
     }
   }
 }

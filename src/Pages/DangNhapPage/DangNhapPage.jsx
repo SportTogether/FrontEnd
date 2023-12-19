@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
 import { setLogin } from "../../redux/QuanLyNguoiDungSlice";
-import Lottie from "lottie-react";
-import animateLogin from "./animation_login.json";
-import { Button, Checkbox, Form, Input, message } from "antd";
+import { Button, Checkbox, Form, Input, message, Typography } from "antd";
+const { Title } = Typography;
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 const googleApiScript = document.createElement("script");
@@ -82,19 +81,8 @@ const DangNhapPage = () => {
   return (
     <>
       <div className="container login-page">
-        <div className="item-left">
-          <Lottie
-            animationData={animateLogin}
-            className=""
-            loop={true}
-            width="100%"
-            height="100%"
-          />
-        </div>
-        <div className="item-right">
-          <h1 className="text-center font-medium text-3xl text-green-600 py-5">
-            Login
-          </h1>
+        <div className="login-item">
+          <h1 className="title-login">Đăng Nhập</h1>
           <Form
             name="normal_login"
             className="login-form"
@@ -103,24 +91,26 @@ const DangNhapPage = () => {
             }}
             onFinish={onFinish}
           >
+            <Title level={4}>Số Điện Thoại</Title>
             <Form.Item
-              name="email"
+              name="phone"
               rules={[
                 {
                   required: true,
-                  message: "Please input your Email!",
+                  message: "Please input your phone!",
                 },
               ]}
-              initialValue={"admin"}
             >
               <Input
                 className="border-green-600 border-2"
                 prefix={
                   <UserOutlined className="site-form-item-icon text-green-600" />
                 }
+                size="large"
                 placeholder="Email"
               />
             </Form.Item>
+            <Title level={4}>Mật Khẩu</Title>
             <Form.Item
               name="password"
               rules={[
@@ -129,7 +119,6 @@ const DangNhapPage = () => {
                   message: "Please input your Password!",
                 },
               ]}
-              initialValue={"1234"}
             >
               <Input.Password
                 className="border-green-600 border-2"
@@ -137,6 +126,7 @@ const DangNhapPage = () => {
                   <LockOutlined className="site-form-item-icon text-green-600" />
                 }
                 type="password"
+                size="large"
                 placeholder="Password"
               />
             </Form.Item>
@@ -150,22 +140,22 @@ const DangNhapPage = () => {
                   navigate("/reset-password");
                 }}
               >
-                Forgot password
+                Quên Mật Khẩu
               </p>
             </Form.Item>
 
             <Form.Item>
               <Button type="primary" htmlType="submit" className="btn">
-                Login
+                Đăng Nhập
               </Button>
               <p className="login-form-text-bottom">
-                Don't Have an Account?{" "}
+                Bạn Chưa Có Tài Khoản? {" "}
                 <span
                   onClick={() => {
                     navigate("/signup");
                   }}
                 >
-                  Sign Up
+                  Đăng Ký
                 </span>
               </p>
             </Form.Item>
