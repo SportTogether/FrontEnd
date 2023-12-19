@@ -8,44 +8,44 @@ import { Button, Checkbox, Form, Input, message, Typography } from "antd";
 const { Title } = Typography;
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
-const googleApiScript = document.createElement("script");
-googleApiScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBh95ExKKtwAIPTnQGcDDL7XiUfjma97rA&libraries=places`;
-googleApiScript.defer = true;
-document.head.appendChild(googleApiScript);
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    document.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-function showPosition(position) {
-  // let location =
-  //   "Latitude: " +
-  //   position.coords.latitude +
-  //   "Longitude: " +
-  //   position.coords.longitude;
-  // console.log("current location : ", location);
+// const googleApiScript = document.createElement("script");
+// googleApiScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBh95ExKKtwAIPTnQGcDDL7XiUfjma97rA&libraries=places`;
+// googleApiScript.defer = true;
+// document.head.appendChild(googleApiScript);
+// function getLocation() {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition);
+//   } else {
+//     document.innerHTML = "Geolocation is not supported by this browser.";
+//   }
+// }
+// function showPosition(position) {
+//   // let location =
+//   //   "Latitude: " +
+//   //   position.coords.latitude +
+//   //   "Longitude: " +
+//   //   position.coords.longitude;
+//   // console.log("current location : ", location);
 
-  var geocoder = new google.maps.Geocoder();
+//   var geocoder = new google.maps.Geocoder();
 
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
+//   let latitude = position.coords.latitude;
+//   let longitude = position.coords.longitude;
 
-  var latlng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
+//   var latlng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
 
-  geocoder.geocode({ location: latlng }, function (results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      if (results[1]) {
-        console.log(results[1].place_id);
-      } else {
-        window.alert("No results found");
-      }
-    } else {
-      window.alert("Geocoder failed due to: " + status);
-    }
-  });
-}
+//   geocoder.geocode({ location: latlng }, function (results, status) {
+//     if (status === google.maps.GeocoderStatus.OK) {
+//       if (results[1]) {
+//         console.log(results[1].place_id);
+//       } else {
+//         window.alert("No results found");
+//       }
+//     } else {
+//       window.alert("Geocoder failed due to: " + status);
+//     }
+//   });
+// }
 
 const DangNhapPage = () => {
   const navigate = useNavigate();
@@ -53,27 +53,31 @@ const DangNhapPage = () => {
   let data = "Test";
   const onFinish = async (values) => {
     try {
-      const response = await fetch(
+      let response = "";
+      console.log(JSON.stringify(values));
+      response = await fetch(
         "https://leethanh.up.railway.app/api/users/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
         }
-      ).then((response) => response.json());
-      data = response;
-      console.log("my data after login : ", data);
-      if (data.data.id != 0) {
-        dispatch(setLogin(data.data));
-        localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
-        message.success("Bạn Đã Đăng Nhập Thành Công!!!");
-        setTimeout(() => {
-          navigate("/");
-          getLocation();
-        }, 1000);
-      } else {
-        message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
-      }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("my data after login : ", data);
+          if (data.data.id != 0) {
+            dispatch(setLogin(data.data));
+            localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
+            message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+            setTimeout(() => {
+              navigate("/");
+              getLocation();
+            }, 1000);
+          } else {
+            message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+          }
+        });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
@@ -91,13 +95,13 @@ const DangNhapPage = () => {
             }}
             onFinish={onFinish}
           >
-            <Title level={4}>Số Điện Thoại</Title>
+            <Title level={4}>Email</Title>
             <Form.Item
-              name="phone"
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: "Please input your phone!",
+                  message: "Please input your email!",
                 },
               ]}
             >
@@ -149,7 +153,7 @@ const DangNhapPage = () => {
                 Đăng Nhập
               </Button>
               <p className="login-form-text-bottom">
-                Bạn Chưa Có Tài Khoản? {" "}
+                Bạn Chưa Có Tài Khoản?{" "}
                 <span
                   onClick={() => {
                     navigate("/signup");
