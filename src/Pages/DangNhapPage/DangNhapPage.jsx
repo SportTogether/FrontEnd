@@ -56,7 +56,7 @@ const DangNhapPage = () => {
       let response = "";
       console.log(JSON.stringify(values));
       response = await fetch(
-        "https://leethanh.up.railway.app/api/users/login",
+        "https://leethanh.up.railway.app/api/login/users",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -66,13 +66,22 @@ const DangNhapPage = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log("my data after login : ", data);
-          if (data.data.id != 0) {
+          if (data.data.id != 0 && data.data.role_name === "user") {
             dispatch(setLogin(data.data));
             localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
             message.success("Bạn Đã Đăng Nhập Thành Công!!!");
             setTimeout(() => {
               navigate("/");
-              getLocation();
+              // getLocation();
+            }, 1000);
+          } else if (data.data.id != 0 && data.data.role_name === "admin") {
+            // dispatch(setLogin(data.data));
+            // localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
+            // message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+            setTimeout(() => {
+              const externalLink =
+                "https://leethanh.up.railway.app/api/login/admin"; // Replace with your external link
+              window.location.href = externalLink;
             }, 1000);
           } else {
             message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");

@@ -121,7 +121,7 @@
   font-size: 40px;
   line-height: 2.25rem;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .login-page .login-form .login-form-forgot {
   float: right;
@@ -132,12 +132,12 @@
 .login-page .login-form .btn {
   width: 100%;
   --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74/var(--tw-bg-opacity));
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 .login-page .login-form .login-form-text-bottom {
   text-align: center;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .login-page .login-form .login-form-text-bottom span {
   font-weight: 500;
@@ -171,7 +171,7 @@
   justify-content: center;
   align-items: center;
   --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128/var(--tw-bg-opacity));
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 .header .nav .nav-left {
   width: 80%;
@@ -213,7 +213,7 @@
 .footer .footer-right {
   width: 50%;
   --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128/var(--tw-bg-opacity));
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -264,7 +264,7 @@
   line-height: 32px;
   font-weight: 700;
   --tw-text-opacity: 1;
-  color: rgb(21 128 61/var(--tw-text-opacity));
+  color: rgb(21 128 61 / var(--tw-text-opacity));
 }
 
 .dat-san-page {
@@ -289,14 +289,14 @@
   line-height: 2.25rem;
   font-weight: 700;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
   cursor: pointer;
 }
 .dat-san-page .dat-san-right .list {
   margin: 15px 30px;
   height: 600px;
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246/var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   border-radius: 1rem;
 }
 .dat-san-page .dat-san-right .list .list-title {
@@ -307,7 +307,7 @@
   border-bottom: solid 2px black;
   font-weight: 700;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .dat-san-page .dat-san-right .list .list-item {
   cursor: pointer;
@@ -338,7 +338,7 @@
 }
 .detail .detail-left img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
 }
 .detail .detail-right {
@@ -366,13 +366,13 @@
   line-height: 2.5rem;
   font-weight: 700;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .detail .detail-right .desc-detail {
   margin: 50px 0;
   height: 400px;
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246/var(--tw-bg-opacity));
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   border-radius: 1rem;
 }
 .detail .detail-right .desc-detail .img-desc {
@@ -411,7 +411,7 @@
 }
 .uu-dai .uu-dai-left img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 100%;
 }
 .uu-dai .uu-dai-right {
@@ -423,7 +423,7 @@
   margin: 40px 0;
   border: 2px solid;
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 .forum .forum-row {
   display: flex;
@@ -431,7 +431,7 @@
   align-items: center;
   border-bottom-width: 2px;
   --tw-border-opacity: 1;
-  border-color: rgb(209 213 219/var(--tw-border-opacity));
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 .forum .forum-row .forum-row-left {
   width: 20%;
@@ -442,7 +442,7 @@
 
 .dangKyDoiTac {
   padding-top: 100px;
-  background: url("../public/image/homepageBackground.JPG") no-repeat;
+  background: url("../public/image/background_lienHeDoiTac.png") no-repeat;
   background-size: cover;
   background-position: center;
 }
@@ -465,14 +465,14 @@
 .dangKyDoiTac .formDangKy .label-dangKyDoiTac {
   padding-left: 20px;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .dangKyDoiTac .formDangKy .title-dangKyDoiTac {
   text-align: center;
   font-size: 2.25rem;
   line-height: 2.5rem;
   --tw-text-opacity: 1;
-  color: rgb(21 128 61/var(--tw-text-opacity));
+  color: rgb(21 128 61 / var(--tw-text-opacity));
   font-weight: 700;
   padding-bottom: 10px;
 }
@@ -496,7 +496,7 @@
   padding-bottom: 20px;
   text-align: center;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
   font-size: 40px;
   line-height: 2rem;
   font-weight: 700;
@@ -504,17 +504,17 @@
 .signup .signup-item .signup-form .title-label {
   padding-left: 20px;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .signup .signup-item .signup-form .btn {
   width: 100%;
   --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74/var(--tw-bg-opacity));
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 .signup .signup-item .signup-form .signup-form-text-bottom {
   text-align: center;
   --tw-text-opacity: 1;
-  color: rgb(22 163 74/var(--tw-text-opacity));
+  color: rgb(22 163 74 / var(--tw-text-opacity));
 }
 .signup .signup-item .signup-form .signup-form-text-bottom span {
   font-weight: 500;
@@ -535,7 +535,7 @@
 .swiper .swiper-slide img {
   display: block;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .breadcrumb {
@@ -546,4 +546,4 @@
   font-size: 1.875rem;
   line-height: 2.25rem;
   padding-top: 8px;
-}/*# sourceMappingURL=index.css.map */
+} /*# sourceMappingURL=index.css.map */

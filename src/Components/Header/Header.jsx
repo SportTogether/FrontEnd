@@ -175,7 +175,7 @@ export default function Header() {
                 return e.preventDefault();
               }}
             >
-              ĐẶT SÂN
+              {/* ĐẶT SÂN */}
             </h1>
           </Dropdown>
           <div
@@ -184,7 +184,7 @@ export default function Header() {
               navigate("/uu-dai");
             }}
           >
-            ƯU ĐÃI
+            {/* ƯU ĐÃI */}
           </div>
           <div
             className="nav-left-title"
@@ -192,7 +192,7 @@ export default function Header() {
               navigate("/forum");
             }}
           >
-            FORUM
+            {/* FORUM */}
           </div>
           <div
             className="nav-left-title"
@@ -200,16 +200,18 @@ export default function Header() {
               navigate("/ket-noi");
             }}
           >
-            KẾT NỐI
+            {/* KẾT NỐI */}
           </div>
           <div className="nav-left-title">
-            <h1 onClick={() => {
-              setIsModalOpen(true)
-            }}>
-              TÌM KIẾM{" "}
-              <span>
+            <h1
+              onClick={() => {
+                setIsModalOpen(true);
+              }}
+            >
+              {/* TÌM KIẾM{" "} */}
+              {/* <span>
                 <i className="fas fa-search"></i>
-              </span>
+              </span> */}
             </h1>
             <ModalSearch isOpen={isModalOpen} onClose={handleCancel} />
           </div>
