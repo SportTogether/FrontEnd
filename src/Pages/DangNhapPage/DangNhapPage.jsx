@@ -53,27 +53,41 @@ const DangNhapPage = () => {
   let data = "Test";
   const onFinish = async (values) => {
     try {
-      const response = await fetch(
-        "https://leethanh.up.railway.app/api/users/login",
+      let response = "";
+      console.log(JSON.stringify(values));
+      response = await fetch(
+        "https://leethanh.up.railway.app/api/login/users",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
         }
-      ).then((response) => response.json());
-      data = response;
-      console.log("my data after login : ", data);
-      if (data.data.id != 0) {
-        dispatch(setLogin(data.data));
-        localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
-        message.success("Bạn Đã Đăng Nhập Thành Công!!!");
-        setTimeout(() => {
-          navigate("/");
-          getLocation();
-        }, 1000);
-      } else {
-        message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
-      }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("my data after login : ", data);
+          if (data.data.id != 0 && data.data.role_name === "user") {
+            dispatch(setLogin(data.data));
+            getLocation();
+            localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
+            message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+            setTimeout(() => {
+              navigate("/");
+              // getLocation();
+            }, 1000);
+          } else if (data.data.id != 0 && data.data.role_name === "admin") {
+            // dispatch(setLogin(data.data));
+            // localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
+            // message.success("Bạn Đã Đăng Nhập Thành Công!!!");
+            setTimeout(() => {
+              const externalLink =
+                "https://leethanh.up.railway.app/api/login/admin"; // Replace with your external link
+              window.location.href = externalLink;
+            }, 1000);
+          } else {
+            message.error("Tên Tài Khoản Hoặc Mật Khẩu Không Đúng!!!");
+          }
+        });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
@@ -91,13 +105,13 @@ const DangNhapPage = () => {
             }}
             onFinish={onFinish}
           >
-            <Title level={4}>Số Điện Thoại</Title>
+            <Title level={4}>Email</Title>
             <Form.Item
-              name="phone"
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: "Please input your phone!",
+                  message: "Please input your email!",
                 },
               ]}
             >
@@ -149,7 +163,7 @@ const DangNhapPage = () => {
                 Đăng Nhập
               </Button>
               <p className="login-form-text-bottom">
-                Bạn Chưa Có Tài Khoản? {" "}
+                Bạn Chưa Có Tài Khoản?{" "}
                 <span
                   onClick={() => {
                     navigate("/signup");

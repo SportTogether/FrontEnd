@@ -60,16 +60,35 @@ const UuDaiPage = () => {
   const [ve, setVe] = useState([]);
   const handleClickChonVe = (event) => {
     // console.log(event);
-    if (!ve.some((item) => JSON.stringify(item) === JSON.stringify(event))) {
-      // Nếu không trùng, thêm đối tượng vào mảng
-      const listVe = [...ve, event];
-      // Cập nhật state với mảng mới
-      setVe(listVe);
-      message.success("Thêm mã giảm giá thành công");
-    } else {
-      // Nếu trùng, bạn có thể thực hiện xử lý khác hoặc không làm gì
-      message.error("Mã giảm giá này đã tồn tại");
-    }
+    // if (!ve.some((item) => JSON.stringify(item) === JSON.stringify(event))) {
+    //   // Nếu không trùng, thêm đối tượng vào mảng
+    //   const listVe = [...ve, event];
+    //   // Cập nhật state với mảng mới
+    //   setVe(listVe);
+    //   message.success("Thêm mã giảm giá thành công");
+    // } else {
+    //   // Nếu trùng, bạn có thể thực hiện xử lý khác hoặc không làm gì
+    //   message.error("Mã giảm giá này đã tồn tại");
+    // }
+    const data = new URLSearchParams();
+    data.append("user_id", 1);
+    data.append("coupon_id", 5);
+    fetch("http://localhost:8080/api/users_coupons", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.data == true) {
+          message.success("Thêm mã giảm giá thành công");
+        } else {
+          message.error("Mã giảm giá này đã tồn tại");
+        }
+      })
+      .catch((error) => console.error(error));
   };
   const tabs = [
     {
@@ -124,7 +143,7 @@ const UuDaiPage = () => {
       ),
       children: (
         <div>
-          <h1>HELLO WORLD 2</h1>
+          <h1></h1>
         </div>
       ),
     },
