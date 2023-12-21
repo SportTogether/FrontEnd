@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, Input, Tabs, message } from "antd";
+import { localStorageServices } from "../../Services/localStorageServices";
+import { SPORT_LOCALSTORAGE } from "../../Constants";
 const { Search } = Input;
 const onChangeTab = (key) => {
   console.log(key);
@@ -68,7 +70,7 @@ const UuDaiPage = () => {
             method: "GET",
           }
         ).then((response) => response.json());
-        setListVe(result.data)
+        setListVe(result.data);
       } catch (error) {
         console.log(error);
       }
@@ -89,8 +91,29 @@ const UuDaiPage = () => {
     //   message.error("Mã giảm giá này đã tồn tại");
     // }
     const data = new URLSearchParams();
-    data.append("user_id", 1);
-    data.append("coupon_id", 5);
+
+    let user_id = JSON.parse(
+      localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+    );
+    data.append("user_id", user_id);
+    data.append("coupon_id", event.id);
+    // console.log(event.id);
+    fetch("https://leethanh.up.railway.app/api/users_coupons", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.data) {
+          message.success("Thêm mã giảm giá thành công");
+        } else {
+          message.error("Mã giảm giá này đã tồn tại");
+        }
+      })
+      .catch((error) => console.error(error));
   };
   const tabs = [
     {
@@ -107,7 +130,9 @@ const UuDaiPage = () => {
               <div className="flex justify-center items-center" key={item.id}>
                 <div className="w-[70%] flex justify-center items-center h-[100px] bg-green-200 rounded-2xl">
                   <div className="w-[30%] pl-2 pr-3">
-                    <h1 className="text-5xl text-center font-bold text-green-700">{item.discount}</h1>
+                    <h1 className="text-5xl text-center font-bold text-green-700">
+                      {item.discount}
+                    </h1>
                   </div>
                   <div className="w-[70%] border-l-4 border-dashed pl-2 border-white">
                     <h1>
@@ -115,7 +140,9 @@ const UuDaiPage = () => {
                         {item.name}
                       </span>
                       <br />
-                      <span className="text-xl text-gray-500">{item.description}</span>
+                      <span className="text-xl text-gray-500">
+                        {item.description}
+                      </span>
                     </h1>
                   </div>
                 </div>
