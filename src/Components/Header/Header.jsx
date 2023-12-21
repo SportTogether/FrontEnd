@@ -92,7 +92,7 @@ export default function Header() {
         </div>
       </div>
       <div className="nav">
-        <div className="">{checkUserLogin()}</div>
+        <div className="nav-right">{checkUserLogin()}</div>
       </div>
     </header>
   );
