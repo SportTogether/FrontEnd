@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Breadcrumb, Input, Tabs, message } from "antd";
 const { Search } = Input;
 const onChangeTab = (key) => {
@@ -58,6 +58,31 @@ const items = [
 const UuDaiPage = () => {
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const [ve, setVe] = useState([]);
+  useEffect(() => {
+    const fetchApiUuDai = async () => {
+      try {
+        const result = await fetch("http://localhost:8080/api/users_coupons", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          }
+        })
+          .then((response) => response.json())
+        // .then((data) => {
+        //   if (data.data == true) {
+        //     message.success("Thêm mã giảm giá thành công");
+        //   } else {
+        //     message.error("Mã giảm giá này đã tồn tại");
+        //   }
+        // })
+        console.log(result);
+      }
+      catch (error) {
+        console.log(error);
+      };
+    }
+    fetchApiUuDai();
+  }, [])
   const handleClickChonVe = (event) => {
     // console.log(event);
     // if (!ve.some((item) => JSON.stringify(item) === JSON.stringify(event))) {
@@ -73,22 +98,8 @@ const UuDaiPage = () => {
     const data = new URLSearchParams();
     data.append("user_id", 1);
     data.append("coupon_id", 5);
-    fetch("http://localhost:8080/api/users_coupons", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.data == true) {
-          message.success("Thêm mã giảm giá thành công");
-        } else {
-          message.error("Mã giảm giá này đã tồn tại");
-        }
-      })
-      .catch((error) => console.error(error));
+
+
   };
   const tabs = [
     {
