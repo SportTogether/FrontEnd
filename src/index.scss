@@ -185,43 +185,25 @@
   .logo-header {
     padding-left: 10px;
     width: 20%;
-    background-color: rgb(241 197 53);
+    --tw-bg-opacity: 1;
+      background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 
     .logo-title {
-      font-size: 24px;
+      font-size: 30px;
       line-height: 32px;
       font-weight: 700;
       color: white;
-      padding-left: 10px;
+      padding: 20px;
     }
   }
 
   .nav {
     width: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     --tw-bg-opacity: 1;
     background-color: rgb(74 222 128 / var(--tw-bg-opacity));
-
-    .nav-left {
-      width: 80%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .nav-left-title {
-        font-size: 24px;
-        line-height: 32px;
-        font-weight: 700;
-        color: white;
-        cursor: pointer;
-      }
-    }
-
     .nav-right {
       text-align: right;
-      padding-right: 20px;
+      padding: 20px 40px 0 20px;
 
       .nav-right-title {
         font-size: 24px;

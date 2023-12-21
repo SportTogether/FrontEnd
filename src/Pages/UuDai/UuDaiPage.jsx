@@ -58,31 +58,24 @@ const items = [
 const UuDaiPage = () => {
   const onSearch = (value, _e, info) => console.log(info?.source, value);
   const [ve, setVe] = useState([]);
+  const [listVe, setListVe] = useState([]);
   useEffect(() => {
     const fetchApiUuDai = async () => {
       try {
-        const result = await fetch("http://localhost:8080/api/users_coupons", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
+        const result = await fetch(
+          "https://leethanh.up.railway.app/api/coupons",
+          {
+            method: "GET",
           }
-        })
-          .then((response) => response.json())
-        // .then((data) => {
-        //   if (data.data == true) {
-        //     message.success("Thêm mã giảm giá thành công");
-        //   } else {
-        //     message.error("Mã giảm giá này đã tồn tại");
-        //   }
-        // })
-        console.log(result);
-      }
-      catch (error) {
+        ).then((response) => response.json());
+        setListVe(result.data)
+      } catch (error) {
         console.log(error);
-      };
-    }
+      }
+    };
     fetchApiUuDai();
-  }, [])
+  }, []);
+  console.log(listVe);
   const handleClickChonVe = (event) => {
     // console.log(event);
     // if (!ve.some((item) => JSON.stringify(item) === JSON.stringify(event))) {
@@ -98,8 +91,6 @@ const UuDaiPage = () => {
     const data = new URLSearchParams();
     data.append("user_id", 1);
     data.append("coupon_id", 5);
-
-
   };
   const tabs = [
     {
@@ -111,20 +102,20 @@ const UuDaiPage = () => {
       ),
       children: (
         <div className="mx-10 grid grid-cols-2 gap-10">
-          {items.map((item) => {
+          {listVe.map((item) => {
             return (
               <div className="flex justify-center items-center" key={item.id}>
                 <div className="w-[70%] flex justify-center items-center h-[100px] bg-green-200 rounded-2xl">
                   <div className="w-[30%] pl-2 pr-3">
-                    <img src={item.image} width={100} height={100} alt="" />
+                    <h1 className="text-5xl text-center font-bold text-green-700">{item.discount}</h1>
                   </div>
                   <div className="w-[70%] border-l-4 border-dashed pl-2 border-white">
                     <h1>
                       <span className="text-2xl font-bold text-green-800">
-                        {item.title}
+                        {item.name}
                       </span>
                       <br />
-                      <span className="text-xl text-gray-500">{item.text}</span>
+                      <span className="text-xl text-gray-500">{item.description}</span>
                     </h1>
                   </div>
                 </div>
