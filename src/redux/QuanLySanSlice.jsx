@@ -4,6 +4,7 @@ import { SPORT_LOCALSTORAGE } from "../Constants";
 const initialState = {
   valueSearch: {},
   listSan: [],
+  idSan: 1,
   thongTinSan: {},
   thongTinNgayGio: {},
   thongTinSanDaDat: {},
@@ -27,6 +28,9 @@ const QuanLySanSlice = createSlice({
     setDatSan: (state, { type, payload }) => {
       state.thongTinSanDaDat = payload;
     },
+    setLayIdSan: (state, { type, payload }) => {
+      state.idSan = payload;
+    },
   },
 });
 export const {
@@ -35,5 +39,6 @@ export const {
   setDetailSan,
   setNgayGio,
   setDatSan,
+  setLayIdSan
 } = QuanLySanSlice.actions;
 export default QuanLySanSlice.reducer;

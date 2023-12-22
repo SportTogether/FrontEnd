@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
-import { setDetailSan, setListSan } from "../../redux/QuanLySanSlice";
+import { setDetailSan, setLayIdSan, setListSan } from "../../redux/QuanLySanSlice";
 const DatSanPage = () => {
   const [valueRadio, setValueRadio] = useState(1);
   const [selectedValues, setSelectedValues] = useState([]);
-
   const handleCheckboxChange = (value) => {
     const updatedValues = [...selectedValues];
     if (updatedValues.includes(value)) {
@@ -19,7 +18,6 @@ const DatSanPage = () => {
       setSelectedValues([...selectedValues, value]);
     }
   };
-
   useEffect(() => {
     const fetchApiRadioCheck = async () => {
       if (selectedValues.length === 2) {
@@ -84,7 +82,6 @@ const DatSanPage = () => {
         fetchApi();
       }
     };
-
     fetchApiRadioCheck();
   }, [selectedValues]);
 
@@ -96,13 +93,10 @@ const DatSanPage = () => {
     }
     // console.log(selectedValues);
   };
-
   console.log("check", selectedValues);
-
   const onChange = (e) => {
     const outerCheck = e.target.value;
     setValueRadio(outerCheck);
-
     console.log("value", outerCheck);
     const params = new URLSearchParams();
     params.append("name", outerCheck);
@@ -310,12 +304,14 @@ const DatSanPage = () => {
     };
     fetchApi();
   }, []);
-  const { listSan, thongTinSan } = useSelector((state) => {
+  const { listSan, thongTinSan, idSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
+  console.log("ID của Sân đã đặt:", idSan);
   // console.log("data:", listSan);
-  const handleDatSan = (event) => {
+  const handleDatSan = (event, id) => {
     dispatch(setDetailSan(event));
+    dispatch(setLayIdSan(id));
     navigate("/detail");
   };
 
@@ -514,7 +510,7 @@ const DatSanPage = () => {
                     className="list-item"
                     key={item.id}
                     onClick={() => {
-                      handleDatSan(item);
+                      handleDatSan(item, item.id);
                     }}
                   >
                     <div className="list-item-left">
