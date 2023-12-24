@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Checkbox, Collapse, Dropdown, Rate } from "antd";
 import { DownOutlined, StarFilled } from "@ant-design/icons";
-import { setDetailSan, setLayIdSan, setListSan } from "../../redux/QuanLySanSlice";
+import { setDetailSan, setListSan } from "../../redux/QuanLySanSlice";
 const DatSanPage = () => {
   const [valueRadio, setValueRadio] = useState(1);
   const [selectedValues, setSelectedValues] = useState([]);
@@ -304,15 +304,17 @@ const DatSanPage = () => {
     };
     fetchApi();
   }, []);
-  const { listSan, thongTinSan, idSan } = useSelector((state) => {
+  const { listSan, thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
-  console.log("ID của Sân đã đặt:", idSan);
+  const { id } = thongTinSan;
+  console.log("Thông tin id của sân", id);
   // console.log("data:", listSan);
-  const handleDatSan = (event, id) => {
+  const handleDatSan = (event) => {
     dispatch(setDetailSan(event));
-    dispatch(setLayIdSan(id));
-    navigate("/detail");
+    setTimeout(() => {
+      navigate("/detail");
+    }, 2000);
   };
 
   return (
@@ -510,7 +512,7 @@ const DatSanPage = () => {
                     className="list-item"
                     key={item.id}
                     onClick={() => {
-                      handleDatSan(item, item.id);
+                      handleDatSan(item);
                     }}
                   >
                     <div className="list-item-left">
