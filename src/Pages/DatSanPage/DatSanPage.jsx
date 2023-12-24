@@ -307,14 +307,10 @@ const DatSanPage = () => {
   const { listSan, thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
-  const { id } = thongTinSan;
-  console.log("Thông tin id của sân", id);
-  // console.log("data:", listSan);
+  // const { id } = thongTinSan;
   const handleDatSan = (event) => {
     dispatch(setDetailSan(event));
-    setTimeout(() => {
-      navigate("/detail");
-    }, 2000);
+    navigate("/detail");
   };
 
   return (
@@ -543,7 +539,7 @@ const DatSanPage = () => {
                         </p>
                         <button className="bg-green-700 text-center py-3 px-4 rounded-3xl w-[200px] ml-[200px]">
                           <b className="text-xl cursor-pointer">
-                            <i className="fas fa-location-arrow"></i> Tìm đường
+                            <i className="fas fa-location-arrow"></i> Đặt Sân
                           </b>
                         </button>
                       </div>

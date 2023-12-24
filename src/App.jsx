@@ -13,6 +13,7 @@ import TrangThongTinUser from "./Pages/TrangThongTinUser/TrangThongTinUser";
 import ThanhToanPage from "./Pages/ThanhToanPage/ThanhToanPage";
 import DangKyDoiTacPage from "./Pages/DangKyDoiTac/DangKyDoiTacPage";
 import NewsPage from "./Pages/News/NewsPage";
+import GoogleMapPage from "./Pages/GoogleMap/GoogleMapPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="thong-tin-user" element={<TrangThongTinUser />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="signup" element={<DangKyPage />} />
+            <Route path="googlemap" element={<GoogleMapPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

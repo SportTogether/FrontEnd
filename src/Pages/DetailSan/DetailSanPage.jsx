@@ -388,7 +388,7 @@ const DetailSanPage = () => {
               <p className="text-xl">
                 <b>Loại Sân:</b> {thongTinSan?.type}
               </p>
-              <div className="grid grid-cols-2 pt-3">
+              <div className="grid grid-cols-3 pt-3">
                 <div>
                   <button
                     className="bg-green-600 rounded-3xl px-3 py-2 font-medium text-white text-2xl"
@@ -472,6 +472,16 @@ const DetailSanPage = () => {
                       {detailDateTime.ocl2} : 00
                     </h1>
                   </Modal>
+                </div>
+                <div className="text-center pr-5">
+                  <button
+                    className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
+                    onClick={() => {
+                      navigate("/googlemap")
+                    }}
+                  >
+                    TÌM ĐƯỜNG
+                  </button>
                 </div>
                 <div className="text-right pr-5">
                   <button
