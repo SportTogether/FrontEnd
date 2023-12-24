@@ -541,9 +541,11 @@ const DatSanPage = () => {
                         <p className="text-lg">
                           <b>Giá tham khảo:</b> {item.price}
                         </p>
-                        <b className="text-right text-xl cursor-pointer">
-                          <i className="fas fa-location-arrow"></i> Tìm đường
-                        </b>
+                        <button className="bg-green-700 text-center py-3 px-4 rounded-3xl w-[200px] ml-[200px]">
+                          <b className="text-xl cursor-pointer">
+                            <i className="fas fa-location-arrow"></i> Tìm đường
+                          </b>
+                        </button>
                       </div>
                     </div>
                   </div>
