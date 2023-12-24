@@ -477,7 +477,38 @@ const DetailSanPage = () => {
                   <button
                     className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
                     onClick={() => {
-                      navigate("/googlemap")
+                      let originId =
+                        localStorageServices.getOriginId("originId");
+                      const newThongTinSanDaDat = {
+                        ...thongTinSan,
+                        ...detailDateTime,
+                      };
+                      let yard_id = newThongTinSanDaDat.id;
+                      const data = new URLSearchParams();
+                      data.append("id", yard_id);
+
+                      // console.log(event.id);
+                      fetch("https://leethanh.up.railway.app/api/yards/find", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: data,
+                      })
+                        .then((response) => response.json())
+                        .then((data) => {
+                          let originId =
+                            localStorageServices.getOriginId("originId");
+                          let destinationId = data.data.destination_id;
+                          console.log(originId, " ", destinationId);
+                          window.open(
+                            `https://google-map-sportogether.netlify.app/?originPlaceId=${originId}&destinationPlaceId=${destinationId}`,
+                            "_blank"
+                          );
+                        })
+                        .catch((error) => console.error(error));
+                      // let destinationId = 1;
+                      // console.log("origin id ", originId);
                     }}
                   >
                     TÌM ĐƯỜNG

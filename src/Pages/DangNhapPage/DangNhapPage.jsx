@@ -15,6 +15,7 @@ document.head.appendChild(googleApiScript);
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
+    // return showPosition();
   } else {
     document.innerHTML = "Geolocation is not supported by this browser.";
   }
@@ -37,7 +38,10 @@ function showPosition(position) {
   geocoder.geocode({ location: latlng }, function (results, status) {
     if (status === google.maps.GeocoderStatus.OK) {
       if (results[1]) {
-        console.log(results[1].place_id);
+        let data = results[1].place_id;
+
+        console.log(data);
+        // localStorageServices.setOriginId("originId",d);
       } else {
         window.alert("No results found");
       }
@@ -68,7 +72,11 @@ const DangNhapPage = () => {
           console.log("my data after login : ", data);
           if (data.data.id != 0 && data.data.role_name === "user") {
             dispatch(setLogin(data.data));
-            getLocation();
+            // getLocation();
+            let testOriginId = "ChIJ6SU909godTERJ6kLdOwpSGI";
+            console.log(testOriginId);
+            localStorageServices.setOriginId("originId", testOriginId);
+
             localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
             message.success("Bạn Đã Đăng Nhập Thành Công!!!");
             setTimeout(() => {
