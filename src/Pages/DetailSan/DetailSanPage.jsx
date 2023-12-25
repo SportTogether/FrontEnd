@@ -11,56 +11,20 @@ import {
   Tabs,
   Typography,
   message,
+  DatePicker,
 } from "antd";
-import { DownOutlined, StarFilled, UserOutlined } from "@ant-design/icons";
+import {
+  DownOutlined,
+  StarFilled,
+  UserOutlined,
+} from "@ant-design/icons";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
 const { Paragraph } = Typography;
+const dateFormat = "DD/MM/YYYY";
 const onChangeTab = (key) => {
   console.log(key);
 };
-const times = [
-  {
-    key: 1,
-    date: 15,
-    day: "H.Nay",
-  },
-  {
-    key: 2,
-    date: 16,
-    day: "T3",
-  },
-  {
-    key: 3,
-    date: 17,
-    day: "T4",
-  },
-  {
-    key: 4,
-    date: 18,
-    day: "T5",
-  },
-  {
-    key: 5,
-    date: 19,
-    day: "T6",
-  },
-  {
-    key: 6,
-    date: 20,
-    day: "T7",
-  },
-  {
-    key: 7,
-    date: 21,
-    day: "CN",
-  },
-  {
-    key: 8,
-    date: 22,
-    day: "T2",
-  },
-];
 const types = [
   {
     key: "1",
@@ -75,18 +39,43 @@ const types = [
 const olocks = [
   {
     id: 1,
-    ocl1: 17,
-    ocl2: 18,
+    ocl1: "05:00",
+    ocl2: "06:00",
   },
   {
     id: 2,
-    ocl1: 18,
-    ocl2: 19,
+    ocl1: "06:30",
+    ocl2: "07:30",
   },
   {
     id: 3,
-    ocl1: 19,
-    ocl2: 20,
+    ocl1: "08:00",
+    ocl2: "09:00",
+  },
+  {
+    id: 4,
+    ocl1: "09:30",
+    ocl2: "10:30",
+  },
+  {
+    id: 5,
+    ocl1: "11:00",
+    ocl2: "12:00",
+  },
+  {
+    id: 6,
+    ocl1: "12:30",
+    ocl2: "13:30",
+  },
+  {
+    id: 7,
+    ocl1: "14:00",
+    ocl2: "15:00",
+  },
+  {
+    id: 8,
+    ocl1: "15:30",
+    ocl2: "16:30",
   },
 ];
 const DetailSanPage = () => {
@@ -96,11 +85,17 @@ const DetailSanPage = () => {
   const { thongTinSan, thongTinSanDaDat } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
+  const onChangeDate = (date, dateString) => {
+    console.log(date, dateString);
+    if (dateString !== null)
+      setDateTime(dateString);
+    else
+      return;
+  };
   const [olock, setOlock] = useState({});
   const { ocl1, ocl2 } = olock;
-  const [dateTime, setDateTime] = useState({});
-  const { date, day } = dateTime;
-  const detailDateTime = { ocl1, ocl2, date, day };
+  const [dateTime, setDateTime] = useState("");
+  const detailDateTime = { ocl1, ocl2, dateTime };
   const items = [
     {
       key: "1",
@@ -260,7 +255,7 @@ const DetailSanPage = () => {
     },
   ];
   const handleDatSan = () => {
-    if (olock !== null && dateTime !== null) {
+    if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
       const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
       dispatch(setDatSan(newThongTinSanDaDat));
       console.log("thong tin dat san ", newThongTinSanDaDat);
@@ -369,6 +364,19 @@ const DetailSanPage = () => {
     // let destinationId = 1;
     // console.log("origin id ", originId);
   };
+  const handleContinue = () => {
+    if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
+      const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
+      console.log("thong tin dat san ", newThongTinSanDaDat);
+      message.success("Bạn Đã Chọn Lịch Trình Thành Công");
+      setTimeout(() => {
+        navigate('/kiemTraThongTinDatSan');
+      }, 1000);
+    } else {
+      message.error("Vui lòng chọn ngày và thời gian");
+      return;
+    }
+  }
   return (
     <>
       <Breadcrumb
@@ -438,7 +446,6 @@ const DetailSanPage = () => {
                     onClick={() => setOpen(true)}
                   >
                     CHỌN GIỜ
-                    <DownOutlined />
                   </button>
                   <Modal
                     title={
@@ -451,69 +458,56 @@ const DetailSanPage = () => {
                     footer={false}
                     onOk={() => setOpen(false)}
                     onCancel={() => setOpen(false)}
-                    width={1000}
+                    width={1300}
                   >
-                    <div className="container grid grid-cols-8 gap-5">
-                      {times.map((item) => {
-                        return (
-                          <button
-                            className="border bg-gray-200 rounded-2xl text-center focus:bg-green-600"
-                            key={item.key}
-                            onClick={() => {
-                              setDateTime(item);
-                            }}
-                          >
-                            <h1 className="text-black text-4xl font-bold py-3">
-                              {item.date}
-                            </h1>
-                            <button className="bg-white w-full rounded-xl border-green-600 border-2 text-green-600 text-xl py-2 font-bold">
-                              {item.day}
-                            </button>
-                          </button>
-                        );
-                      })}
+                    <div className="container grid grid-cols-2">
+                      <h1 className="py-5 text-3xl text-green-600 font-bold">
+                        {thongTinSan?.name}
+                      </h1>
+                      <div className="text-right py-5">
+                        <button
+                          className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
+                          onClick={() => {
+                            handleContinue()
+                          }}
+                        >
+                          TIẾP THEO
+                        </button>
+                      </div>
                     </div>
-                    <div className="container py-5 grid grid-cols-4 gap-6">
-                      <button className="bg-gray-200 text-2xl rounded-2xl py-2 focus:bg-green-600 focus:text-white">
-                        Tất Cả
-                      </button>
-                      {olocks.map((item) => {
-                        return (
-                          <div
-                            key={item.id}
-                            onClick={() => {
-                              setOlock(item);
-                            }}
-                          >
-                            <button className="bg-gray-200 text-2xl rounded-2xl p-2 focus:bg-green-600 focus:text-white">
-                              {item.ocl1}:00 - {item.ocl2}:00
-                            </button>
-                          </div>
-                        );
-                      })}
+                    <div className="container flex py-4">
+                      <DatePicker onChange={onChangeDate} format={dateFormat} size="large" className="border-green-600 border-[3px] w-[250px]" />
+                      <h1 className="text-2xl font-bold pl-10">
+                        Ngày và Giờ Đã Chọn: {detailDateTime?.dateTime}, {detailDateTime.ocl1} -{" "}
+                        {detailDateTime.ocl2}
+                      </h1>
                     </div>
-                    <h1 className="text-center text-4xl font-bold py-10">
-                      <span className="bg-green-100 p-3 mr-2 rounded-xl">
-                        {olock?.ocl1}
-                      </span>
-                      :
-                      <span className="bg-green-100 p-3 mx-2 rounded-xl">
-                        00
-                      </span>
-                      -
-                      <span className="bg-green-100 p-3 mx-2 rounded-xl">
-                        {olock?.ocl2}
-                      </span>
-                      :
-                      <span className="bg-green-100 p-3 ml-2 rounded-xl">
-                        00
-                      </span>
-                    </h1>
-                    <h1 className="text-center text-2xl py-5">
-                      Ngày Và Giờ Đã Chọn: {detailDateTime.day},{" "}
-                      {detailDateTime.date} lúc {detailDateTime.ocl1} : 00 -{" "}
-                      {detailDateTime.ocl2} : 00
-                    </h1>
+                    <div className="flex justify-center items-center py-5">
+                      <div className="w-[70%] grid grid-cols-3 gap-5">
+                        {olocks.map((item) => {
+                          return (
+                            <div
+                              key={item.id}
+                              className="mx-auto"
+                              onClick={() => {
+                                setOlock(item);
+                              }}
+                            >
+                              <button className="bg-gray-200 text-2xl rounded-2xl p-2 focus:bg-green-600 focus:text-white">
+                                {item.ocl1} - {item.ocl2}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="w-[30%]">
+                        <img
+                          className="mx-auto border-[5px] border-gray-300 rounded-2xl"
+                          src="https://leethanh.netlify.app/image/sanThanhThang.JPG"
+                          width={300}
+                          alt="" />
+                      </div>
+                    </div>
                   </Modal>
                 </div>
                 <div className="text-right pr-5">

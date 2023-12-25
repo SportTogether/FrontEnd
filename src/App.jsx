@@ -14,6 +14,7 @@ import ThanhToanPage from "./Pages/ThanhToanPage/ThanhToanPage";
 import DangKyDoiTacPage from "./Pages/DangKyDoiTac/DangKyDoiTacPage";
 import NewsPage from "./Pages/News/NewsPage";
 import GoogleMapPage from "./Pages/GoogleMap/GoogleMapPage";
+import ThongTinDatSanPage from "./Pages/TrangThongTinDatSan/ThongTinDatSanPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="signup" element={<DangKyPage />} />
             <Route path="googlemap" element={<GoogleMapPage />} />
+            <Route path="kiemTraThongTinDatSan" element={<ThongTinDatSanPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
