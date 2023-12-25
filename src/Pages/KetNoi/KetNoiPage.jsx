@@ -333,25 +333,10 @@ const KetNoiPage = () => {
                     </div>
                   </div>
                 </div>
-                <div className="grid grid-cols-2 py-1">
-                  <div>
-                    <img
-                      src="https://leethanh.netlify.app/image/ICON_CMT_KETNOI.png"
-                      width={50}
-                      height={50}
-                      alt=""
-                      className="mx-auto"
-                    />
-                  </div>
-                  <div className=" border-l-2 border-l-gray-500">
-                    <img
-                      src="https://leethanh.netlify.app/image/ICON_CHIASE_KETNOI.png"
-                      width={50}
-                      height={50}
-                      alt=""
-                      className="mx-auto"
-                    />
-                  </div>
+                <div className="text-center py-5">
+                  <button className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium">
+                    Tham Gia
+                  </button>
                 </div>
               </div>
             );
