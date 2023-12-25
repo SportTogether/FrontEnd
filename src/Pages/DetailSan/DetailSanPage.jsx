@@ -337,7 +337,38 @@ const DetailSanPage = () => {
       return;
     }
   };
+  const handleTimDuong = () => {
+    let originId = localStorageServices.getOriginId("originId");
+    const newThongTinSanDaDat = {
+      ...thongTinSan,
+      ...detailDateTime,
+    };
+    let yard_id = newThongTinSanDaDat.id;
+    const data = new URLSearchParams();
+    data.append("id", yard_id);
 
+    // console.log(event.id);
+    fetch("https://leethanh.up.railway.app/api/yards/find", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: data,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let originId = localStorageServices.getOriginId("originId");
+        let destinationId = data.data.destination_id;
+        console.log(originId, " ", destinationId);
+        window.open(
+          `https://google-map-sportogether.netlify.app/?originPlaceId=${originId}&destinationPlaceId=${destinationId}`,
+          "_blank"
+        );
+      })
+      .catch((error) => console.error(error));
+    // let destinationId = 1;
+    // console.log("origin id ", originId);
+  };
   return (
     <>
       <Breadcrumb
@@ -375,7 +406,19 @@ const DetailSanPage = () => {
               />
             </div>
             <div className="item-detail-right">
-              <h1>{thongTinSan?.name}</h1>
+              <div className="grid grid-cols-2">
+                <h1>{thongTinSan?.name}</h1>
+                <div className="text-right pr-5">
+                  <button
+                    className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
+                    onClick={() => {
+                      handleDatSan();
+                    }}
+                  >
+                    ĐẶT SÂN
+                  </button>
+                </div>
+              </div>
               <p
                 className="text-2xl
             "
@@ -388,7 +431,7 @@ const DetailSanPage = () => {
               <p className="text-xl">
                 <b>Loại Sân:</b> {thongTinSan?.type}
               </p>
-              <div className="grid grid-cols-3 pt-3">
+              <div className="grid grid-cols-2 pt-3">
                 <div>
                   <button
                     className="bg-green-600 rounded-3xl px-3 py-2 font-medium text-white text-2xl"
@@ -473,55 +516,14 @@ const DetailSanPage = () => {
                     </h1>
                   </Modal>
                 </div>
-                <div className="text-center pr-5">
-                  <button
-                    className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
-                    onClick={() => {
-                      let originId =
-                        localStorageServices.getOriginId("originId");
-                      const newThongTinSanDaDat = {
-                        ...thongTinSan,
-                        ...detailDateTime,
-                      };
-                      let yard_id = newThongTinSanDaDat.id;
-                      const data = new URLSearchParams();
-                      data.append("id", yard_id);
-
-                      // console.log(event.id);
-                      fetch("https://leethanh.up.railway.app/api/yards/find", {
-                        method: "POST",
-                        headers: {
-                          "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        body: data,
-                      })
-                        .then((response) => response.json())
-                        .then((data) => {
-                          let originId =
-                            localStorageServices.getOriginId("originId");
-                          let destinationId = data.data.destination_id;
-                          console.log(originId, " ", destinationId);
-                          window.open(
-                            `https://google-map-sportogether.netlify.app/?originPlaceId=${originId}&destinationPlaceId=${destinationId}`,
-                            "_blank"
-                          );
-                        })
-                        .catch((error) => console.error(error));
-                      // let destinationId = 1;
-                      // console.log("origin id ", originId);
-                    }}
-                  >
-                    TÌM ĐƯỜNG
-                  </button>
-                </div>
                 <div className="text-right pr-5">
                   <button
-                    className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
+                    className="px-4 py-3 rounded-xl text-2xl font-medium"
                     onClick={() => {
-                      handleDatSan();
+                      handleTimDuong();
                     }}
                   >
-                    ĐẶT SÂN
+                    <i className="fas fa-location-arrow"></i> TÌM ĐƯỜNG
                   </button>
                 </div>
               </div>

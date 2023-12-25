@@ -196,7 +196,7 @@ const ForumPage = () => {
         <div className="forum">
           <div className="forum-row">
             <div className="forum-row-left bg-green-100 py-5">
-              <h1 className="text-white text-3xl font-bold text-center">
+              <h1 className="text-black text-3xl font-bold text-center">
                 FORUMS
               </h1>
             </div>
