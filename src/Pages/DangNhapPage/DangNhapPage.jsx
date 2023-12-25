@@ -8,49 +8,6 @@ import { Button, Checkbox, Form, Input, message, Typography } from "antd";
 const { Title } = Typography;
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
-const googleApiScript = document.createElement("script");
-googleApiScript.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyBh95ExKKtwAIPTnQGcDDL7XiUfjma97rA&libraries=places`;
-googleApiScript.defer = true;
-document.head.appendChild(googleApiScript);
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-    // return showPosition();
-  } else {
-    document.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
-function showPosition(position) {
-  // let location =
-  //   "Latitude: " +
-  //   position.coords.latitude +
-  //   "Longitude: " +
-  //   position.coords.longitude;
-  // console.log("current location : ", location);
-
-  var geocoder = new google.maps.Geocoder();
-
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-
-  var latlng = { lat: parseFloat(latitude), lng: parseFloat(longitude) };
-
-  geocoder.geocode({ location: latlng }, function (results, status) {
-    if (status === google.maps.GeocoderStatus.OK) {
-      if (results[1]) {
-        let data = results[1].place_id;
-
-        console.log(data);
-        // localStorageServices.setOriginId("originId",d);
-      } else {
-        window.alert("No results found");
-      }
-    } else {
-      window.alert("Geocoder failed due to: " + status);
-    }
-  });
-}
-
 const DangNhapPage = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
@@ -73,9 +30,9 @@ const DangNhapPage = () => {
           if (data.data.id != 0 && data.data.role_name === "user") {
             dispatch(setLogin(data.data));
             // getLocation();
-            let testOriginId = "ChIJ6SU909godTERJ6kLdOwpSGI";
-            console.log(testOriginId);
-            localStorageServices.setOriginId("originId", testOriginId);
+            // let testOriginId = "ChIJ6SU909godTERJ6kLdOwpSGI";
+            // console.log(testOriginId);
+            // localStorageServices.setOriginId("originId", testOriginId);
 
             localStorageServices.setUser(SPORT_LOCALSTORAGE, data.data);
             message.success("Bạn Đã Đăng Nhập Thành Công!!!");
