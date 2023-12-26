@@ -13,11 +13,7 @@ import {
   message,
   DatePicker,
 } from "antd";
-import {
-  DownOutlined,
-  StarFilled,
-  UserOutlined,
-} from "@ant-design/icons";
+import { DownOutlined, StarFilled, UserOutlined } from "@ant-design/icons";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
 const { Paragraph } = Typography;
@@ -87,10 +83,8 @@ const DetailSanPage = () => {
   });
   const onChangeDate = (date, dateString) => {
     console.log(date, dateString);
-    if (dateString !== null)
-      setDateTime(dateString);
-    else
-      return;
+    if (dateString !== null) setDateTime(dateString);
+    else return;
   };
   const [olock, setOlock] = useState({});
   const { ocl1, ocl2 } = olock;
@@ -315,7 +309,6 @@ const DetailSanPage = () => {
         .then((result) => {
           if (result.data) {
             message.success("Chúc mừng bạn đã đặt sân thành công");
-
             console.log("thong tin dat san", thongTinSanDaDat);
             setTimeout(() => {
               navigate("/thanh-toan");
@@ -367,16 +360,28 @@ const DetailSanPage = () => {
   const handleContinue = () => {
     if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
       const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
+      dispatch(setDatSan(newThongTinSanDaDat));
       console.log("thong tin dat san ", newThongTinSanDaDat);
-      message.success("Bạn Đã Chọn Lịch Trình Thành Công");
+      let user_id = "";
+      try {
+        user_id = JSON.parse(
+          localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+        );
+      } catch (error) {
+        message.error("Vui lòng đăng nhập");
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
+      message.success("Bạn đã đặt lịch trình thành công!");
       setTimeout(() => {
-        navigate('/kiemTraThongTinDatSan');
+        navigate("/kiemTraThongTinDatSan");
       }, 1000);
     } else {
       message.error("Vui lòng chọn ngày và thời gian");
       return;
     }
-  }
+  };
   return (
     <>
       <Breadcrumb
@@ -468,7 +473,7 @@ const DetailSanPage = () => {
                         <button
                           className="px-4 py-3 rounded-xl text-2xl text-green-600 font-medium border-4 border-green-600"
                           onClick={() => {
-                            handleContinue()
+                            handleContinue();
                           }}
                         >
                           TIẾP THEO
@@ -476,10 +481,20 @@ const DetailSanPage = () => {
                       </div>
                     </div>
                     <div className="container flex py-4">
-                      <DatePicker onChange={onChangeDate} format={dateFormat} size="large" className="border-green-600 border-[3px] w-[250px]" />
+                      <DatePicker
+                        onChange={onChangeDate}
+                        format={dateFormat}
+                        size="large"
+                        className="border-green-600 border-[3px] w-[250px]"
+                      />
                       <h1 className="text-2xl font-bold pl-10">
-                        Ngày và Giờ Đã Chọn: {detailDateTime?.dateTime}, {detailDateTime.ocl1} -{" "}
-                        {detailDateTime.ocl2}
+                        {detailDateTime.ocl1 !== undefined ||
+                          detailDateTime.ocl2 !== undefined ||
+                          detailDateTime.dateTime !== ""
+                          ? `Ngày và Giờ Đã Chọn: ${detailDateTime?.dateTime
+                          }, ${detailDateTime.ocl1} - ${" "}
+                        ${detailDateTime.ocl2}`
+                          : ""}
                       </h1>
                     </div>
                     <div className="flex justify-center items-center py-5">
@@ -505,7 +520,8 @@ const DetailSanPage = () => {
                           className="mx-auto border-[5px] border-gray-300 rounded-2xl"
                           src="https://leethanh.netlify.app/image/sanThanhThang.JPG"
                           width={300}
-                          alt="" />
+                          alt=""
+                        />
                       </div>
                     </div>
                   </Modal>
