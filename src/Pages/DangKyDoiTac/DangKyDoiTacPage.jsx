@@ -6,13 +6,42 @@ const { Title } = Typography;
 const DangKyDoiTacPage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
-  const onFinish = (value) => {
+  const onFinish = async (value) => {
     console.log(value);
-
-    message.success("Đã gửi liên hệ thành công!!!");
-    setTimeout(() => {
-      window.location.reload(); // Reload the page
-    }, 2000);
+    // message.success("Đã gửi liên hệ thành công!!!");
+    // setTimeout(() => {
+    //   window.location.reload(); // Reload the page
+    // }, 2000);
+    const formData = new FormData();
+    const formDataObject = {};
+    formData.forEach((value, key) => {
+      formDataObject[key] = value;
+    });
+    try {
+      // Gửi dữ liệu biểu mẫu lên máy chủ
+      const response = await fetch('/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataObject),
+      });
+      // const response = await axios.post('/send-email', value);
+      // const result = await response.text();
+      // console.log(result);
+      // Xử lý phản hồi từ máy chủ
+      if (response.status === 200) {
+        message.success('Đã gửi liên hệ thành công!!!');
+        setTimeout(() => {
+          window.location.reload(); // Reload the page
+        }, 2000);
+      } else {
+        message.error('Có lỗi xảy ra khi gửi liên hệ.');
+      }
+    } catch (error) {
+      console.error('Lỗi khi gửi dữ liệu:', error);
+      message.error('Có lỗi xảy ra khi gửi liên hệ.');
+    }
   };
   return (
     <div className="container dangKyDoiTac">
