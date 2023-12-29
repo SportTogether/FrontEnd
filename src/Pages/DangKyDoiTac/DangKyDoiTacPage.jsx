@@ -11,15 +11,16 @@ const DangKyDoiTacPage = () => {
       `-Name: ${values.username}\n-Phone: ${values.phone}\n-Email: ${values.email}\n-Address: ${values.address}\n-Content: ${values.content}`
     );
 
-    const mailtoLink = `mailto:thanhxuandaole@email.com?subject=${subject}&body=${body}`;
+    const mailtoLink = `mailto:thanhxuandaole@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
-  };
-  const onFinish = async (value) => {
-    console.log(value);
     message.success("Đã gửi liên hệ thành công!!!");
     setTimeout(() => {
       window.location.reload(); // Reload the page
     }, 2000);
+  };
+  const onFinish = async (value) => {
+    console.log(value);
+
     // const formData = new FormData();
     // const formDataObject = {};
     // formData.forEach((value, key) => {
