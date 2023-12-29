@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Breadcrumb, Input, Tabs, message } from "antd";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
@@ -6,60 +7,11 @@ const { Search } = Input;
 const onChangeTab = (key) => {
   console.log(key);
 };
-const items = [
-  {
-    id: 1,
-    maVe: "giam10%",
-    image: "https://leethanh.netlify.app/image/IMG_2315.png",
-    title: "Giảm 10%",
-    text: "Khi đặt từ thứ 2 - thứ 6",
-    boolean: false,
-  },
-  {
-    id: 2,
-    maVe: "tangNuoc",
-    image: "https://leethanh.netlify.app/image/drinkBonusIcon.png",
-    title: "Tặng Nước",
-    text: "Khi đặt sân tại quận 2",
-    boolean: false,
-  },
-  {
-    id: 3,
-    maVe: "giam20%",
-    image: "https://leethanh.netlify.app/image/20percentDiscountIcon.png",
-    title: "Giảm 20%",
-    text: "Đặt dịch vụ trọng tài và livestream",
-    boolean: false,
-  },
-  {
-    id: 4,
-    maVe: "giam30%",
-    image: "https://leethanh.netlify.app/image/30percentDiscountIcon.png",
-    title: "Giảm 30%",
-    text: "Khi đặt từ 9h - 15h",
-    boolean: false,
-  },
-  {
-    id: 5,
-    maVe: "giam5%",
-    image: "https://leethanh.netlify.app/image/5percentDiscountIcon.png",
-    title: "Giảm 5%",
-    text: "Khi đặt dịch vụ livestream",
-    boolean: false,
-  },
-  {
-    id: 6,
-    maVe: "giam50%",
-    image: "https://leethanh.netlify.app/image/blackfridayIcon.png",
-    title: "Giảm 50%",
-    text: "Chỉ áp dụng ngày 24/11/2023",
-    boolean: false,
-  },
-];
 
 const UuDaiPage = () => {
+  const navigate = useNavigate();
   const onSearch = (value, _e, info) => console.log(info?.source, value);
-  const [ve, setVe] = useState([]);
+  // const [ve, setVe] = useState([]);
   const [listVe, setListVe] = useState([]);
   useEffect(() => {
     const fetchApiUuDai = async () => {
@@ -77,27 +29,21 @@ const UuDaiPage = () => {
     };
     fetchApiUuDai();
   }, []);
-  console.log(listVe);
   const handleClickChonVe = (event) => {
-    // console.log(event);
-    // if (!ve.some((item) => JSON.stringify(item) === JSON.stringify(event))) {
-    //   // Nếu không trùng, thêm đối tượng vào mảng
-    //   const listVe = [...ve, event];
-    //   // Cập nhật state với mảng mới
-    //   setVe(listVe);
-    //   message.success("Thêm mã giảm giá thành công");
-    // } else {
-    //   // Nếu trùng, bạn có thể thực hiện xử lý khác hoặc không làm gì
-    //   message.error("Mã giảm giá này đã tồn tại");
-    // }
+    const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
+    if (!checkUser) {
+      message.error("Vui lòng đăng nhập trước khi nhận ưu đãi!!");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+      return;
+    }
     const data = new URLSearchParams();
-
     let user_id = JSON.parse(
-      localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+      checkUser.id
     );
     data.append("user_id", user_id);
     data.append("coupon_id", event.id);
-    // console.log(event.id);
     fetch("https://leethanh.up.railway.app/api/users_coupons", {
       method: "POST",
       headers: {
@@ -111,6 +57,7 @@ const UuDaiPage = () => {
           message.success("Thêm mã giảm giá thành công");
         } else {
           message.error("Mã giảm giá này đã tồn tại");
+          return;
         }
       })
       .catch((error) => console.error(error));
