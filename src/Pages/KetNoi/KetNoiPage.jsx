@@ -6,6 +6,14 @@ const onChange = (e) => {
   const outerCheck = e.target.value;
   console.log("check:", outerCheck);
 };
+
+const response = fetch("https://leethanh.up.railway.app/api/matches", {
+  method: "GET",
+  headers: { "Content-Type": "application/json" },
+})
+  .then((response) => response.json())
+  .then((data) => console.log(data));
+
 const types = [
   {
     key: "1",
