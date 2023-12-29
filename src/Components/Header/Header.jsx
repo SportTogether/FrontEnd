@@ -67,13 +67,15 @@ export default function Header() {
     return (
       <>
         <div className="nav-right">
-          <h1
-            onClick={() => {
-              navigate("/login");
-            }}
-            className="nav-right-title"
-          >
-            Log In
+          <h1>
+            <span
+              className="nav-right-title"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Log In
+            </span>
           </h1>
         </div>
       </>

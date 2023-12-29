@@ -1,7 +1,6 @@
 import React from "react";
 import { RightOutlined } from "@ant-design/icons";
 import { Form, Input, Typography, message } from "antd";
-import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
 const DangKyDoiTacPage = () => {
   const [form] = Form.useForm();
@@ -15,7 +14,6 @@ const DangKyDoiTacPage = () => {
     const mailtoLink = `mailto:thanhxuandaole@email.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
   };
-  const navigate = useNavigate();
   const onFinish = async (value) => {
     console.log(value);
     message.success("Đã gửi liên hệ thành công!!!");
