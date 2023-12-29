@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Breadcrumb, Checkbox, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { useState } from "react";
 
 const onChange = (e) => {
   const outerCheck = e.target.value;
@@ -181,37 +182,17 @@ const districts = [
     ),
   },
 ];
-const itemKetNoi = [
-  {
-    key: 1,
-    image: "https://leethanh.netlify.app/image/ANHEMFC_ICON.png",
-    name: "ANH EM FC",
-    date: "Thứ 7, 12/10/2023, 20:30",
-    location: "Sân Thành Thắng, quận 12",
-  },
-  {
-    key: 2,
-    image: "https://leethanh.netlify.app/image/HUUNGHIFC_KETNOI.png",
-    name: "HỮU NGHỊ FC",
-    date: "Thứ 7, 12/10/2023, 18:30",
-    location: "Sân Đại Nam, quận 12",
-  },
-  {
-    key: 3,
-    image: "https://leethanh.netlify.app/image/ICON_VIPFC_KETNOI.png",
-    name: "VIP FC",
-    date: "Thứ 7, 12/10/2023, 19:00",
-    location: "Sân Phát Đạt, quận 12",
-  },
-  {
-    key: 4,
-    image: "https://leethanh.netlify.app/image/icon_StrongFC_Ketnoi.png",
-    name: "STRONG FC",
-    date: "Thứ 7, 12/10/2023, 17:30",
-    location: "Sân Vườn Lài, quận 12",
-  },
-];
 const KetNoiPage = () => {
+  const [list, setList] = useState([])
+  useEffect(() => {
+    const response = fetch("https://leethanh.up.railway.app/api/matches", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => setList(data.data));
+  }, [])
+  console.log(list);
   return (
     <>
       <Breadcrumb
@@ -279,16 +260,16 @@ const KetNoiPage = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-8 pb-10">
-          {itemKetNoi.map((item) => {
+          {list.map((item) => {
             return (
               <div
                 className="bg-amber-100 px-5 pt-5 rounded-[40px]"
-                key={item.key}
+                key={item.id}
               >
                 <div className="border-b-2 border-b-gray-500">
                   <div className="grid grid-cols-3">
                     <div className="mx-auto">
-                      <img src={item.image} width={150} height={150} alt="" />
+                      <img src="https://leethanh.netlify.app/image/HUUNGHIFC_KETNOI.png" width={150} height={150} alt="" />
                       <h1 className="text-xl font-bold text-center">
                         {item.name}
                       </h1>
@@ -300,6 +281,7 @@ const KetNoiPage = () => {
                         height={100}
                         alt=""
                       />
+                      <h1 className="text-center pt-6 font-bold text-xl">{item.current_quantities} / {item.max_quantities}</h1>
                     </div>
                     <div className="mx-auto">
                       <img
@@ -322,7 +304,7 @@ const KetNoiPage = () => {
                         />
                       </div>
                       <div className="w-[60%]">
-                        <h1 className="font-bold">{item.date}</h1>
+                        <h1 className="font-bold">{item.time}</h1>
                       </div>
                     </div>
                     <div className="flex justify-center items-center">
@@ -336,7 +318,7 @@ const KetNoiPage = () => {
                         />
                       </div>
                       <div className="w-[60%]">
-                        <h1 className="font-bold">{item.location}</h1>
+                        <h1 className="font-bold">{item.address}</h1>
                       </div>
                     </div>
                   </div>
