@@ -10,12 +10,19 @@ const DangKyDoiTacPage = () => {
     const body = encodeURIComponent(
       `-Name: ${values.username}\n-Phone: ${values.phone}\n-Email: ${values.email}\n-Address: ${values.address}\n-Content: ${values.content}`
     );
+
     const mailtoLink = `mailto:thanhxuandaole@gmail.com?subject=${subject}&body=${body}`;
     window.location.href = mailtoLink;
     message.success("Đã gửi liên hệ thành công!!!");
     setTimeout(() => {
       window.location.reload(); // Reload the page
     }, 2000);
+<<<<<<< HEAD
+=======
+  };
+  const onFinish = async (value) => {
+    console.log(value);
+>>>>>>> 89778eb9a9ac8d50af577d1f94a44a34d7aa3579
   };
   return (
     <div className="container dangKyDoiTac">
