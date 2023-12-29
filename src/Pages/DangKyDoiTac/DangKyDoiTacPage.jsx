@@ -6,6 +6,11 @@ const DangKyDoiTacPage = () => {
   const [form] = Form.useForm();
   const handleEmailClick = () => {
     const values = form.getFieldsValue();
+    const { username, phone, email, address, content } = values;
+    if (username == undefined || phone == undefined || email == undefined || address == undefined || content == undefined) {
+      message.error("Vui lòng nhập thông tin gửi liên hệ!");
+      return;
+    }
     const subject = encodeURIComponent("Liên hệ đối tác");
     const body = encodeURIComponent(
       `-Name: ${values.username}\n-Phone: ${values.phone}\n-Email: ${values.email}\n-Address: ${values.address}\n-Content: ${values.content}`

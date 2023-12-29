@@ -81,6 +81,14 @@ const DetailSanPage = () => {
   const { thongTinSan, thongTinSanDaDat } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
+  const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
+  if (!checkUser) {
+    message.error("Vui lòng đăng nhập trước khi đặt sân!!!");
+    setTimeout(() => {
+      navigate("/login");
+    }, 1000);
+    return;
+  }
   const onChangeDate = (date, dateString) => {
     console.log(date, dateString);
     if (dateString !== null) setDateTime(dateString);
