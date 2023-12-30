@@ -307,7 +307,6 @@ const DatSanPage = () => {
   const { listSan, thongTinSan } = useSelector((state) => {
     return state.QuanLySanSlice;
   });
-  // const { id } = thongTinSan;
   const handleDatSan = (event) => {
     dispatch(setDetailSan(event));
     navigate("/detail");

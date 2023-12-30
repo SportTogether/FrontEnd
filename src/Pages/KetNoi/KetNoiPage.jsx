@@ -183,21 +183,26 @@ const KetNoiPage = () => {
   const navigate = useNavigate();
   const handleJoin = (value) => {
     console.log(value);
-
-    const params = new URLSearchParams();
-
-    try {
-      let user_id = JSON.parse(
-        localStorageServices.getUser(SPORT_LOCALSTORAGE).id
-      );
-      params.append("users_id", user_id);
-      console.log("user id :", user_id);
-    } catch (error) {
-      message.error("Vui lòng đăng nhập");
+    const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
+    console.log(checkUser);
+    if (checkUser == null) {
+      message.error("Vui lòng đăng nhập trước khi tham gia!!");
       setTimeout(() => {
         navigate("/login");
       }, 1000);
-    }
+      return;
+    };
+    const params = new URLSearchParams();
+    // try {
+    //   let user_id = JSON.parse(checkUser.id);
+    //   params.append("users_id", user_id);
+    //   console.log("user id :", user_id);
+    // } catch (error) {
+    //   message.error("Vui lòng đăng nhập");
+    //   setTimeout(() => {
+    //     navigate("/login");
+    //   }, 1000);
+    // }
     params.append("matches_id", value);
     console.log(params);
     try {
