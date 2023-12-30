@@ -180,6 +180,7 @@ const districts = [
 ];
 const KetNoiPage = () => {
   const [list, setList] = useState([]);
+  const [statusJoin, setStatusJoin] = useState(false);
   const navigate = useNavigate();
   const handleJoin = (value) => {
     console.log(value);
@@ -207,7 +208,10 @@ const KetNoiPage = () => {
         }
       )
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          console.log(data);
+          setStatusJoin(data.data);
+        });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
@@ -358,14 +362,21 @@ const KetNoiPage = () => {
                   </div>
                 </div>
                 <div className="text-center py-5">
-                  <button
+                  {statusJoin ? <button
+                    className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                    onClick={() => {
+                      handleJoin(item.id);
+                    }}
+                  >
+                    Hủy Tham Gia
+                  </button> : <button
                     className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
                     onClick={() => {
                       handleJoin(item.id);
                     }}
                   >
                     Tham Gia
-                  </button>
+                  </button>}
                 </div>
               </div>
             );
