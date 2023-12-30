@@ -184,27 +184,20 @@ const KetNoiPage = () => {
   const handleJoin = (value) => {
     console.log(value);
     const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
-    console.log(checkUser);
+    // console.log(checkUser);
     if (checkUser == null) {
       message.error("Vui lòng đăng nhập trước khi tham gia!!");
       setTimeout(() => {
         navigate("/login");
       }, 1000);
       return;
-    };
+    }
     const params = new URLSearchParams();
-    // try {
-    //   let user_id = JSON.parse(checkUser.id);
-    //   params.append("users_id", user_id);
-    //   console.log("user id :", user_id);
-    // } catch (error) {
-    //   message.error("Vui lòng đăng nhập");
-    //   setTimeout(() => {
-    //     navigate("/login");
-    //   }, 1000);
-    // }
+    let user_id = JSON.parse(checkUser.id);
+
+    params.append("users_id", user_id);
     params.append("matches_id", value);
-    console.log(params);
+    console.log(user_id);
     try {
       const response = fetch(
         "https://leethanh.up.railway.app/api/users_matches",
