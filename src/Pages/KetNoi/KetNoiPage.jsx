@@ -2,18 +2,14 @@ import React, { useEffect } from "react";
 import { Breadcrumb, Checkbox, Dropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useState } from "react";
-
+import { localStorageServices } from "../../Services/localStorageServices";
+import { SPORT_LOCALSTORAGE } from "../../Constants";
+import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 const onChange = (e) => {
   const outerCheck = e.target.value;
   console.log("check:", outerCheck);
 };
-
-const response = fetch("https://leethanh.up.railway.app/api/matches", {
-  method: "GET",
-  headers: { "Content-Type": "application/json" },
-})
-  .then((response) => response.json())
-  .then((data) => console.log(data));
 
 const types = [
   {
@@ -184,8 +180,40 @@ const districts = [
 ];
 const KetNoiPage = () => {
   const [list, setList] = useState([]);
+  const navigate = useNavigate();
   const handleJoin = (value) => {
     console.log(value);
+
+    const params = new URLSearchParams();
+
+    try {
+      let user_id = JSON.parse(
+        localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+      );
+      params.append("users_id", user_id);
+      console.log("user id :", user_id);
+    } catch (error) {
+      message.error("Vui lòng đăng nhập");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    }
+    params.append("matches_id", value);
+    console.log(params);
+    try {
+      const response = fetch(
+        "https://leethanh.up.railway.app/api/users_matches",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+    } catch (error) {
+      console.error("Lỗi xảy ra: ", error);
+    }
   };
   useEffect(() => {
     const response = fetch("https://leethanh.up.railway.app/api/matches", {
