@@ -183,7 +183,10 @@ const districts = [
   },
 ];
 const KetNoiPage = () => {
-  const [list, setList] = useState([])
+  const [list, setList] = useState([]);
+  const handleJoin = (value) => {
+    console.log(value);
+  };
   useEffect(() => {
     const response = fetch("https://leethanh.up.railway.app/api/matches", {
       method: "GET",
@@ -191,8 +194,7 @@ const KetNoiPage = () => {
     })
       .then((response) => response.json())
       .then((data) => setList(data.data));
-  }, [])
-  console.log(list);
+  }, []);
   return (
     <>
       <Breadcrumb
@@ -269,7 +271,12 @@ const KetNoiPage = () => {
                 <div className="border-b-2 border-b-gray-500">
                   <div className="grid grid-cols-3">
                     <div className="mx-auto">
-                      <img src="https://leethanh.netlify.app/image/HUUNGHIFC_KETNOI.png" width={150} height={150} alt="" />
+                      <img
+                        src="https://leethanh.netlify.app/image/HUUNGHIFC_KETNOI.png"
+                        width={150}
+                        height={150}
+                        alt=""
+                      />
                       <h1 className="text-xl font-bold text-center">
                         {item.name}
                       </h1>
@@ -281,7 +288,9 @@ const KetNoiPage = () => {
                         height={100}
                         alt=""
                       />
-                      <h1 className="text-center pt-6 font-bold text-xl">{item.current_quantities} / {item.max_quantities}</h1>
+                      <h1 className="text-center pt-6 font-bold text-xl">
+                        {item.current_quantities} / {item.max_quantities}
+                      </h1>
                     </div>
                     <div className="mx-auto">
                       <img
@@ -324,7 +333,12 @@ const KetNoiPage = () => {
                   </div>
                 </div>
                 <div className="text-center py-5">
-                  <button className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium">
+                  <button
+                    className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                    onClick={() => {
+                      handleJoin(item.id);
+                    }}
+                  >
                     Tham Gia
                   </button>
                 </div>
