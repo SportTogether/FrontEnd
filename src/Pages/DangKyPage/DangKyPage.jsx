@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, Checkbox, Button, message, Typography } from "antd";
@@ -9,9 +8,10 @@ const DangKyPage = () => {
   const [form] = Form.useForm();
   let data = "";
   const onFinish = async (values) => {
+    console.log(values);
     try {
       const response = await fetch(
-        "https://leethanh.up.railway.app/api/users/register",
+        "https://leethanh.up.railway.app/api/login/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -49,7 +49,9 @@ const DangKyPage = () => {
             }}
             scrollToFirstError
           >
-            <Title level={4} className="title-label">Họ Và Tên*</Title>
+            <Title level={4} className="title-label">
+              Họ Và Tên*
+            </Title>
             <Form.Item
               name="name"
               className="mb-3"
@@ -72,7 +74,9 @@ const DangKyPage = () => {
                 className="border-2 border-green-600"
               />
             </Form.Item>
-            <Title level={4} className="title-label">Email*</Title>
+            <Title level={4} className="title-label">
+              Email*
+            </Title>
             <Form.Item
               name="email"
               className="mb-3"
@@ -95,7 +99,9 @@ const DangKyPage = () => {
                 className="border-2 border-green-600"
               />
             </Form.Item>
-            <Title level={4} className="title-label">Số Điện Thoại*</Title>
+            <Title level={4} className="title-label">
+              Số Điện Thoại*
+            </Title>
             <Form.Item
               name="number"
               className="mb-3"
@@ -116,7 +122,9 @@ const DangKyPage = () => {
                 className="border-2 border-green-600"
               />
             </Form.Item>
-            <Title level={4} className="title-label">Mật Khẩu*</Title>
+            <Title level={4} className="title-label">
+              Mật Khẩu*
+            </Title>
             <Form.Item
               name="password"
               className="mb-3"
@@ -134,7 +142,9 @@ const DangKyPage = () => {
                 className="border-2 border-green-600"
               />
             </Form.Item>
-            <Title level={4} className="title-label">Nhập Lại Mật Khẩu*</Title>
+            <Title level={4} className="title-label">
+              Nhập Lại Mật Khẩu*
+            </Title>
             <Form.Item
               name="confirm"
               className="mb-3"
