@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { Breadcrumb, Checkbox, Dropdown } from "antd";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Breadcrumb, Checkbox, Dropdown, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { useState } from "react";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
-import { message } from "antd";
-import { useNavigate } from "react-router-dom";
 const onChange = (e) => {
   const outerCheck = e.target.value;
   console.log("check:", outerCheck);
 };
-
 const types = [
   {
     key: "1",
@@ -182,10 +179,9 @@ const KetNoiPage = () => {
   const [list, setList] = useState([]);
   const [statusJoin, setStatusJoin] = useState(false);
   const navigate = useNavigate();
+  const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
   const handleJoin = (value) => {
     console.log(value);
-    const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
-    // console.log(checkUser);
     if (checkUser == null) {
       message.error("Vui lòng đăng nhập trước khi tham gia!!");
       setTimeout(() => {
@@ -197,7 +193,6 @@ const KetNoiPage = () => {
     let user_id = JSON.parse(checkUser.id);
     params.append("users_id", user_id);
     params.append("matches_id", value);
-    console.log(user_id);
     try {
       const response = fetch(
         "https://leethanh.up.railway.app/api/users_matches/add",
@@ -209,15 +204,23 @@ const KetNoiPage = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          console.log(data.data);
           if (data.data) {
             message.success("Đã tham gia trận đấu thành công!");
-          } else {
-            message.error("Bạn đã tham gia trận đấu này!");
+            setStatusJoin(true);
           }
         });
-
-      const response2 = fetch(
+    } catch (error) {
+      console.error("Lỗi xảy ra: ", error);
+    }
+  };
+  const handleCancel = (value) => {
+    const params = new URLSearchParams();
+    let user_id = JSON.parse(checkUser.id);
+    params.append("users_id", user_id);
+    params.append("matches_id", value);
+    try {
+      const response = fetch(
         "https://leethanh.up.railway.app/api/users_matches/remove",
         {
           method: "POST",
@@ -226,7 +229,12 @@ const KetNoiPage = () => {
         }
       )
         .then((res) => res.json())
-        .then((data) => console.log(data));
+        .then((data) => {
+          if (data.data) {
+            message.success("Đã hủy tham gia trận đấu thành công!");
+            setStatusJoin(false);
+          }
+        });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
@@ -380,7 +388,7 @@ const KetNoiPage = () => {
                   {statusJoin ? <button
                     className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
                     onClick={() => {
-                      handleJoin(item.id);
+                      handleCancel(item.id);
                     }}
                   >
                     Hủy Tham Gia

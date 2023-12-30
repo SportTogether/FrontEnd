@@ -39,9 +39,7 @@ const UuDaiPage = () => {
       return;
     }
     const data = new URLSearchParams();
-    let user_id = JSON.parse(
-      checkUser.id
-    );
+    let user_id = JSON.parse(checkUser.id);
     data.append("user_id", user_id);
     data.append("coupon_id", event.id);
     fetch("https://leethanh.up.railway.app/api/users_coupons", {
