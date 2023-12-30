@@ -200,7 +200,7 @@ const KetNoiPage = () => {
     console.log(user_id);
     try {
       const response = fetch(
-        "https://leethanh.up.railway.app/api/users_matches",
+        "https://leethanh.up.railway.app/api/users_matches/add",
         {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -210,8 +210,23 @@ const KetNoiPage = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          setStatusJoin(data.data);
+          if (data.data) {
+            message.success("Đã tham gia trận đấu thành công!");
+          } else {
+            message.error("Bạn đã tham gia trận đấu này!");
+          }
         });
+
+      const response2 = fetch(
+        "https://leethanh.up.railway.app/api/users_matches/remove",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => console.log(data));
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
