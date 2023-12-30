@@ -194,7 +194,6 @@ const KetNoiPage = () => {
     }
     const params = new URLSearchParams();
     let user_id = JSON.parse(checkUser.id);
-
     params.append("users_id", user_id);
     params.append("matches_id", value);
     console.log(user_id);
