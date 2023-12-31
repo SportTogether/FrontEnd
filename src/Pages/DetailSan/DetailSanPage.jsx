@@ -257,81 +257,48 @@ const DetailSanPage = () => {
     },
   ];
   const handleDatSan = () => {
-    if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
-      const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
-      dispatch(setDatSan(newThongTinSanDaDat));
-      console.log("thong tin dat san ", newThongTinSanDaDat);
-      let user_id = "";
-      try {
-        user_id = JSON.parse(
-          localStorageServices.getUser(SPORT_LOCALSTORAGE).id
-        );
-      } catch (error) {
-        message.error("Vui lòng đăng nhập");
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
-      }
-
-      let yards_id = newThongTinSanDaDat.id;
-      let status_id = 1;
-      let start_date =
-        newThongTinSanDaDat.day +
-        ", " +
-        newThongTinSanDaDat.date +
-        "/10/2023, " +
-        newThongTinSanDaDat.ocl1 +
-        "PM";
-      let end_date =
-        newThongTinSanDaDat.day +
-        ", " +
-        newThongTinSanDaDat.date +
-        "/10/2023, " +
-        newThongTinSanDaDat.ocl2 +
-        "PM";
-
-      if (
-        newThongTinSanDaDat.date === undefined ||
-        newThongTinSanDaDat.ocl1 === undefined ||
-        newThongTinSanDaDat.ocl2 === undefined
-      ) {
-        start_date = null;
-        end_date = null;
-      }
-      console.log("start date ", start_date);
-      console.log("end date ", end_date);
-      let values = {
-        users_id: user_id,
-        yards_id: yards_id,
-        status_id: status_id,
-        start_date: start_date,
-        end_date: end_date,
-      };
-      console.log("values ", values);
-      const response = fetch("https://leethanh.up.railway.app/api/orders/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          if (result.data) {
-            message.success("Chúc mừng bạn đã đặt sân thành công");
-            console.log("thong tin dat san", thongTinSanDaDat);
-            setTimeout(() => {
-              navigate("/thanh-toan");
-            }, 1000);
-          } else {
-            message.error("Vui lòng chọn ngày và giờ");
-            setTimeout(() => {
-              navigate("/dat-san");
-            }, 1000);
-          }
-        });
-    } else {
-      alert("Vui lòng chọn ngày và thời gian");
-      return;
-    }
+    // if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
+    //   const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
+    //   dispatch(setDatSan(newThongTinSanDaDat));
+    //   console.log("thong tin dat san ", newThongTinSanDaDat);
+    //   let user_id = "";
+    //   try {
+    //     user_id = JSON.parse(
+    //       localStorageServices.getUser(SPORT_LOCALSTORAGE).id
+    //     );
+    //   } catch (error) {
+    //     message.error("Vui lòng đăng nhập");
+    //     setTimeout(() => {
+    //       navigate("/login");
+    //     }, 1000);
+    //   }
+    //   let yards_id = newThongTinSanDaDat.id;
+    //   let status_id = 1;
+    //
+    // const response = fetch("https://leethanh.up.railway.app/api/orders/add", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(values),
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     if (result.data) {
+    //       message.success("Chúc mừng bạn đã đặt sân thành công");
+    //       console.log("thong tin dat san", thongTinSanDaDat);
+    //       setTimeout(() => {
+    //         navigate("/thanh-toan");
+    //       }, 1000);
+    //     } else {
+    //       message.error("Vui lòng chọn ngày và giờ");
+    //       setTimeout(() => {
+    //         navigate("/dat-san");
+    //       }, 1000);
+    //     }
+    // });
+    // } else {
+    //   alert("Vui lòng chọn ngày và thời gian");
+    //   return;
+    // }
   };
   const handleTimDuong = () => {
     let originId = localStorageServices.getOriginId("originId");
@@ -368,13 +335,32 @@ const DetailSanPage = () => {
   const handleContinue = () => {
     if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
       const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
-      dispatch(setDatSan(newThongTinSanDaDat));
-      console.log("thong tin dat san ", newThongTinSanDaDat);
+
+      // console.log("thong tin dat san ", newThongTinSanDaDat);
       let user_id = "";
       try {
         user_id = JSON.parse(
           localStorageServices.getUser(SPORT_LOCALSTORAGE).id
         );
+
+        let yards_id = newThongTinSanDaDat.id;
+        let status_id = 1;
+        // console.log("thong tin dat san", newThongTinSanDaDat);
+        let start_date =
+          newThongTinSanDaDat.dateTime + ", " + newThongTinSanDaDat.ocl1;
+        let end_date =
+          newThongTinSanDaDat.dateTime + ", " + newThongTinSanDaDat.ocl2;
+        let values = {
+          users_id: user_id,
+          yards_id: yards_id,
+          status_id: status_id,
+          start_date: start_date,
+          end_date: end_date,
+          address: newThongTinSanDaDat.address,
+          yard_name: newThongTinSanDaDat.name,
+        };
+        console.log("values ", values);
+        dispatch(setDatSan(values));
       } catch (error) {
         message.error("Vui lòng đăng nhập");
         setTimeout(() => {
@@ -497,10 +483,11 @@ const DetailSanPage = () => {
                       />
                       <h1 className="text-2xl font-bold pl-10">
                         {detailDateTime.ocl1 !== undefined ||
-                          detailDateTime.ocl2 !== undefined ||
-                          detailDateTime.dateTime !== ""
-                          ? `Ngày và Giờ Đã Chọn: ${detailDateTime?.dateTime
-                          }, ${detailDateTime.ocl1} - ${" "}
+                        detailDateTime.ocl2 !== undefined ||
+                        detailDateTime.dateTime !== ""
+                          ? `Ngày và Giờ Đã Chọn: ${
+                              detailDateTime?.dateTime
+                            }, ${detailDateTime.ocl1} - ${" "}
                         ${detailDateTime.ocl2}`
                           : ""}
                       </h1>

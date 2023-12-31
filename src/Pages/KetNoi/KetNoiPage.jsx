@@ -208,6 +208,8 @@ const KetNoiPage = () => {
           if (data.data) {
             message.success("Đã tham gia trận đấu thành công!");
             setStatusJoin(true);
+          } else {
+            message.success("Bạn đã tham gia trận đấu!");
           }
         });
     } catch (error) {
@@ -385,21 +387,25 @@ const KetNoiPage = () => {
                   </div>
                 </div>
                 <div className="text-center py-5">
-                  {statusJoin ? <button
-                    className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
-                    onClick={() => {
-                      handleCancel(item.id);
-                    }}
-                  >
-                    Hủy Tham Gia
-                  </button> : <button
-                    className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
-                    onClick={() => {
-                      handleJoin(item.id);
-                    }}
-                  >
-                    Tham Gia
-                  </button>}
+                  {statusJoin ? (
+                    <button
+                      className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                      onClick={() => {
+                        handleCancel(item.id);
+                      }}
+                    >
+                      Hủy Tham Gia
+                    </button>
+                  ) : (
+                    <button
+                      className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                      onClick={() => {
+                        handleJoin(item.id);
+                      }}
+                    >
+                      Tham Gia
+                    </button>
+                  )}
                 </div>
               </div>
             );

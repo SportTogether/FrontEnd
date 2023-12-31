@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Breadcrumb, Form, Image, Input, Radio } from "antd";
+import { Breadcrumb, Form, Image, Input, Radio, message } from "antd";
 const ThongTinDatSanPage = () => {
   const navigate = useNavigate();
   const { checkLogin } = useSelector((state) => {
@@ -12,10 +12,25 @@ const ThongTinDatSanPage = () => {
   });
   console.log(thongTinSanDaDat);
   const handleFinish = (value) => {
-    console.log("Success:", value);
-    setTimeout(() => {
-      navigate("/thanh-toan");
-    }, 1000);
+    const response = fetch("https://leethanh.up.railway.app/api/orders/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(thongTinSanDaDat),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.data) {
+          console.log("thong tin dat san", thongTinSanDaDat);
+          setTimeout(() => {
+            navigate("/thanh-toan");
+          }, 1000);
+        } else {
+          message.error("Có lỗi xảy ra");
+          setTimeout(() => {
+            navigate("/dat-san");
+          }, 1000);
+        }
+      });
   };
   return (
     <>
@@ -47,7 +62,7 @@ const ThongTinDatSanPage = () => {
             <h1 className="text-3xl text-green-700">
               Sân Đặt:{" "}
               <span className="text-black font-bold uppercase">
-                {thongTinSanDaDat?.name} - SÂN 1
+                {thongTinSanDaDat?.yard_name}
               </span>
             </h1>
             <div className="text-center my-7">
@@ -61,7 +76,7 @@ const ThongTinDatSanPage = () => {
             <h1 className="text-3xl text-green-700">
               Giờ Đặt:{" "}
               <span className="text-black font-bold bg-gray-200 py-1 px-2 rounded-2xl">
-                {thongTinSanDaDat?.ocl1} - {thongTinSanDaDat?.ocl2}{" "}
+                {thongTinSanDaDat?.start_date} - {thongTinSanDaDat?.end_date}{" "}
               </span>
             </h1>
             <h1 className="text-3xl text-green-700 py-3">
@@ -72,7 +87,7 @@ const ThongTinDatSanPage = () => {
             </h1>
             <h1 className="text-3xl text-green-700 py-3">
               Số Điện Thoại Chủ Sân:{" "}
-              <span className="text-black font-bold">0123456789</span>
+              <span className="text-black font-bold">0987654321</span>
             </h1>
           </div>
         </div>
