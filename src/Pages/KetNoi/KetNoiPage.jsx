@@ -177,11 +177,10 @@ const districts = [
 ];
 const KetNoiPage = () => {
   const [list, setList] = useState([]);
-  const [statusJoin, setStatusJoin] = useState(false);
+  const [statusJoin, setStatusJoin] = useState();
   const navigate = useNavigate();
   const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
   const handleJoin = (value) => {
-    console.log(value);
     if (checkUser == null) {
       message.error("Vui lòng đăng nhập trước khi tham gia!!");
       setTimeout(() => {
@@ -206,8 +205,10 @@ const KetNoiPage = () => {
         .then((data) => {
           console.log(data.data);
           if (data.data) {
+            const session = data.data;
+            const newStatusJoin = { ...list, status: session };
+            setList(newStatusJoin);
             message.success("Đã tham gia trận đấu thành công!");
-            setStatusJoin(true);
           }
         });
     } catch (error) {
@@ -231,8 +232,9 @@ const KetNoiPage = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.data) {
+            const status = data.data;
+            // setStatusJoin(false);
             message.success("Đã hủy tham gia trận đấu thành công!");
-            setStatusJoin(false);
           }
         });
     } catch (error) {
@@ -245,8 +247,12 @@ const KetNoiPage = () => {
       headers: { "Content-Type": "application/json" },
     })
       .then((response) => response.json())
-      .then((data) => setList(data.data));
+      .then((data) => {
+        const newList = data.data.map(item => ({ ...item, status: false }));
+        setList(newList);
+      });
   }, []);
+  console.log(list);
   return (
     <>
       <Breadcrumb
@@ -314,7 +320,7 @@ const KetNoiPage = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-8 pb-10">
-          {list.map((item) => {
+          {list?.map((item) => {
             return (
               <div
                 className="bg-amber-100 px-5 pt-5 rounded-[40px]"
@@ -385,21 +391,25 @@ const KetNoiPage = () => {
                   </div>
                 </div>
                 <div className="text-center py-5">
-                  {statusJoin ? <button
-                    className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
-                    onClick={() => {
-                      handleCancel(item.id);
-                    }}
-                  >
-                    Hủy Tham Gia
-                  </button> : <button
-                    className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
-                    onClick={() => {
-                      handleJoin(item.id);
-                    }}
-                  >
-                    Tham Gia
-                  </button>}
+                  {item.status ? (
+                    <button
+                      className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                      onClick={() => {
+                        handleCancel(item.id);
+                      }}
+                    >
+                      Hủy Tham Gia
+                    </button>
+                  ) : (
+                    <button
+                      className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                      onClick={() => {
+                        handleJoin(item.id);
+                      }}
+                    >
+                      Tham Gia
+                    </button>
+                  )}
                 </div>
               </div>
             );
