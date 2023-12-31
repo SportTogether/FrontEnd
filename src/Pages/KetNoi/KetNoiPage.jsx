@@ -203,13 +203,10 @@ const KetNoiPage = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data);
-          if (data.data) {
-            const session = data.data;
-            const newStatusJoin = { ...list, status: session };
-            setList(newStatusJoin);
-            message.success("Đã tham gia trận đấu thành công!");
-          }
+          console.log(data);
+          // if (data.data) {
+          //   message.success("Đã tham gia trận đấu thành công!");
+          // }
         });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
@@ -248,7 +245,7 @@ const KetNoiPage = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const newList = data.data.map(item => ({ ...item, status: false }));
+        const newList = data.data.map((item) => ({ ...item, status: false }));
         setList(newList);
       });
   }, []);
@@ -391,25 +388,14 @@ const KetNoiPage = () => {
                   </div>
                 </div>
                 <div className="text-center py-5">
-                  {item.status ? (
-                    <button
-                      className="bg-red-500 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
-                      onClick={() => {
-                        handleCancel(item.id);
-                      }}
-                    >
-                      Hủy Tham Gia
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
-                      onClick={() => {
-                        handleJoin(item.id);
-                      }}
-                    >
-                      Tham Gia
-                    </button>
-                  )}
+                  <button
+                    className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
+                    onClick={() => {
+                      handleJoin(item.id);
+                    }}
+                  >
+                    Tham Gia
+                  </button>
                 </div>
               </div>
             );

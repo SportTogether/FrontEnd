@@ -84,7 +84,6 @@ const DatSanPage = () => {
     };
     fetchApiRadioCheck();
   }, [selectedValues]);
-
   const handleCheckboxClick = (value) => {
     // Kiểm tra nếu giá trị đã được chọn, thì xóa nó ra khỏi mảng
     if (selectedValues.includes(value)) {
@@ -93,7 +92,6 @@ const DatSanPage = () => {
     }
     // console.log(selectedValues);
   };
-  console.log("check", selectedValues);
   const onChange = (e) => {
     const outerCheck = e.target.value;
     setValueRadio(outerCheck);
@@ -311,7 +309,6 @@ const DatSanPage = () => {
     dispatch(setDetailSan(event));
     navigate("/detail");
   };
-
   return (
     <>
       <Breadcrumb
