@@ -178,11 +178,9 @@ const districts = [
 
 const KetNoiPage = () => {
   const [list, setList] = useState([]);
-  const [statusJoin, setStatusJoin] = useState();
   const navigate = useNavigate();
   const handleJoin = (value) => {
     const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
-
     if (checkUser == null) {
       message.error("Vui lòng đăng nhập trước khi tham gia!!");
       setTimeout(() => {
@@ -212,6 +210,9 @@ const KetNoiPage = () => {
             message.error("Bạn đã tham gia trận đấu này!");
           }
         });
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
@@ -227,7 +228,6 @@ const KetNoiPage = () => {
         setList(newList);
       });
   }, []);
-  console.log(list);
   return (
     <>
       <Breadcrumb

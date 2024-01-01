@@ -11,7 +11,6 @@ const onChangeTab = (key) => {
 const UuDaiPage = () => {
   const navigate = useNavigate();
   const onSearch = (value, _e, info) => console.log(info?.source, value);
-  // const [ve, setVe] = useState([]);
   const [listVe, setListVe] = useState([]);
   useEffect(() => {
     const fetchApiUuDai = async () => {
@@ -76,7 +75,7 @@ const UuDaiPage = () => {
                 <div className="w-[70%] flex justify-center items-center h-[100px] bg-green-200 rounded-2xl">
                   <div className="w-[30%] pl-2 pr-3">
                     <h1 className="text-5xl text-center font-bold text-green-700">
-                      {item.discount}
+                      <img src="../../../public/image/30percentDiscountIcon.png" width={100} alt="" />
                     </h1>
                   </div>
                   <div className="w-[70%] border-l-4 border-dashed pl-2 border-white">
