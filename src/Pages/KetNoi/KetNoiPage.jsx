@@ -214,32 +214,6 @@ const KetNoiPage = () => {
       console.error("Lỗi xảy ra: ", error);
     }
   };
-  const handleCancel = (value) => {
-    const params = new URLSearchParams();
-    let user_id = JSON.parse(checkUser.id);
-    params.append("users_id", user_id);
-    params.append("matches_id", value);
-    try {
-      const response = fetch(
-        "https://leethanh.up.railway.app/api/users_matches/remove",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: params,
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.data) {
-            const status = data.data;
-            // setStatusJoin(false);
-            message.success("Đã hủy tham gia trận đấu thành công!");
-          }
-        });
-    } catch (error) {
-      console.error("Lỗi xảy ra: ", error);
-    }
-  };
   useEffect(() => {
     const response = fetch("https://leethanh.up.railway.app/api/matches", {
       method: "GET",

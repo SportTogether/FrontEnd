@@ -257,29 +257,6 @@ const DetailSanPage = () => {
     },
   ];
   const handleDatSan = () => {
-    // if (ocl1 !== undefined && ocl2 !== undefined && dateTime !== "") {
-    //   const newThongTinSanDaDat = { ...thongTinSan, ...detailDateTime };
-    //   dispatch(setDatSan(newThongTinSanDaDat));
-    //   console.log("thong tin dat san ", newThongTinSanDaDat);
-    //   let user_id = "";
-    //   try {
-    //     user_id = JSON.parse(
-    //       localStorageServices.getUser(SPORT_LOCALSTORAGE).id
-    //     );
-    //   } catch (error) {
-    //     message.error("Vui lòng đăng nhập");
-    //     setTimeout(() => {
-    //       navigate("/login");
-    //     }, 1000);
-    //   }
-    //   let yards_id = newThongTinSanDaDat.id;
-    //   let status_id = 1;
-    //
-    //
-    // } else {
-    //   alert("Vui lòng chọn ngày và thời gian");
-    //   return;
-    // }
   };
   const handleTimDuong = () => {
     let originId = localStorageServices.getOriginId("originId");
@@ -464,11 +441,10 @@ const DetailSanPage = () => {
                       />
                       <h1 className="text-2xl font-bold pl-10">
                         {detailDateTime.ocl1 !== undefined ||
-                        detailDateTime.ocl2 !== undefined ||
-                        detailDateTime.dateTime !== ""
-                          ? `Ngày và Giờ Đã Chọn: ${
-                              detailDateTime?.dateTime
-                            }, ${detailDateTime.ocl1} - ${" "}
+                          detailDateTime.ocl2 !== undefined ||
+                          detailDateTime.dateTime !== ""
+                          ? `Ngày và Giờ Đã Chọn: ${detailDateTime?.dateTime
+                          }, ${detailDateTime.ocl1} - ${" "}
                         ${detailDateTime.ocl2}`
                           : ""}
                       </h1>

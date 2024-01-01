@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Breadcrumb, Table, Tabs } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { localStorageServices } from "../../Services/localStorageServices";
@@ -26,75 +26,37 @@ const columns = [
 const column = [
   {
     title: <h1 className="text-3xl">Trận đấu </h1>,
-    dataIndex: "match1",
-    key: "match1",
+    dataIndex: "match",
+    key: "match",
   },
   {
     title: <h1 className="text-3xl">Địa Chỉ</h1>,
-    dataIndex: "name1",
-    key: "name1",
+    dataIndex: "address",
+    key: "address",
   },
   {
     title: <h1 className="text-3xl text-center">Thời Gian</h1>,
-    dataIndex: "time1",
-    key: "time1",
+    dataIndex: "dateTime",
+    key: "dateTime",
   },
   {
     title: <h1 className="text-3xl text-center">Số Lượng</h1>,
-    dataIndex: "status1",
-    key: "status1",
+    dataIndex: "quantity",
+    key: "quantity",
   },
   {
-    title: <h1 className="text-3xl text-right">Cài Đặt</h1>,
-    dataIndex: "setting1",
-    key: "setting1",
-  },
-];
-const listJoin = [
-  {
-    id: 1,
-    name: "Sân Thành Thắng, Q12",
-    time: "20h00 ngày 25/7/2021",
-    status: "Đang Chơi",
-  },
-  {
-    id: 2,
-    name: "Sân Đại Nam, Q12",
-    time: "18h30 ngày 26/7/2021",
-    status: "Chưa Bắt Đầu",
-  },
-  {
-    id: 3,
-    name: "Sân Phát Đạt, Q12",
-    time: "14h30 ngày 29/7/2021",
-    status: "Hoàn Thành",
-  },
-  {
-    id: 4,
-    name: "Sân Vườn Lài, Q12",
-    time: "14h30 ngày 29/7/2021",
-    status: "Hoàn Thành",
-  },
-  {
-    id: 5,
-    name: "Sân Đạt Đức, Q. Gò Vấp",
-    time: "14h30 ngày 29/7/2021",
-    status: "Chưa Bắt Đầu",
-  },
-  {
-    id: 6,
-    name: "Sân Phát Đạt, Q12",
-    time: "14h30 ngày 29/7/2021",
-    status: "Hoàn Thành",
+    title: <h1 className="text-3xl text-right">Trạng Thái</h1>,
+    dataIndex: "setting",
+    key: "setting",
   },
 ];
 const onChangeTab = (key) => {
   console.log(key);
 };
-
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [listMatch, setListMatch] = useState([]);
   let user_id = "";
   try {
     user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
@@ -110,7 +72,7 @@ const TrangThongTinUser = () => {
         }
       )
         .then((res) => res.json())
-        .then((data) => console.log("user data", data));
+        .then((data) => setListMatch(data.data));
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
     }
@@ -158,19 +120,20 @@ const TrangThongTinUser = () => {
         ),
     };
   });
-  const data1 = listJoin.map((item) => {
+  const data1 = listMatch.map((item) => {
     return {
       key: item.id,
-      name1: <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>,
-      time1: (
+      match: <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>,
+      address: <h1 className="text-2xl text-blue-800 font-bold">{item.address}</h1>,
+      dateTime: (
         <h1 className="text-2xl text-blue-800 text-center">{item.time}</h1>
       ),
-      status1: (
+      quantity: (
         <h1 className="text-2xl text-blue-800 font-bold text-center">
-          {item.status}
+          {item.current_quantities} / {item.max_quantities}
         </h1>
       ),
-      setting1: (
+      setting: (
         <div className="text-right">
           <button className="bg-red-500 py-2 px-3 text-2xl rounded-2xl text-white font-medium">
             HỦY THAM GIA
