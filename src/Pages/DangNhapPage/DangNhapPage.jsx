@@ -15,6 +15,9 @@ const DangNhapPage = () => {
   const onFinish = async (values) => {
     try {
       let response = "";
+      // values["role_id"] = 2;
+      console.log(values);
+
       console.log(JSON.stringify(values));
       response = await fetch(
         "https://leethanh.up.railway.app/api/login/users",
@@ -27,7 +30,7 @@ const DangNhapPage = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log("my data after login : ", data);
-          if (data.data.id != 0 && data.data.role_name === "user") {
+          if (data.data.id != 0) {
             dispatch(setLogin(data.data));
             // getLocation();
             // let testOriginId = "ChIJ6SU909godTERJ6kLdOwpSGI";
