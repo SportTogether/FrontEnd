@@ -203,10 +203,12 @@ const KetNoiPage = () => {
       )
         .then((res) => res.json())
         .then((data) => {
+
           console.log(data);
           // if (data.data) {
           //   message.success("Đã tham gia trận đấu thành công!");
           // }
+
         });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);
@@ -388,6 +390,7 @@ const KetNoiPage = () => {
                   </div>
                 </div>
                 <div className="text-center py-5">
+
                   <button
                     className="bg-green-600 text-white w-[250px] py-3 text-2xl rounded-2xl font-medium"
                     onClick={() => {
@@ -396,6 +399,7 @@ const KetNoiPage = () => {
                   >
                     Tham Gia
                   </button>
+
                 </div>
               </div>
             );
