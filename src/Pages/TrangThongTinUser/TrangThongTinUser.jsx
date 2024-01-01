@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Avatar, Breadcrumb, Table } from "antd";
+import { Avatar, Breadcrumb, Table, Tabs } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { localStorageServices } from "../../Services/localStorageServices";
 import { SPORT_LOCALSTORAGE } from "../../Constants";
@@ -11,7 +11,6 @@ const columns = [
     title: <h1 className="text-3xl">Tên Sân</h1>,
     dataIndex: "name",
     key: "name",
-    render: (text) => <a>{text}</a>,
   },
   {
     title: <h1 className="text-3xl text-center">Thời Gian</h1>,
@@ -24,30 +23,52 @@ const columns = [
     key: "status",
   },
 ];
+const column = [
+  {
+    title: <h1 className="text-3xl">Tên Sân</h1>,
+    dataIndex: "name1",
+    key: "name1",
+  },
+  {
+    title: <h1 className="text-3xl text-center">Thời Gian</h1>,
+    dataIndex: "time1",
+    key: "time1",
+  },
+  {
+    title: <h1 className="text-3xl text-center">Trạng Thái</h1>,
+    dataIndex: "status1",
+    key: "status1",
+  },
+  {
+    title: <h1 className="text-3xl text-right">Cài Đặt</h1>,
+    dataIndex: "setting1",
+    key: "setting1",
+  },
+];
 const listJoin = [
   {
     id: 1,
     name: "Sân Thành Thắng, Q12",
     time: "20h00 ngày 25/7/2021",
-    status: "Đang chơi",
+    status: "Đang Chơi",
   },
   {
     id: 2,
     name: "Sân Đại Nam, Q12",
     time: "18h30 ngày 26/7/2021",
-    status: "Chưa bắt đầu",
+    status: "Chưa Bắt Đầu",
   },
   {
     id: 3,
     name: "Sân Phát Đạt, Q12",
     time: "14h30 ngày 29/7/2021",
-    status: "Hoàn thành",
+    status: "Hoàn Thành",
   },
   {
     id: 4,
     name: "Sân Vườn Lài, Q12",
     time: "14h30 ngày 29/7/2021",
-    status: "Hoàn thành",
+    status: "Hoàn Thành",
   },
   {
     id: 5,
@@ -59,9 +80,12 @@ const listJoin = [
     id: 6,
     name: "Sân Phát Đạt, Q12",
     time: "14h30 ngày 29/7/2021",
-    status: "Hoàn thành",
+    status: "Hoàn Thành",
   }
-]
+];
+const onChangeTab = (key) => {
+  console.log(key);
+};
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -112,6 +136,53 @@ const TrangThongTinUser = () => {
         ),
     };
   });
+  const data1 = listJoin.map((item) => {
+    return {
+      key: item.id,
+      name1: (
+        <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>
+      ),
+      time1: (
+        <h1 className="text-2xl text-blue-800 text-center">{item.time}</h1>
+      ),
+      status1: (
+        <h1 className="text-2xl text-blue-800 font-bold text-center">{item.status}</h1>
+      ),
+      setting1: (
+        <div className="text-right">
+          <button className="bg-red-500 py-2 px-3 text-2xl rounded-2xl text-white font-medium">HỦY THAM GIA</button>
+        </div>
+      )
+    };
+  });
+  const items = [
+    {
+      key: "1",
+      label: (
+        <h1 className="w-[600px] text-center text-green-600 text-3xl font-bold">
+          LỊCH SỬ ĐẶT SÂN
+        </h1>
+      ),
+      children: (
+        <div className="pt-10">
+          <Table columns={columns} dataSource={data} />
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <h1 className="w-[600px] text-center text-green-600 text-3xl font-bold">
+          LỊCH SỬ THAM GIA THI ĐẤU
+        </h1>
+      ),
+      children: (
+        <div className="pt-10">
+          <Table columns={column} dataSource={data1} />
+        </div>
+      ),
+    },
+  ];
   return (
     <>
       <Breadcrumb
@@ -129,63 +200,43 @@ const TrangThongTinUser = () => {
       />
       <div className="container pt-10">
         <div className="flex justify-center items-center">
-          <div className="w-[50%] flex justify-center items-center">
-            <div className="w-[20%] text-center">
-              <Avatar
-                src="https://leethanh.netlify.app/image/avatar.png"
-                size={100}
-                icon={<UserOutlined />}
-              />
-            </div>
-            <div className="w-[80%] pl-5">
-              <h1>
-                <i className="fas fa-user text-3xl text-green-600"></i>
-                <span className="pl-5 text-3xl text-blue-800 font-bold">
-                  {checkLogin.name}
-                </span>
-              </h1>
-              <h1 className="py-3">
-                <i className="fas fa-envelope text-3xl text-green-600"></i>
-                <span className="pl-5 text-3xl text-blue-800">
-                  {checkLogin.email}
-                </span>
-              </h1>
-              <h1>
-                <i className="fas fa-phone-alt text-3xl text-green-600"></i>
-                <span className="pl-5 text-3xl text-blue-800">
-                  {checkLogin.number}
-                </span>
-              </h1>
-            </div>
+          <div className="w-[20%] text-center">
+            <Avatar
+              src="https://leethanh.netlify.app/image/avatar.png"
+              size={150}
+              icon={<UserOutlined />}
+            />
           </div>
-          <div className="w-[50%]">
-            <h1 className="py-8 text-center text-green-600 text-3xl font-bold">
-              LỊCH SỬ THAM GIA THI ĐẤU
+          <div className="w-[80%] pl-5">
+            <h1>
+              <i className="fas fa-user text-3xl text-green-600"></i>
+              <span className="pl-5 text-3xl text-blue-800 font-bold">
+                {checkLogin.name}
+              </span>
             </h1>
-            <div className="overflow-y-scroll h-[250px] rounded-2xl bg-gray-200 p-5">
-              {listJoin.map((item) => {
-                return (
-                  <div className="grid grid-cols-2 gap-5 border-b-2 border-b-black mb-3" key={item.id}>
-                    <div>
-                      <h1 className="text-2xl text-green-700 font-medium">{item.name}</h1>
-                      <h1 className="text-lg font-medium">Thời Gian: {item.time}</h1>
-                      <h1 className="text-lg font-bold">Tình Trạng: {item.status}</h1>
-                    </div>
-                    <div className="text-right">
-                      <button className="bg-red-500 py-2 px-3 text-lg rounded-2xl text-white font-medium">HỦY THAM GIA</button>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+            <h1 className="py-3">
+              <i className="fas fa-envelope text-3xl text-green-600"></i>
+              <span className="pl-5 text-3xl text-blue-800">
+                {checkLogin.email}
+              </span>
+            </h1>
+            <h1>
+              <i className="fas fa-phone-alt text-3xl text-green-600"></i>
+              <span className="pl-5 text-3xl text-blue-800">
+                {checkLogin.number}
+              </span>
+            </h1>
           </div>
         </div>
-        <h1 className="py-10 text-center text-green-600 text-3xl font-bold">
-          LỊCH SỬ ĐẶT SÂN
-        </h1>
-        <div>
-          <Table columns={columns} dataSource={data} />
+        <div className="pt-10">
+          <Tabs
+            defaultActiveKey="1"
+            centered
+            items={items}
+            onChange={onChangeTab}
+          />
         </div>
+
       </div>
     </>
   );
