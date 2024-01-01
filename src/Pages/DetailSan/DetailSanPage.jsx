@@ -275,26 +275,7 @@ const DetailSanPage = () => {
     //   let yards_id = newThongTinSanDaDat.id;
     //   let status_id = 1;
     //
-    // const response = fetch("https://leethanh.up.railway.app/api/orders/add", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(values),
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     if (result.data) {
-    //       message.success("Chúc mừng bạn đã đặt sân thành công");
-    //       console.log("thong tin dat san", thongTinSanDaDat);
-    //       setTimeout(() => {
-    //         navigate("/thanh-toan");
-    //       }, 1000);
-    //     } else {
-    //       message.error("Vui lòng chọn ngày và giờ");
-    //       setTimeout(() => {
-    //         navigate("/dat-san");
-    //       }, 1000);
-    //     }
-    // });
+    //
     // } else {
     //   alert("Vui lòng chọn ngày và thời gian");
     //   return;

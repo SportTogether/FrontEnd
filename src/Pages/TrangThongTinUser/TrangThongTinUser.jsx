@@ -25,7 +25,12 @@ const columns = [
 ];
 const column = [
   {
-    title: <h1 className="text-3xl">Tên Sân</h1>,
+    title: <h1 className="text-3xl">Trận đấu </h1>,
+    dataIndex: "match1",
+    key: "match1",
+  },
+  {
+    title: <h1 className="text-3xl">Địa Chỉ</h1>,
     dataIndex: "name1",
     key: "name1",
   },
@@ -35,7 +40,7 @@ const column = [
     key: "time1",
   },
   {
-    title: <h1 className="text-3xl text-center">Trạng Thái</h1>,
+    title: <h1 className="text-3xl text-center">Số Lượng</h1>,
     dataIndex: "status1",
     key: "status1",
   },
@@ -81,17 +86,34 @@ const listJoin = [
     name: "Sân Phát Đạt, Q12",
     time: "14h30 ngày 29/7/2021",
     status: "Hoàn Thành",
-  }
+  },
 ];
 const onChangeTab = (key) => {
   console.log(key);
 };
+
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let user_id = "";
   try {
     user_id = JSON.parse(localStorageServices.getUser(SPORT_LOCALSTORAGE).id);
+    const params = new URLSearchParams();
+    params.append("users_id", user_id);
+    try {
+      const response = fetch(
+        "https://leethanh.up.railway.app/api/users_matches/list_match",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: params,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => console.log("user data", data));
+    } catch (error) {
+      console.error("Lỗi xảy ra: ", error);
+    }
   } catch (error) {
     console.log("lỗi ", error);
     setTimeout(() => {
@@ -139,20 +161,22 @@ const TrangThongTinUser = () => {
   const data1 = listJoin.map((item) => {
     return {
       key: item.id,
-      name1: (
-        <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>
-      ),
+      name1: <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>,
       time1: (
         <h1 className="text-2xl text-blue-800 text-center">{item.time}</h1>
       ),
       status1: (
-        <h1 className="text-2xl text-blue-800 font-bold text-center">{item.status}</h1>
+        <h1 className="text-2xl text-blue-800 font-bold text-center">
+          {item.status}
+        </h1>
       ),
       setting1: (
         <div className="text-right">
-          <button className="bg-red-500 py-2 px-3 text-2xl rounded-2xl text-white font-medium">HỦY THAM GIA</button>
+          <button className="bg-red-500 py-2 px-3 text-2xl rounded-2xl text-white font-medium">
+            HỦY THAM GIA
+          </button>
         </div>
-      )
+      ),
     };
   });
   const items = [
@@ -236,7 +260,6 @@ const TrangThongTinUser = () => {
             onChange={onChangeTab}
           />
         </div>
-
       </div>
     </>
   );
