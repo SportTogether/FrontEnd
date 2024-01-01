@@ -53,6 +53,27 @@ const column = [
 const onChangeTab = (key) => {
   console.log(key);
 };
+
+// const params = new URLSearchParams();
+// let user_id = JSON.parse(checkUser.id);
+// params.append("users_id", user_id);
+// params.append("matches_id", value);
+// try {
+//   const response = fetch(
+//     "https://leethanh.up.railway.app/api/users_matches/remove",
+//     {
+//       method: "POST",
+//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+//       body: params,
+//     }
+//   )
+//     .then((res) => res.json())
+//     .then((data) => {
+//       console.log(data);
+//     });
+// } catch (error) {
+//   console.error("Lỗi xảy ra: ", error);
+// }
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -124,7 +145,9 @@ const TrangThongTinUser = () => {
     return {
       key: item.id,
       match: <h1 className="text-2xl text-blue-800 font-bold">{item.name}</h1>,
-      address: <h1 className="text-2xl text-blue-800 font-bold">{item.address}</h1>,
+      address: (
+        <h1 className="text-2xl text-blue-800 font-bold">{item.address}</h1>
+      ),
       dateTime: (
         <h1 className="text-2xl text-blue-800 text-center">{item.time}</h1>
       ),
