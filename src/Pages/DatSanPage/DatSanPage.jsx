@@ -37,7 +37,7 @@ const DatSanPage = () => {
         console.log("param: ", params);
         try {
           const response = await fetch(
-            "http://localhost:8080/api/yards/filter/all",
+            "https://leethanh.up.railway.app/api/yards/filter/all",
             {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },

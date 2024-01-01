@@ -175,12 +175,14 @@ const districts = [
     ),
   },
 ];
+
 const KetNoiPage = () => {
   const [list, setList] = useState([]);
   const [statusJoin, setStatusJoin] = useState();
   const navigate = useNavigate();
-  const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
   const handleJoin = (value) => {
+    const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
+
     if (checkUser == null) {
       message.error("Vui lòng đăng nhập trước khi tham gia!!");
       setTimeout(() => {
@@ -204,6 +206,11 @@ const KetNoiPage = () => {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          if (data.data) {
+            message.success("Tham gia trận đấu thành công!");
+          } else {
+            message.error("Bạn đã tham gia trận đấu này!");
+          }
         });
     } catch (error) {
       console.error("Lỗi xảy ra: ", error);

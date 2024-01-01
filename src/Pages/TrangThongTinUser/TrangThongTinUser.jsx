@@ -54,26 +54,37 @@ const onChangeTab = (key) => {
   console.log(key);
 };
 
-// const params = new URLSearchParams();
-// let user_id = JSON.parse(checkUser.id);
-// params.append("users_id", user_id);
-// params.append("matches_id", value);
-// try {
-//   const response = fetch(
-//     "https://leethanh.up.railway.app/api/users_matches/remove",
-//     {
-//       method: "POST",
-//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//       body: params,
-//     }
-//   )
-//     .then((res) => res.json())
-//     .then((data) => {
-//       console.log(data);
-//     });
-// } catch (error) {
-//   console.error("Lỗi xảy ra: ", error);
-// }
+const handleCancel = (value) => {
+  const checkUser = localStorageServices.getUser(SPORT_LOCALSTORAGE);
+  // if (checkUser == null) {
+  //   message.error("Vui lòng đăng nhập trước khi tham gia!!");
+  //   setTimeout(() => {
+  //     navigate("/login");
+  //   }, 1000);
+  //   return;
+  // }
+  const params = new URLSearchParams();
+  let user_id = JSON.parse(checkUser.id);
+  params.append("users_id", user_id);
+  params.append("matches_id", value);
+  console.log("handle cancel ", value);
+  try {
+    const response = fetch(
+      "https://leethanh.up.railway.app/api/users_matches/remove",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  } catch (error) {
+    console.error("Lỗi xảy ra: ", error);
+  }
+};
 const TrangThongTinUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -158,7 +169,12 @@ const TrangThongTinUser = () => {
       ),
       setting: (
         <div className="text-right">
-          <button className="bg-red-500 py-2 px-3 text-2xl rounded-2xl text-white font-medium">
+          <button
+            className="bg-red-500 py-2 px-3 text-2xl rounded-2xl text-white font-medium"
+            onClick={() => {
+              handleCancel(item.id);
+            }}
+          >
             HỦY THAM GIA
           </button>
         </div>
@@ -183,7 +199,7 @@ const TrangThongTinUser = () => {
       key: "2",
       label: (
         <h1 className="w-[600px] text-center text-green-600 text-3xl font-bold">
-          LỊCH SỬ THAM GIA THI ĐẤU
+          LỊCH SỬ THAM GIA TRẬN ĐẤU
         </h1>
       ),
       children: (
